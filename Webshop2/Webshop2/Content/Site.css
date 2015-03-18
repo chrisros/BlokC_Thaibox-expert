@@ -94,7 +94,7 @@ nav ul{
 
 nav ul li {
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     
 }
 
@@ -110,12 +110,10 @@ nav ul li {
 nav ul li a {
     font-size: 1.2em;
     font-weight: 100;
-    margin-left: 15px;
     margin-bottom: 12px;
     margin-top: 12px;
     padding: 10px 20px 10px 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 8px;
     color: #ffffff;
     text-decoration: none;
 }
@@ -125,6 +123,8 @@ nav ul li:hover a {
     background-color: #f1f1f1;
     color: #a81e22;
 }
+
+
 
 
 #slider{

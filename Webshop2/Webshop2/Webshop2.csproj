@@ -103,6 +103,7 @@
     <Content Include="images\image-slider-3.jpg" />
     <Content Include="images\image-slider-4.jpg" />
     <Content Include="images\image-slider-5.jpg" />
+    <Content Include="images\kickboxing.jpg" />
     <Content Include="images\loading.gif" />
     <Content Include="images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -115,6 +116,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\js-image-slider.js" />
