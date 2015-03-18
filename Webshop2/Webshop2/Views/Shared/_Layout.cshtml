@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Thaibox-expert.nl</title>
+    <link href="~/Content/Reset.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/kube.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/js-image-slider.js"></script>
+
+
+</head>
+<body>
+    @*navbar*@
+    <header>
+        <div class="container">
+            <a href="/"><img src="/images/logo.png" alt="Logo thaibox expert"></a>
+            <nav>
+                @*list met menu items in de navbar*@
+                <ul> 
+                    <li><a href="/store"><i class="fa fa-home"></i> Shop</a></li>
+                    <li><a href="/about"><i class="fa fa-question-circle"></i> Over ons</a></li>
+                    <li><a href="/contact"><i class="fa fa-phone-square"></i> Contact</a></li>
+                    <li><a href="/account"><i class="fa fa-sign-in"></i> Login</a></li>
+                    <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Winkelwagen</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+
+        <div id="content">
+            <div class="container">
+                @*slider*@
+                <div id="sliderFrame">
+                    <div id="slider">
+                        <img src="/images/image-slider-1.jpg" alt="Slider Image" />
+                        <img src="/images/image-slider-2.jpg" alt="Slider Image" />
+                        <img src="/images/image-slider-3.jpg" alt="Slider Image" />
+                        <img src="/images/image-slider-4.jpg" alt="Slider Image" />
+                        <img src="/images/image-slider-5.jpg" alt="Slider Image" />
+                    </div>
+            </div>
+
+                @*start van content*@
+                <div class="units-row">
+                    <div id="vertNav" class="unit-20">
+                        <ul>
+                            <li><a class="topCat" href="/store/cat/clothing">Kleding</a></li>
+                            <li><a class="subCat" href="/store/cat/shirts">Shirts</a></li>
+                            <li><a class="subCat" href="/store/cat/shorts">Broeken</a></li>
+                            <li><a class="subCat" href="/store/cat/shoes">Schoenen</a></li>
+                            <li><a class="subCat" href="/store/cat/socks">Sokken</a></li>
+                            <li><a class="subCat" href="/store/cat/underwear">Ondergoed</a></li>
+                            <li><a class="topCat" href="/store/cat/protection">Bescherming</a></li>
+                            <li><a class="subCat" href="/store/cat/head">Hoofd</a></li>
+                            <li><a class="subCat" href="/store/cat/chest">Borst</a></li>
+                            <li><a class="subCat" href="/store/cat/leg">Been</a></li>
+                            <li><a class="subCat" href="/store/cat/hand">Hand</a></li>
+                        </ul>
+                    </div>
+                    <div id="vertCont" div class="unit-80">
+
+                        @RenderBody()
+                    </div>
+                </div>
+                
+                 
+                
+
+                @*end of content*@
+            </div>
+    </div>
+
+
+    <footer>
+        <div class="container">
+            <ul>
+                <li><a href="http://www.auteursrecht.nl/">Copyright © 2015 - Thaibox-expert</a></li>
+                <li><a href="/terms">Algemene voorwaarden</a></li>
+                <li><p class="space"></p></li>
+                <li><a class="Icon" href="https://www.twitter.com"><i class="fa fa-twitter-square"></i></a></li>
+                <li><a class="Icon" href="https://www.facebook.com"><i class="fa fa-facebook-square"></i></a></li>
+                <li><a class="Icon" href="mailto:info@chrisros.eu?subject=Contact 'www.chrisros.eu'"><i class="fa fa-envelope"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

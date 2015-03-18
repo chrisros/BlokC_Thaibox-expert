@@ -1,0 +1,280 @@
+﻿
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+body {
+    font-family: "Open Sans",sans-serif;
+    background-color: #ffffff;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-left: 40px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 200;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    margin-top: 100px;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: 100;
+    
+    margin-bottom: 12px;
+    margin-top: 12px;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+P {
+    margin-top: 10px;
+    text-align: justify;
+    line-height: 1.5em;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+a:active {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+a {
+    
+}
+
+
+.container {
+    
+    max-width: 1100px;   
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+
+header {
+   width: 100%;
+   top: 0px;
+   position: fixed;
+   /*box-shadow: 0px 0px 15px #888888;*/
+   text-align: justify;
+   background-color: #a81e22;
+   z-index: 2;
+
+}
+
+header .container {
+    padding: 3px;
+}
+
+nav ul{
+   margin-left: 300px;
+   bottom: 5px;
+   position: absolute;
+   margin-bottom: 0em
+}
+
+nav ul li {
+    display: inline-block;
+    margin-bottom: 10px;
+    
+}
+
+@media screen and (max-width: 750px) {
+    nav ul li {
+        display: block;
+    }
+    nav ul{
+        float:right;
+    }
+}
+
+nav ul li a {
+    font-size: 1.2em;
+    font-weight: 100;
+    margin-left: 15px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    padding: 10px 20px 10px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+nav ul li:hover a {
+    padding: 10px 20px 10px 20px;
+    background-color: #f1f1f1;
+    color: #a81e22;
+}
+
+
+#slider{
+    box-shadow: 0px 0px 0px;
+}
+
+#form{
+    width:435px;
+    height:400px;
+    text-align: left;
+    background-color:white;
+    margin-left:10%;  
+    margin-top:10%;
+    padding-top:20px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius: 3px;
+    font-size:16px;
+    
+}
+
+    #form input {
+        margin-bottom: 5px;
+    }
+
+
+
+#pLink{
+    color: #000000;
+    text-decoration: underline;
+}
+#content .container {
+    margin-top: 56px;
+    
+    background-color: #e4e4e4;   
+    border-radius: 3px;
+    box-shadow: 0px 0px 15px #888888;
+    
+}
+
+#vertCont{
+    background-color: #ffffff;
+    min-height: 900px;
+}
+
+.container #vertNav{
+    padding-top: 20px;
+    height: 100%;
+    
+}
+
+#vertNav ul li .topCat{
+    
+    margin-left: 0px;
+    color: #a81e22;
+    font-family: Stencil;
+}
+
+#vertNav ul li .subCat{
+    margin-left: 10%;
+    color: #000000;
+    padding-left: 10px;
+}
+
+#vertNav ul li a{
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+#vertNav ul li :hover{
+    background-color: #D1D1D1;
+}
+
+footer {
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0px 0px 15px #888888;
+    margin-top: 20px;
+    background-color: #a81e22;
+}
+
+footer .container {
+    padding: 0px;  
+    margin-left: auto;
+    margin-right: auto;
+                                                                        
+}
+
+footer p{
+    min-width: 300px;
+    margin-right:30px;
+    color: #ffffff;
+}
+
+footer ul{
+    
+}
+
+footer ul li {
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-right: 15px;
+}
+
+footer ul li a {
+    font-size: 1em;
+    font-weight: 100;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer ul li .Icon {
+    font-size: 2em;
+    }
+
+.space{
+    max-width: 280px    ;
+}
+
+footer ul li:hover a {
+    /*background-color: #f1f1f1;*/
+    color: #888888;
+}
+
+#block {
+    width:350px;
+    height:400px;
+    background-color:white;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10%;
+    padding-top:20px;
+    padding-left:10px;
+    padding-right:20px;
+    text-align:center;
+    border-radius: 3px;
+    font-size:20px;
+}
+	
+
+#form {
+    text-align:right;
+    padding-right:20px;
+}
+
+#links {
+    text-align: center;
+}
+
