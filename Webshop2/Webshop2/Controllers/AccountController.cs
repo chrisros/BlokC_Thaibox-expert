@@ -43,7 +43,7 @@ namespace Webshop2.Controllers
             /* wachtwoord checken voor submit, kan later?
                  * 
                  * if(password1.Equals(password2)){
-                    WachtPara.Value = password1;
+                    WachtPara.Value = password1  ;
                 }
                 else{
                     //FoutMelding
