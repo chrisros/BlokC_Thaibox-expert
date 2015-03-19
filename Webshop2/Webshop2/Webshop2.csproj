@@ -97,7 +97,6 @@
     <Content Include="Content\Reset.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="images\bullet.png" />
     <Content Include="images\image-slider-1.jpg" />
     <Content Include="images\image-slider-2.jpg" />
     <Content Include="images\image-slider-3.jpg" />
@@ -106,6 +105,39 @@
     <Content Include="images\kickboxing.jpg" />
     <Content Include="images\loading.gif" />
     <Content Include="images\logo.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\boatbig.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\boatpaper.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\boatsail.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\busdouble.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\busgreen.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\busred.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\carconvert.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\carearly.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\planeglider.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\planepaper.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\planeprop.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\rocket.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\boatpaper.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\boatsail.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\busdouble.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\busgreen.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\busred.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\carconvert.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\carearly.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\carfast.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\carfaster.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\carracer.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\planeace.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\planeglider.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\planepaper.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\planeprop.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\rocket.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\truckbig.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\truckearly.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\truckfire.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\truckbig.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\truckearly.png" />
+    <Content Include="images\PlaceHolderImages\Big Pic\truckfire.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -115,6 +147,8 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="images\PlaceHolderImages\Big Pic\Thumbs.db" />
+    <Content Include="images\PlaceHolderImages\Small Pics\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -140,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +192,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Admin.cshtml" />
     <Content Include="Views\Account\create.cshtml" />
+    <Content Include="Views\Store\ProductDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

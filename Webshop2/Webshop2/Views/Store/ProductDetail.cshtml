@@ -1,0 +1,29 @@
+﻿@using Webshop2.Models
+@model Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@ViewBag.H1</h1>
+
+
+    @*<% if (@Model.productID == 1)
+    { %>
+        <div> Naam: @Model.productNaam , Detail: @Model.productDetail</div>
+    <% }
+    else if (@Model.productID == 2)
+    { %>
+        <div> Naam: @Model.productNaam , Detail: @Model.productDetail</div>
+    <% }
+    else
+    { %>
+        <div>Er zijn geen producten geselecteerd</div>
+    <% } %>*@
+
+<%
+if (@Model.productID == 1) { %>
+    Naam: @Model.productNaam , Detail: @Model.productDetail
+<% } else { %>
+    Er zijn geen producten geselecteerd
+<% } %>
+   

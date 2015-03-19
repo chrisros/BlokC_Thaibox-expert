@@ -277,4 +277,6 @@ footer ul li:hover a {
 #links {
     text-align: center;
 }
-
+.naastElkaar {
+    display: inline-block;
+}
