@@ -97,6 +97,7 @@
     <Content Include="Content\Reset.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\bullet.png" />
     <Content Include="images\image-slider-1.jpg" />
     <Content Include="images\image-slider-2.jpg" />
     <Content Include="images\image-slider-3.jpg" />
@@ -170,6 +171,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\TermsController.cs" />
+    <Compile Include="DatabaseControllers\DatabaseController.cs" />
+    <Compile Include="DatabaseControllers\RegisterDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
