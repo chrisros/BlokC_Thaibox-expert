@@ -27,18 +27,9 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Account creëren";
             return View();
         }
-        public ActionResult RegCompleted(String username, String surname, String adress, String postal, String location, String tel, String mail, String password1, String password2)
+        public ActionResult RegCompleted(AccountModel account)
         {
             ViewBag.H1 = "Account geregistreerd";
-
-            AccountModel account = new AccountModel();
-            account.Email = mail;
-            account.Wachtwoord = password1;
-            account.Gebruikersnaam = username;
-            account.Naam = surname;
-            account.Woonadres = adress;
-            account.Woonpostcode = postal;
-            account.Telefoonnummer = Int32.Parse(tel);
 
             /* wachtwoord checken voor submit, kan later?
                  * 
@@ -48,11 +39,16 @@ namespace Webshop2.Controllers
                 else{
                     //FoutMelding
                 }*/
-
-            RegDB.RegisterAccount(account);
-
             
+            if (ModelState.IsValid) { 
+            RegDB.RegisterAccount(account);
             return View();
+            }
+            else
+            {
+                return View("create", account);
+            }
+            
         }
     }
 }

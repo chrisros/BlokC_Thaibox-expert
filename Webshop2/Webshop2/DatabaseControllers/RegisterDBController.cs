@@ -19,7 +19,7 @@ namespace Webshop2.DatabaseControllers
                 trans = conn.BeginTransaction();
 
                 string InsertString = @"insert into Gebruiker (naam, adres, woonPostcode, gebruikersnaam, wachtwoord, email, 
-                                           telefoonnummer, ) 
+                                           telefoonnummer) 
                                   values (@anaam, @wadres, @wpcode, @gnaam, @wwoord, @amail, @atel)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
@@ -29,7 +29,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter GnaamPara = new MySqlParameter("@gnaam", MySqlDbType.VarChar);
                 MySqlParameter WachtPara = new MySqlParameter("@wwoord", MySqlDbType.VarChar);
                 MySqlParameter MailPara = new MySqlParameter("@amail", MySqlDbType.VarChar);
-                MySqlParameter TelePara = new MySqlParameter("@anaam", MySqlDbType.Int32);
+                MySqlParameter TelePara = new MySqlParameter("@atel", MySqlDbType.Int32);
 
                 //Geboortedatum, sla ik nu even over
                 //MySqlParameter GebPara = new MySqlParameter("@ageb", MySqlDbType.DateTime);

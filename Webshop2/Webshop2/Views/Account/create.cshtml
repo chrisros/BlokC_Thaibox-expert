@@ -1,4 +1,5 @@
-﻿
+﻿@using Webshop2.Models
+@model AccountModel
 @{
     ViewBag.Title = "create";
 }
@@ -6,14 +7,21 @@
 <h1>@ViewBag.H1</h1>
 <div id='form'>
     <form name="login" method="post" action="/Account/RegCompleted">
-        <label>Voornaam :<input type="text" name="username"></label><br>
-        <label>Achternaam :<input type="text" name="surname"></label><br>
-        <label>Adres :<input type="text" name="adress"></label><br>
-        <label>Postcode :<input type="text" name="postal"></label><br>
-        <label>Plaats :<input type="text" name="location"></label><br>
-        <label>Telefoon :<input type="text" name="tel"></label><br>
-        <label>Email :<input type="text" name="mail"></label><br>
-        <label>Wachtwoord :<input type="password" name="password1"></label><br>
+        <label>Voornaam : @Html.TextBoxFor(model => model.Gebruikersnaam)
+        @Html.ValidationMessageFor(model => model.Gebruikersnaam) </label><br>
+        <label>Achternaam :@Html.TextBoxFor(model => model.Naam)
+        @Html.ValidationMessageFor(model => model.Naam)</label><br>
+        <label>Adres : @Html.TextBoxFor(model => model.Woonadres)
+        @Html.ValidationMessageFor(model => model.Woonadres)</label><br>
+        <label>Postcode : @Html.TextBoxFor(model => model.Woonpostcode)
+        @Html.ValidationMessageFor(model => model.Woonpostcode)</label><br>
+        <label>Plaats : @Html.TextBoxFor(model => model.Woonplaats)
+        @Html.ValidationMessageFor(model => model.Woonplaats)</label><br>
+        <label>Telefoon @Html.TextBoxFor(model => model.Telefoonnummer) </label><br>
+        <label>Email : @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)</label><br>
+        <label>Wachtwoord : @Html.PasswordFor(model => model.Wachtwoord)
+        @Html.ValidationMessageFor(model => model.Wachtwoord)</label><br>
         <label>Wachtwoord bevestigen : <input type="password" name="password2"></label><br/><br/>
         <input type="submit" value="Create">
     </form>
