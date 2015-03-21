@@ -6,24 +6,63 @@
 
 <h1>@ViewBag.H1</h1>
 
-
-    @*<% if (@Model.productID == 1)
-    { %>
-        <div> Naam: @Model.productNaam , Detail: @Model.productDetail</div>
-    <% }
+@{
+    if (@Model.productID == 1)
+    {
+        <p>
+            <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br/>
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
     else if (@Model.productID == 2)
-    { %>
-        <div> Naam: @Model.productNaam , Detail: @Model.productDetail</div>
-    <% }
+    {
+        <p>
+<img src="~/images/PlaceHolderImages/Small Pics/carconvert.png" alt="Artikel met ID 1" height="500" width="500"> <br />
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
+    else if (@Model.productID == 3)
+    {
+        <p>
+<img src="~/images/PlaceHolderImages/Small Pics/busred.png" alt="Artikel met ID 1" height="500" width="500"> <br />
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
+    else if (@Model.productID == 4)
+    {
+        <p>
+<img src="~/images/PlaceHolderImages/Small Pics/carearly.png" alt="Artikel met ID 1" height="500" width="500"> <br />
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
+    else if (@Model.productID == 5)
+    {
+        <p>
+<img src="~/images/PlaceHolderImages/Small Pics/boatsail.png" alt="Artikel met ID 1" height="500" width="500"> <br />
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
+    else if (@Model.productID == 6)
+    {
+        <p>
+<img src="~/images/PlaceHolderImages/Small Pics/planeace.png" alt="Artikel met ID 1" height="500" width="500"> <br />
+            Naam: @Model.productNaam <br />
+            Detail: @Model.productDetail <br />
+        </p>
+    }
     else
-    { %>
-        <div>Er zijn geen producten geselecteerd</div>
-    <% } %>*@
+    {
+        <p>Geen product geselecteerd</p>
+    }
+} 
+    
 
-<%
-if (@Model.productID == 1) { %>
-    Naam: @Model.productNaam , Detail: @Model.productDetail
-<% } else { %>
-    Er zijn geen producten geselecteerd
-<% } %>
+    
+
+
    

@@ -35,6 +35,31 @@ namespace Webshop2.Controllers
                 p.productNaam = "Hesje";
                 p.productDetail = "Geel hesje met reflectie materiaal";
             }
+            else if (productID == 3)
+            {
+                p.productID = productID;
+                p.productNaam = "3";
+                p.productDetail = "3";
+            }
+            else if (productID == 4)
+            {
+                p.productID = productID;
+                p.productNaam = "4";
+                p.productDetail = "4";
+            }
+            else if (productID == 5)
+            {
+                p.productID = productID;
+                p.productNaam = "5";
+                p.productDetail = "5";
+            }
+            else if (productID == 6)
+            {
+                p.productID = productID;
+                p.productNaam = "6";
+                p.productDetail = "6";
+            }
+            
             else
             {
                 p.productNaam = "Onbekend";
