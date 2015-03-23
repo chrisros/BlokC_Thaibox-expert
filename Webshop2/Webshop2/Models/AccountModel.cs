@@ -26,6 +26,9 @@ namespace Webshop2.Models
         [Required(ErrorMessage="Dit veld is verplicht")]
         public String Wachtwoord { get; set; }
 
+        [CompareAttribute("Wachtwoord", ErrorMessage = "Uw wachtwoorden komen niet overeen.")]
+        public String BevestigdWachtwoord { get; set; }
+
         [Required(ErrorMessage="Dit veld is verplicht")]
         public String Email { get; set; }
 

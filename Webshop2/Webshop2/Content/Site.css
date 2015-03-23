@@ -134,7 +134,7 @@ nav ul li:hover a {
 #form{
     width:435px;
     height:400px;
-    text-align: left;
+    text-align:left;
     background-color:white;
     margin-left:10%;  
     margin-top:10%;
@@ -149,8 +149,6 @@ nav ul li:hover a {
     #form input {
         margin-bottom: 5px;
     }
-
-
 
 #pLink{
     color: #000000;
