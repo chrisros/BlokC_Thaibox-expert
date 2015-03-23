@@ -18,14 +18,15 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"insert into Gebruiker (naam, adres, woonPostcode, gebruikersnaam, wachtwoord, email, 
+                string InsertString = @"insert into Gebruiker (naam, adres, woonPostcode, woonplaats, gebruikersnaam, wachtwoord, email, 
                                            telefoonnummer) 
-                                  values (@anaam, @wadres, @wpcode, @gnaam, @wwoord, @amail, @atel)";
+                                  values (@anaam, @wadres, @wpcode, @wplaats, @gnaam, @wwoord, @amail, @atel)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
                 MySqlParameter NaamPara = new MySqlParameter("@anaam", MySqlDbType.VarChar);
                 MySqlParameter WoonPara = new MySqlParameter("@wadres", MySqlDbType.VarChar);
                 MySqlParameter PostPara = new MySqlParameter("@wpcode", MySqlDbType.VarChar);
+                MySqlParameter PlaatsPara = new MySqlParameter("@wplaats", MySqlDbType.VarChar);
                 MySqlParameter GnaamPara = new MySqlParameter("@gnaam", MySqlDbType.VarChar);
                 MySqlParameter WachtPara = new MySqlParameter("@wwoord", MySqlDbType.VarChar);
                 MySqlParameter MailPara = new MySqlParameter("@amail", MySqlDbType.VarChar);
@@ -37,6 +38,7 @@ namespace Webshop2.DatabaseControllers
                 NaamPara.Value = account.Naam;
                 WoonPara.Value = account.Woonadres;
                 PostPara.Value = account.Woonpostcode;
+                PlaatsPara.Value = account.Woonplaats;
                 GnaamPara.Value = account.Gebruikersnaam;
                 MailPara.Value = account.Email;
                 WachtPara.Value = account.Wachtwoord;
@@ -45,6 +47,7 @@ namespace Webshop2.DatabaseControllers
                 regcmd.Parameters.Add(NaamPara);
                 regcmd.Parameters.Add(WoonPara);
                 regcmd.Parameters.Add(PostPara);
+                regcmd.Parameters.Add(PlaatsPara);
                 regcmd.Parameters.Add(GnaamPara);
                 regcmd.Parameters.Add(MailPara);
                 regcmd.Parameters.Add(WachtPara);

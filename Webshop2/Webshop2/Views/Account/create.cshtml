@@ -22,7 +22,8 @@
         @Html.ValidationMessageFor(model => model.Email)</label><br>
         <label>Wachtwoord : @Html.PasswordFor(model => model.Wachtwoord)
         @Html.ValidationMessageFor(model => model.Wachtwoord)</label><br>
-        <label>Wachtwoord bevestigen : <input type="password" name="password2"></label><br/><br/>
+        <label>Wachtwoord bevestigen : @Html.PasswordFor(model => model.BevestigdWachtwoord)
+        @Html.ValidationMessageFor(model => model.BevestigdWachtwoord)</label><br/><br/>
         <input type="submit" value="Create">
     </form>
 </div>

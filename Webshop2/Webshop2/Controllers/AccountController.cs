@@ -29,7 +29,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult RegCompleted(AccountModel account)
         {
-            ViewBag.H1 = "Account geregistreerd";
+            ViewBag.H1 = "Account geregistreerd.";
 
             /* wachtwoord checken voor submit, kan later?
                  * 
