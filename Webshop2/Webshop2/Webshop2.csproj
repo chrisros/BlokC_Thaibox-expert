@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\TermsController.cs" />
+    <Compile Include="DatabaseControllers\BestellingDBController.cs" />
     <Compile Include="DatabaseControllers\DatabaseController.cs" />
     <Compile Include="DatabaseControllers\RegisterDBController.cs" />
     <Compile Include="Global.asax.cs">
@@ -205,6 +206,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\BestellingDB\" />
+    <Folder Include="Views\ProductDB\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

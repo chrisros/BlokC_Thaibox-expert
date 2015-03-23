@@ -1,7 +1,24 @@
-﻿
+﻿@using Webshop2.Models;
+@model List<Product>
 @{
     ViewBag.Title = "Index";
 }
 
 <h1>@ViewBag.H1</h1>
-
+<table>
+<thead class="h4">
+        <th>Artikel</th>
+        <th>Verzending</th>
+        <th>Prijs</th>
+        <th>Aantal</th>
+</thead>
+    @{foreach (Product prod in Model)
+    {
+    <tr>    
+        <td>@prod.productNaam</td>
+        <td>Gratis</td>
+        <td>@prod.productPrijs</td>
+        </tr>
+    }}
+</table>
+<h4>Subtotaal: € @ViewBag.prijs</h4>
