@@ -5,14 +5,49 @@
 
 <h1>@ViewBag.H1</h1>
 
-<p>Vul de gegevens beneden in om in te loggen in uw account.</p>
+<p>Vul de gegevens beneden in om in te loggen in uw account. <br>
+    U heeft een account nodig om bestellingen te kunnen plaatsen, beschikt u nog niet over een account? een account aanmaken is geheel vrijblijfend en gratis!</p>
+<table>
+    <tr>
+        <td>
+        <h3>Bestaande klant</h3>
+        </td>
+        <td>
+            <h3>Nieuwe klant</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id='form'>
+                <form name="login" method="post" action="">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Email:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Wachtwoord:</label>
+                            </td>
+                            <td>
+                                <input type="password" name="password">
+                            </td>
+                        </tr>
+                        </table>
+                        <input type="submit" value="Log in">
+                </form>
+            </div>
+        </td>
+        <td>
+            <p>Heeft u nog geen account? Geen probleem,
+            klik <a href="/account/create/" id="pLink">hier</a> om een account aan te maken.</p>
+        </td>
+    </tr>
+</table>
 
-<div id='form'>
-    <form name="login" method="post" action="">
-        <label>Gebruikersnaam: <input type="text" name="username"></label><br>
-        <label>Wachtwoord:  <input type="password" name="password"></label><br><br>
-        <input type="submit" value="Log in">
-    </form>
-</div>
 
-<p>Heeft u nog geen account? Geen probleem, klik <a href="/account/create/" id="pLink">hier</a> om een account aan te maken.</p>
+
