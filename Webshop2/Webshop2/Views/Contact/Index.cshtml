@@ -16,18 +16,25 @@
         </td>
     </tr>
     <tr>
-     <td>       
+     <td id="contact">       
         <p>
             Wagenstraat 79 <br/>
             2512 AR Den Haag <br/>
             Nederland <br/>
             Tel: 070-36002817<br />
-            email: <a href="mailto:mailto:info@chrisros.eu?subject=Contact 'www.chrisros.eu">info@thaibox-expert.nl</a><br />
+            email: <a href="mailto:mailto:thaiboxexpert@chros.nl?subject=Contact 'www.chrisros.eu">info@thaibox-expert.nl</a><br />
 
         </p>
     </td>
     <td>
-        
+        <form name="contactform" method="post" action="/Contact/Mailsend">
+            <label><input type="text" name="subject" value="Onderwerp"></label><br />
+            <label><input type="text" name="name" value="Uw naam"></label><br />
+            <label><input type="email" name="email" value="Uw Email"></label>
+            <textarea name="message" rows="5" cols="25">Typ hier uw bericht.</textarea>
+            <input type="submit" value="Verstuur"> <br>
+            <p>@ViewBag.feedback</p>
+        </form>
     </td>
     </tr>
 </table>
