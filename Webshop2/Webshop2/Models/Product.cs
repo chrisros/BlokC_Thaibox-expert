@@ -10,5 +10,6 @@ namespace Webshop2.Models
         public String productNaam { get; set; }
         public String productDetail { get; set; }
         public int productID { get; set; }
+        public int productPrijs { get; set; }
     }
 }

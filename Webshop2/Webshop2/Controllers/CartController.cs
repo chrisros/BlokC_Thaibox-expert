@@ -11,8 +11,12 @@ namespace Webshop2.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+           
             ViewBag.H1 = "Winkelwagen";
-            return View();
+            DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
+            ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = besteldbcontrol.haalProductGegevensOp();
+            return View(producten);
         }
     }
 }
