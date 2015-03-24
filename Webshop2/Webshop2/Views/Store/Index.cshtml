@@ -6,7 +6,15 @@
 }
 
 <h1>@ViewBag.H1</h1>
-
+<p class="naastElkaar">
+    @{foreach (Product prod in Model)
+    {
+        <tr>
+            naam: @prod.productNaam
+            <br />Prijs: @prod.productPrijs
+        </tr>
+    }}
+    </p>
 <p class="naastElkaar">
     <a href="store/ProductDetail?productID=1"><img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="100" width="100"></a> <br />
     Naam: Artikel 1 <br />
@@ -50,12 +58,5 @@
 </p>
 
 
-@{foreach (Product prod in Model)
-{
-    <tr>
-        <td>@prod.productNaam</td>
-        <td>Gratis</td>
-        <td>@prod.productPrijs</td>
-    </tr>
-}}
+
 
