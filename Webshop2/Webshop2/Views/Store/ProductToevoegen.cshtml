@@ -2,11 +2,10 @@
 @model Product
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "create";
 }
 
 <h1>@ViewBag.H1</h1>
-
 <div id='createform'>
     <form name="productToevoegen" method="post" action="/Store/ProductToegevoegd">
 
@@ -17,6 +16,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.productNaam)
+                </td>
+                <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.productNaam)
                 </td>
             </tr>
@@ -35,6 +36,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.productSoort)
+                </td>
+                <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.productSoort)
                 </td>
             </tr>
@@ -45,6 +48,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.productPrijs)
+                </td>
+                <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.productPrijs)
                 </td>
             </tr>
@@ -55,6 +60,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.productDetail)
+                </td>
+                <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.productDetail)
                 </td>
             </tr>

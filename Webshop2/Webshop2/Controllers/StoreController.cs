@@ -94,7 +94,7 @@ namespace Webshop2.Controllers
             }
             else
             {
-                return View("create", product);
+                return View("ProductToevoegen", product);
             }
         }
 
