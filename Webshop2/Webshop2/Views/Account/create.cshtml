@@ -5,6 +5,7 @@
 }
 
 <h1>@ViewBag.H1</h1>
+<h3>@ViewBag.H2</h3>
 <div id='createform'>
     <form name="login" method="post" action="/Account/RegCompleted">
 
@@ -15,6 +16,11 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.Gebruikersnaam)
+<<<<<<< HEAD
+=======
+                </td>
+                <td id="validationerror">
+>>>>>>> origin/master
                     @Html.ValidationMessageFor(model => model.Gebruikersnaam)
                 </td>
             </tr>
@@ -24,6 +30,11 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.Naam)
+<<<<<<< HEAD
+=======
+                </td>
+                <td id="validationerror">
+>>>>>>> origin/master
                     @Html.ValidationMessageFor(model => model.Naam)
                 </td>
             </tr>
@@ -31,6 +42,80 @@
                 <td>
                     <label>Adres :</label>
                 </td>
+<<<<<<< HEAD
+=======
+                <td>
+                    @Html.TextBoxFor(model => model.Woonadres)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.Woonadres)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Postcode :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Woonpostcode)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.Woonpostcode)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Plaats :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Woonplaats)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.Woonplaats)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Email :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Email)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Telefoon :</label>
+                </td>
+                <td>
+                     @Html.TextBoxFor(model => model.Telefoonnummer)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Wachtwoord :</label>
+                </td>
+                <td>
+                    @Html.PasswordFor(model => model.Wachtwoord)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.Wachtwoord)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Wachtwoord bevestigen :</label>
+                </td>
+                <td>
+                    @Html.PasswordFor(model => model.BevestigdWachtwoord)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.BevestigdWachtwoord)
+                </td>
+            </tr>
+            <tr>
+>>>>>>> origin/master
                 <td>
                     @Html.TextBoxFor(model => model.Woonadres)
                 @Html.ValidationMessageFor(model => model.Woonadres)

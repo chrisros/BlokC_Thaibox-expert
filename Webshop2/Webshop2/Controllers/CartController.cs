@@ -12,16 +12,22 @@ namespace Webshop2.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-           //List<Models.Product> producten = new List<Models.Product>();
+           List<Models.Product> producten = new List<Models.Product>();
             ViewBag.H1 = "Winkelwagen";
+            bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
             ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-           // producten = besteldbcontrol.haalProductGegevensOp();
-            List<Product> producten = (List<Product>)Session["sessietest"];
-            if (System.Web.HttpContext.Current.Session["Sessionexists"] != null)
+            producten = besteldbcontrol.haalProductGegevensOp();
+            if (Session["LoggedIn"] != null)
             {
-                Session["Sessionexists"] = 0;
+                ingelogd = (bool)Session["LoggedIn"];
             }
+            ViewBag.loggedin = ingelogd;
+           // List<Product> producten = (List<Product>)Session["sessietest"];
+            //if (System.Web.HttpContext.Current.Session["Sessionexists"] != null)
+           // {
+            //    Session["Sessionexists"] = 0;
+            //}
             return View(producten);
         }
     }

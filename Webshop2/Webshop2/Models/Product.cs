@@ -12,7 +12,11 @@ namespace Webshop2.Models
         public String productMerk { get; set; }
         public int productID { get; set; }
         public int productPrijs { get; set; }
+<<<<<<< HEAD
         public String productSoort { get; set; }
         public String productAfbeelding { get; set; }
+=======
+        public int productAantal { get; set; }
+>>>>>>> origin/master
     }
 }

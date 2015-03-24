@@ -110,5 +110,45 @@ namespace Webshop2.DatabaseControllers
             }
             return account;
         }
+        //Kijkt of de email al bestaat in de database returned true als de email nog niet in de DB voorkomt
+        public Boolean isNewEmail(String email)
+        {
+            Boolean isNewEmail = false;
+            int rowCount = 1;
+            try
+            {
+                conn.Open();
+
+                string selectQuery = @"count * as rows from Gebruiker where email = @mail";
+                MySqlCommand selcmd = new MySqlCommand(selectQuery, conn);
+
+                MySqlParameter mailpara = new MySqlParameter("@mail", MySqlDbType.VarChar);
+                mailpara.Value = email;
+
+                selcmd.Parameters.Add(mailpara);
+
+                MySqlDataReader dataReader = selcmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    rowCount = dataReader.GetInt32("rows");
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            if (rowCount == 0)
+            {
+                isNewEmail = true;
+            }
+
+            return isNewEmail;
+        }
     }
 }

@@ -146,6 +146,11 @@ nav ul li:hover a {
     background-color:white;
     border-radius: 3px;
     font-size:16px;
+    
+}
+#createform td{
+    margin-bottom:-10px;
+    margin-top:0px
 }
 
     #form input {
@@ -281,7 +286,7 @@ footer ul li:hover a {
 .naastElkaar {
     display: inline-block;
     width: 250px;
-    
+    text-align: left;
 }
 
 #contact{
@@ -290,4 +295,9 @@ footer ul li:hover a {
 
 textarea{
     width: 90%;
+}
+#validationerror{
+    color: red;
+    font-size: 12px;
+    margin-left: 0px;
 }
