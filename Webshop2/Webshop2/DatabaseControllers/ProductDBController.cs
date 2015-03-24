@@ -37,5 +37,53 @@ namespace Webshop2.DatabaseControllers
             }
             return producten;
         }
+
+        public void RegisterProduct(Product product)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"insert into Product (prijs, naam, merk, soort, productOmschrijving) 
+                                  values (@prijs, @naam, @merk, @soort, @detail)";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.VarChar);
+                MySqlParameter naamPara = new MySqlParameter("@naam", MySqlDbType.VarChar);
+                MySqlParameter merkPara = new MySqlParameter("@merk", MySqlDbType.VarChar);
+                MySqlParameter soortPara = new MySqlParameter("@soort", MySqlDbType.VarChar);
+                MySqlParameter detailPara = new MySqlParameter("@detail", MySqlDbType.VarChar);
+                
+                prijsPara.Value = product.productPrijs;
+                naamPara.Value = product.productNaam;
+                merkPara.Value = product.productMerk;
+                soortPara.Value = product.productSoort;
+                detailPara.Value = product.productDetail;
+
+                regcmd.Parameters.Add(prijsPara);
+                regcmd.Parameters.Add(naamPara);
+                regcmd.Parameters.Add(merkPara);
+                regcmd.Parameters.Add(soortPara);
+                regcmd.Parameters.Add(detailPara);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
     }
 }

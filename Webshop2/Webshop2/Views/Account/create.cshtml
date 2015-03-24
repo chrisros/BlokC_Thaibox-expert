@@ -7,7 +7,7 @@
 <h1>@ViewBag.H1</h1>
 <div id='createform'>
     <form name="login" method="post" action="/Account/RegCompleted">
-        
+
         <table>
             <tr>
                 <td>
@@ -15,7 +15,7 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.Gebruikersnaam)
-                    @Html.ValidationMessageFor(model => model.Gebruikersnaam)    
+                    @Html.ValidationMessageFor(model => model.Gebruikersnaam)
                 </td>
             </tr>
             <tr>
@@ -23,80 +23,80 @@
                     <label>Achternaam :</label>
                 </td>
                 <td>
-                @Html.TextBoxFor(model => model.Naam)
-                @Html.ValidationMessageFor(model => model.Naam)
+                    @Html.TextBoxFor(model => model.Naam)
+                    @Html.ValidationMessageFor(model => model.Naam)
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Adres :</label>
                 </td>
-                <td>@Html.TextBoxFor(model => model.Woonadres)
-                @Html.ValidationMessageFor(model => model.Woonadres)</td>
-            </tr>
-            <tr>
                 <td>
-                    <label>Postcode :</label>
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.Woonpostcode)
-                    @Html.ValidationMessageFor(model => model.Woonpostcode)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Plaats :</label>
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.Woonplaats)
-                    @Html.ValidationMessageFor(model => model.Woonplaats)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Email :</label>
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.Email)
-                    @Html.ValidationMessageFor(model => model.Email)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Telefoon :</label>
-                </td>
-                <td>
-                     @Html.TextBoxFor(model => model.Telefoonnummer)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Wachtwoord :</label>
-                </td>
-                <td>
-                    @Html.PasswordFor(model => model.Wachtwoord)
-                    @Html.ValidationMessageFor(model => model.Wachtwoord)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Wachtwoord bevestigen :</label>
-                </td>
-                <td>
-                    @Html.PasswordFor(model => model.BevestigdWachtwoord)
-                    @Html.ValidationMessageFor(model => model.BevestigdWachtwoord)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    
-                </td>
-                <td>
-                    <input type="submit" value="Registreer">
-                </td>
-            </tr>
-            </table>
-            
+                    @Html.TextBoxFor(model => model.Woonadres)
+                @Html.ValidationMessageFor(model => model.Woonadres)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Postcode :</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Woonpostcode)
+                @Html.ValidationMessageFor(model => model.Woonpostcode)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Plaats :</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Woonplaats)
+                @Html.ValidationMessageFor(model => model.Woonplaats)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email :</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Telefoon :</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Telefoonnummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Wachtwoord :</label>
+            </td>
+            <td>
+                @Html.PasswordFor(model => model.Wachtwoord)
+                @Html.ValidationMessageFor(model => model.Wachtwoord)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Wachtwoord bevestigen :</label>
+            </td>
+            <td>
+                @Html.PasswordFor(model => model.BevestigdWachtwoord)
+                @Html.ValidationMessageFor(model => model.BevestigdWachtwoord)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Registreer">
+            </td>
+        </tr>
+    </table>
+
 </form>
 </div>
 

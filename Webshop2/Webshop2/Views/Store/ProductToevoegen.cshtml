@@ -1,0 +1,70 @@
+﻿@using Webshop2.Models
+@model Product
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div id='createform'>
+    <form name="productToevoegen" method="post" action="/Store/ProductToegevoegd">
+
+        <table>
+            <tr>
+                <td>
+                    <label>Product Naam :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productNaam)
+                    @Html.ValidationMessageFor(model => model.productNaam)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Product merk :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productMerk)
+                    @Html.ValidationMessageFor(model => model.productMerk)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Product soort :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productSoort)
+                    @Html.ValidationMessageFor(model => model.productSoort)
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <label>Product Prijs :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productPrijs)
+                    @Html.ValidationMessageFor(model => model.productPrijs)
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <label>Product Details :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productDetail)
+                    @Html.ValidationMessageFor(model => model.productDetail)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Toevoegen">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+

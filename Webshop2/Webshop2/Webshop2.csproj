@@ -204,6 +204,8 @@
     <Content Include="Views\Account\RegCompleted.cshtml" />
     <Content Include="Views\Contact\Mailsend.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Store\ProductToevoegen.cshtml" />
+    <Content Include="Views\Store\ProductToegevoegd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

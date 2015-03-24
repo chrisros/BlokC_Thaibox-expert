@@ -11,18 +11,18 @@ namespace Webshop2.Controllers
 {
     public class StoreController : Controller
     {
+
+        static ProductDBController ProdDataBase = new ProductDBController();
+
         // GET: Store
         public ActionResult Index()
         {
             ViewBag.H1 = "Winkel";
-            DatabaseControllers.ProductDBController prodControl= new DatabaseControllers.ProductDBController();
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalProductGegevensOp();
             return View(producten);
         }
-
-        
-            
 
         public ActionResult ProductDetail(int productID)
         {
@@ -76,6 +76,28 @@ namespace Webshop2.Controllers
             return View(p);
         }
 
-        
+        public ActionResult ProductToevoegen()
+        {
+            ViewBag.H1 = "Toevoegen producten";
+
+            return View();
+        }
+
+        public ActionResult ProductToegevoegd(Product product)
+        {
+            ViewBag.H1 = "Account geregistreerd.";
+
+            if (ModelState.IsValid)
+            {
+                ProdDataBase.RegisterProduct(product);
+                return View();
+            }
+            else
+            {
+                return View("create", product);
+            }
+        }
+
+
     }
 }
