@@ -9,52 +9,33 @@ namespace Webshop2.DatabaseControllers
 {
     public class ProductDBController : DatabaseController
     {
-        public void Producten(Product product)
+        public List<Product> haalProductGegevensOp()
         {
-            MySqlTransaction trans = null;
-
+            List<Product> producten = new List<Product>();
             try
             {
                 conn.Open();
-                trans = conn.BeginTransaction();
-
-                string selectStat = @"Select * from Product where productID = 1";
-                MySqlCommand regcmd = new MySqlCommand(selectStat, conn);
-
-                //MySqlParameter NaamPara = new MySqlParameter("@naam", MySqlDbType.VarChar);
-                //MySqlParameter Detail = new MySqlParameter("@merk", MySqlDbType.VarChar);
-
-                //NaamPara.Value = "Naam";
-                //Detail.Value = "merk";
-
-                //regcmd.Parameters.Add(NaamPara);
-                //regcmd.Parameters.Add(Detail);
-                //regcmd.Prepare();
-
-                MySqlDataReader reader = regcmd.ExecuteReader();
-
-                while (reader.NextResult())
+                string selectQuery = "select * from Product where productID = 1";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    Models.Product pr = new Models.Product();
-                                        
-                    string naam = reader.GetString("naam");
-                    string merk = reader.GetString("merk");
+                    int ID = dataReader.GetInt32("productID");
+                    string productNaam = dataReader.GetString("naam");
+                    int productPrijs = dataReader.GetInt32("productOmschrijving");
+                    Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam, productPrijs = productPrijs };
+                    producten.Add(p);
                 }
-                
-
-                
-
             }
             catch (Exception)
             {
-                trans.Rollback();
+
             }
             finally
             {
                 conn.Close();
-
             }
-
+            return producten;
         }
     }
 }

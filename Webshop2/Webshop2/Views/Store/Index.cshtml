@@ -1,5 +1,5 @@
 ﻿@using Webshop2.Models
-@model Product
+@model List<Product>
 
 @{
     ViewBag.Title = "Index";
@@ -49,7 +49,13 @@
     Prijs: Prijs 6<br />
 </p>
 
-<p>
 
-    <label>Select: @Model.productNaam</label>
-</p>
+@{foreach (Product prod in Model)
+{
+    <tr>
+        <td>@prod.productNaam</td>
+        <td>Gratis</td>
+        <td>@prod.productPrijs</td>
+    </tr>
+}}
+

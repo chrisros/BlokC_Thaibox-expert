@@ -15,9 +15,14 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             ViewBag.H1 = "Winkel";
-
-            return View();
+            DatabaseControllers.ProductDBController prodControl= new DatabaseControllers.ProductDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalProductGegevensOp();
+            return View(producten);
         }
+
+        
+            
 
         public ActionResult ProductDetail(int productID)
         {
