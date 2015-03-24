@@ -118,7 +118,9 @@
     <Content Include="images\PlaceHolderImages\Big Pic\planepaper.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\planeprop.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\rocket.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\1.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\boatpaper.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\2.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\boatsail.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\busdouble.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\busgreen.png" />
