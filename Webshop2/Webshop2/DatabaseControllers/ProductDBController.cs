@@ -15,7 +15,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "select * from Product where productID = 1";
+                string selectQuery = "select * from Product";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
