@@ -20,11 +20,15 @@
         <td>@prod.productNaam</td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
+        <td><form action="~/Views/Cart/Index.cshtml">
+        <input type="number" name="points"
+           min="0" max="100" step="1" value="@prod.productAantal">
+        </form></td>
         </tr>
       }
       }}
 
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
-
-
+<br /><b>Om te kunnen bestellen moet u een account hebben en ingelogd zijn.</b>
+<br />Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.
