@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace Webshop2.Controllers
 {
     public class AccountController : Controller
     {
+        
         static RegisterDBController RegDB = new RegisterDBController();
         // GET: Account
         public ActionResult Index()
@@ -31,9 +33,17 @@ namespace Webshop2.Controllers
         {
             ViewBag.H1 = "Account geregistreerd.";
 
-            if (ModelState.IsValid) { 
+            if (ModelState.IsValid && RegDB.isNewEmail(account.Email))
+            { 
             RegDB.RegisterAccount(account);
+            ViewBag.H1 = "Account geregistreerd.";
             return View();
+            }
+            else if (!RegDB.isNewEmail(account.Email))
+            {
+                ViewBag.H1 = "Account creëren";
+                ViewBag.H2 = "Dit Email adres is reeds geregistreerd.";
+                return View("create", account);
             }
             else
             {
