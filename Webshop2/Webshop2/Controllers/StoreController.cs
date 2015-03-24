@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop2.Models;
+using Webshop2.DatabaseControllers;
+using MySql.Data.MySqlClient;
 
 namespace Webshop2.Controllers
 {
@@ -59,7 +61,7 @@ namespace Webshop2.Controllers
                 p.productNaam = "6";
                 p.productDetail = "6";
             }
-            
+
             else
             {
                 p.productNaam = "Onbekend";
@@ -68,5 +70,7 @@ namespace Webshop2.Controllers
 
             return View(p);
         }
+
+        
     }
 }

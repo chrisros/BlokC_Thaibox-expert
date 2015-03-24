@@ -1,18 +1,20 @@
-﻿
+﻿@using Webshop2.Models
+@model Product
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h1>@ViewBag.H1</h1>
 
-    <p class="naastElkaar">
+<p class="naastElkaar">
     <a href="store/ProductDetail?productID=1"><img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="100" width="100"></a> <br />
     Naam: Artikel 1 <br />
     Detail: Beschrijving 1<br />
     Prijs: Prijs 1<br />
 </p>
 
-<p class ="naastElkaar">
+<p class="naastElkaar">
     <a href="store/ProductDetail?productID=2"><img src="~/images/PlaceHolderImages/Small Pics/carconvert.png" alt="Artikel met ID 1" height="100" width="100"></a> <br />
     Naam: Artikel 2 <br />
     Detail: Beschrijving 2<br />
@@ -45,4 +47,9 @@
     Naam: Artikel 6 <br />
     Detail: Beschrijving 6<br />
     Prijs: Prijs 6<br />
+</p>
+
+<p>
+
+    <label>Select: @Model.productNaam</label>
 </p>
