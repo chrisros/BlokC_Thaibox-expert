@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Webshop2.Models;
 
 namespace Webshop2.Controllers
 {
@@ -11,8 +12,14 @@ namespace Webshop2.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            Session["Sessionexists"] = 1;
+            List<Product> prod = new List<Product>();
+            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi" };
+            prod.Add(p);
+            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2" };
+            prod.Add(p1);
+            Session["sessietest"] = prod;
             ViewBag.H2 = "Welkom";
-
             return View();
         }
     }

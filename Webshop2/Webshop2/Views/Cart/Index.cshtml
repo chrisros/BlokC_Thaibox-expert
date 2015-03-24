@@ -12,13 +12,19 @@
         <th>Prijs</th>
         <th>Aantal</th>
 </thead>
-    @{foreach (Product prod in Model)
+    @{if (Session["Sessionexists"] !=null)
+      { 
+        foreach (Product prod in Model)
     {
     <tr>    
         <td>@prod.productNaam</td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
         </tr>
-    }}
+      }
+      }}
+
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
+
+
