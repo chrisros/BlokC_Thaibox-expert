@@ -31,15 +31,6 @@ namespace Webshop2.Controllers
         {
             ViewBag.H1 = "Account geregistreerd.";
 
-            /* wachtwoord checken voor submit, kan later?
-                 * 
-                 * if(password1.Equals(password2)){
-                    WachtPara.Value = password1  ;
-                }
-                else{
-                    //FoutMelding
-                }*/
-            
             if (ModelState.IsValid) { 
             RegDB.RegisterAccount(account);
             return View();
@@ -49,6 +40,21 @@ namespace Webshop2.Controllers
                 return View("create", account);
             }
             
+        }
+        public ActionResult Login(string username, string password)
+        {
+            AccountModel account = RegDB.LoginCheck(username, password);
+
+            bool mailklopt = account.Email.Equals(username);
+            bool passklopt = account.Wachtwoord.Equals(password);
+
+            if (!mailklopt || !passklopt) {
+                return View("Index"); 
+            }
+            else
+            {
+                return View(account);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿
+﻿@model String
+
 @{
     ViewBag.Title = "Index";
 }
@@ -6,7 +7,7 @@
 <h1>@ViewBag.H1</h1>
 
 <p>Vul de gegevens beneden in om in te loggen in uw account. <br>
-    U heeft een account nodig om bestellingen te kunnen plaatsen, beschikt u nog niet over een account? een account aanmaken is geheel vrijblijfend en gratis!</p>
+    U heeft een account nodig om bestellingen te kunnen plaatsen. Beschikt u nog niet over een account? Een account aanmaken is geheel vrijblijvend en gratis!</p>
 <table>
     <tr>
         <td>
@@ -19,7 +20,7 @@
     <tr>
         <td>
             <div id='form'>
-                <form name="login" method="post" action="">
+                <form name="login" method="post" action="/Account/Login">
                     <table>
                         <tr>
                             <td>

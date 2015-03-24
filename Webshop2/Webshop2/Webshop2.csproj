@@ -201,6 +201,7 @@
     <Content Include="Views\Store\ProductDetail.cshtml" />
     <Content Include="Views\Account\RegCompleted.cshtml" />
     <Content Include="Views\Contact\Mailsend.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,8 +211,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MailSend\" />
     <Folder Include="Views\BestellingDB\" />
+    <Folder Include="Views\MailSend\" />
     <Folder Include="Views\ProductDB\" />
   </ItemGroup>
   <PropertyGroup>

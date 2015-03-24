@@ -68,5 +68,47 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
+
+        public AccountModel LoginCheck(String email, string wachtwoord) 
+        {
+            AccountModel account = new AccountModel();
+            try
+            {
+                conn.Open();
+
+                string selectquery = @"select * from Gebruiker where email = @mail";
+                MySqlCommand selcmd = new MySqlCommand(selectquery, conn);
+
+                MySqlParameter mailpara = new MySqlParameter("@mail", MySqlDbType.VarChar);
+                mailpara.Value = email;
+
+                selcmd.Parameters.Add(mailpara);
+
+                MySqlDataReader reader = selcmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    account.Email = reader.GetString("email");
+                    account.Wachtwoord = reader.GetString("wachtwoord");
+                    account.Naam = reader.GetString("naam");
+                    account.Woonadres = reader.GetString("adres");
+                    account.Woonpostcode = reader.GetString("woonPostcode");
+                    account.Woonplaats = reader.GetString("woonplaats");
+                    account.Gebruikersnaam = reader.GetString("gebruikersnaam");
+                    account.Telefoonnummer = reader.GetInt32("telefoonnummer");
+                }
+                
+            }
+            catch (Exception)
+            {
+                
+            }
+            finally 
+            {
+                conn.Close();
+            }
+            return account;
+        }
     }
 }
