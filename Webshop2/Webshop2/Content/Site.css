@@ -281,7 +281,7 @@ footer ul li:hover a {
 .naastElkaar {
     display: inline-block;
     width: 250px;
-    
+    text-align: left;
 }
 
 #contact{
