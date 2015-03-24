@@ -45,7 +45,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.productID, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID" 
+                string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.*, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID" 
                 +" left outer join Uitvoering U on B.uitvoeringID = U.uitvoeringID" 
                 +" left outer join Product P on U.productID = P.productID where A.bestellingID = 1; ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
@@ -54,9 +54,11 @@ namespace Webshop2.DatabaseControllers
                 {
                     int ID = dataReader.GetInt32("productID");
                     string productNaam = dataReader.GetString("naam");
+                    string kleur = dataReader.GetString("kleur");
+                    string maat = dataReader.GetString("maat");
                     int productPrijs = dataReader.GetInt32("prijs");
                     int productaantal = dataReader.GetInt32("aantal");
-                Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam, productPrijs = productPrijs, productAantal =  productaantal };
+                Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam +" - " + kleur +" - " + maat, productPrijs = productPrijs, productAantal =  productaantal };
                 producten.Add(p);
                 }
             }

@@ -53,6 +53,7 @@ namespace Webshop2.Controllers
             }
             else
             {
+                Session["LoggedIn"] = true;
                 return View(account);
             }
         }

@@ -30,5 +30,13 @@
 
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
-<br /><b>Om te kunnen bestellen moet u een account hebben en ingelogd zijn.</b>
+@{if(@ViewBag.loggedin != true)
+    { 
+    <br /><b>Om te kunnen bestellen moet u een account hebben en ingelogd zijn.</b>
+    }
+    if(@ViewBag.loggedin == true)
+    {
+        <br /><input type="submit" value="bestel">
+    }
+}
 <br />Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.
