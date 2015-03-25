@@ -98,6 +98,24 @@ namespace Webshop2.Controllers
             }
         }
 
+        public ActionResult Kleding()
+        {
+            ViewBag.H1 = "Kleding";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalKledingGegevensOp();
+            return View(producten);
+        }
+
+        public ActionResult Shirts()
+        {
+            ViewBag.H1 = "Shirts";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalShirtsOp();
+            return View(producten);
+        }
+
 
     }
 }

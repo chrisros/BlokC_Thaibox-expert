@@ -22,8 +22,11 @@ namespace Webshop2.DatabaseControllers
                 {
                     int ID = dataReader.GetInt32("productID");
                     string productNaam = dataReader.GetString("naam");
-                    string productPrijs = dataReader.GetString("merk");
-                    Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam, productMerk = productPrijs };
+                    string productMerk = dataReader.GetString("merk");
+                    int productPrijs = dataReader.GetInt32("prijs");
+                    string productDetail = dataReader.GetString("productOmschrijving");
+                    string productSoort = dataReader.GetString("soort");
+                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
                     producten.Add(p);
                 }
             }
