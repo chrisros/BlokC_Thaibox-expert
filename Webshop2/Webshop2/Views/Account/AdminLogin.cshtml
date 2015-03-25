@@ -1,0 +1,21 @@
+﻿@using Webshop2.Models
+@model AdminModel
+@{
+    ViewBag.Title = "Ingelogd als medewerker";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div>
+    <p>Hallo, @Model.Functie.</p>
+
+     @if (@Model.Functie == "Beheerder")
+     {
+         <p>U bent nu ingelogd en u kunt het assortiment wijzigen.</p>
+         
+     }
+     else
+     {
+        <p>U bent nu ingelogd en u kunt de financiële overzichten bekijken.</p>
+     }
+</div>

@@ -24,6 +24,48 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Beheer login";
             return View();
         }
+        public ActionResult AdminLogin(string username, string password) {
+
+            ViewBag.H1 = "Ingelogd als medewerker";
+            AdminModel admin = RegDB.AdminLoginCheck(username, password);
+            
+            bool userklopt = true;
+            bool passklopt = true;
+
+            if (admin.Naam == null)
+            {
+                userklopt = false;
+            }
+            else
+            {
+                if (!admin.Naam.Equals(username))
+                {
+                    userklopt = false;
+                }
+            }
+            if (admin.Wachtwoord == null)
+            {
+                passklopt = false;
+            }
+            else
+            {
+                if (!admin.Wachtwoord.Equals(password))
+                {
+                    passklopt = false;
+                }
+            }
+
+            if (!userklopt || !passklopt)
+            {
+                ViewData["AdminLogError"] = "Uw gegevens zijn onjuist. Probeer het opnieuw.";
+                return View("Admin");
+            }
+            else
+            {
+                Session["AdminLoggedIn"] = true;
+                return View(admin);
+            }
+        }
         public ActionResult create()
         {
             ViewBag.H1 = "Account creëren";
@@ -56,6 +98,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult Login(string username, string password)
         {
+            ViewBag.H1 = "Ingelogd";
             AccountModel account = RegDB.LoginCheck(username, password);
             bool mailklopt = true;
             bool passklopt = true;

@@ -151,5 +151,50 @@ namespace Webshop2.DatabaseControllers
 
             return isNewEmail;
         }
+
+        public AdminModel AdminLoginCheck(String gebruiker, String password) 
+        {
+            AdminModel admin = new AdminModel();
+            try{
+                conn.Open();
+
+                string select = @"select * from Admin where gebruikersnaam = @user";
+                MySqlCommand selectcmd = new MySqlCommand(select, conn);
+
+                MySqlParameter Userpara = new MySqlParameter("@user", MySqlDbType.VarChar);
+                Userpara.Value = gebruiker;
+
+                selectcmd.Parameters.Add(Userpara);
+
+                MySqlDataReader reader = selectcmd.ExecuteReader();
+
+
+                while(reader.Read())
+                {
+                    admin.GebruikerID = reader.GetInt32("adminID");
+                    admin.Naam = reader.GetString("gebruikersnaam");
+                    admin.Wachtwoord = reader.GetString("wachtwoord");
+                    admin.email = reader.GetString("email");
+                    string functie = reader.GetString("functie");
+                    if (functie.Equals("w")) {
+                        admin.Functie = "Beheerder";
+                    }
+                    else if (functie.Equals("f")) {
+                        admin.Functie = "Manager";
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally 
+            {
+                conn.Close();
+            }
+            
+            return admin;
+        }
     }
 }

@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="MailControllers\MailSendController.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,6 +222,7 @@
     <Content Include="Views\Store\Borstbescherming.cshtml" />
     <Content Include="Views\Store\Beenbescherming.cshtml" />
     <Content Include="Views\Store\Handbescherming.cshtml" />
+    <Content Include="Views\Account\AdminLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

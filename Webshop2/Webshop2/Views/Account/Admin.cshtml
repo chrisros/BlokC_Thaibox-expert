@@ -6,10 +6,11 @@
 <h1>@ViewBag.H1</h1>
 
 <div id='form'>
-    <form name="login" method="post" action="">
+    <form name="login" method="post" action="/Account/AdminLogin">
         <label>Username: <input type="text" name="username"></label><br>
         <label>Password:  <input type="password" name="password"></label><br><br>
-        <input type="submit" value="Sign in">
+        <input type="submit" value="Sign in"><br />
+        @ViewData["AdminLogError"]
     </form>
 </div>
 
