@@ -41,6 +41,38 @@ namespace Webshop2.DatabaseControllers
             return producten;
         }
 
+        public List<Product> haalProductDetailGegevensOp(int productID)
+        {
+            List<Product> producten = new List<Product>();
+            try
+            {
+                conn.Open();
+                string selectQuery = "select * from Product where (productID = " + productID + ")";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    int ID = dataReader.GetInt32("productID");
+                    string productNaam = dataReader.GetString("naam");
+                    string productMerk = dataReader.GetString("merk");
+                    int productPrijs = dataReader.GetInt32("prijs");
+                    string productDetail = dataReader.GetString("productOmschrijving");
+                    string productSoort = dataReader.GetString("soort");
+                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+                    producten.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return producten;
+        }
+
         public void WijzigenProduct(Product product)
         {
             MySqlTransaction trans = null;

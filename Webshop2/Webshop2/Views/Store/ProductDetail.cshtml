@@ -1,65 +1,23 @@
 ﻿@using Webshop2.Models
-@model Product
+@model List<Product>
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Product Detail";
 }
 
 <h1>@ViewBag.H1</h1>
 
-@{
-    if (@Model.productID == 1)
-    {
+@{foreach (Product prod in Model)
+  {
         <p>
             <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br/>
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
+            Naam: @prod.productNaam <br />
+            Prijs: @prod.productPrijs <br />
+            Merk: @prod.productMerk <br/>
+            Detail: @prod.productDetail <br />
         </p>
-    }
-    else if (@Model.productID == 2)
-    {
-        <p>
-<img src="~/images/PlaceHolderImages/Small Pics/carconvert.png" alt="Artikel met ID 1" height="500" width="500"> <br />
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
-        </p>
-    }
-    else if (@Model.productID == 3)
-    {
-        <p>
-<img src="~/images/PlaceHolderImages/Small Pics/busred.png" alt="Artikel met ID 1" height="500" width="500"> <br />
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
-        </p>
-    }
-    else if (@Model.productID == 4)
-    {
-        <p>
-<img src="~/images/PlaceHolderImages/Small Pics/carearly.png" alt="Artikel met ID 1" height="500" width="500"> <br />
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
-        </p>
-    }
-    else if (@Model.productID == 5)
-    {
-        <p>
-<img src="~/images/PlaceHolderImages/Small Pics/boatsail.png" alt="Artikel met ID 1" height="500" width="500"> <br />
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
-        </p>
-    }
-    else if (@Model.productID == 6)
-    {
-        <p>
-<img src="~/images/PlaceHolderImages/Small Pics/planeace.png" alt="Artikel met ID 1" height="500" width="500"> <br />
-            Naam: @Model.productNaam <br />
-            Detail: @Model.productDetail <br />
-        </p>
-    }
-    else
-    {
-        <p>Geen product geselecteerd</p>
-    }
-} 
+}
+}
     
 
     

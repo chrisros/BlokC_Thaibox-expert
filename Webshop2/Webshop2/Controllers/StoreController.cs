@@ -27,53 +27,13 @@ namespace Webshop2.Controllers
         public ActionResult ProductDetail(int productID)
         {
             ViewBag.H1 = "Product Detail";
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalProductDetailGegevensOp(productID);
 
-            Models.Product p = new Models.Product();
+            ViewBag.H1 = "Product Detail";
 
-            if (productID == 1)
-            {
-                p.productID = productID;
-                p.productNaam = "Sport broek";
-                p.productDetail = "Strakke sport broek met wat leuke kleurtjes";
-            }
-            else if (productID == 2)
-            {
-                p.productID = productID;
-                p.productNaam = "Hesje";
-                p.productDetail = "Geel hesje met reflectie materiaal";
-            }
-            else if (productID == 3)
-            {
-                p.productID = productID;
-                p.productNaam = "3";
-                p.productDetail = "3";
-            }
-            else if (productID == 4)
-            {
-                p.productID = productID;
-                p.productNaam = "4";
-                p.productDetail = "4";
-            }
-            else if (productID == 5)
-            {
-                p.productID = productID;
-                p.productNaam = "5";
-                p.productDetail = "5";
-            }
-            else if (productID == 6)
-            {
-                p.productID = productID;
-                p.productNaam = "6";
-                p.productDetail = "6";
-            }
-
-            else
-            {
-                p.productNaam = "Onbekend";
-                p.productDetail = "Onbekend";
-            }
-
-            return View(p);
+            return View(producten);
         }
 
         public ActionResult ProductToevoegen()
