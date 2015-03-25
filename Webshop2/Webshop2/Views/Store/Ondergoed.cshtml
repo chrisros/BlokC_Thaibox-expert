@@ -1,0 +1,24 @@
+﻿@using Webshop2.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "Ondergoed";
+}
+
+<h1>@ViewBag.H1</h1>
+
+@{foreach (Product prod in Model)
+{
+    string afbeelding = prod.productID + ".png";
+    <p class="naastElkaar">
+        <tr>
+
+            <a href="Store/ProductDetail?productID=@prod.productID"><img src="~/images/PlaceHolderImages/Small Pics/@afbeelding" alt="Artikel met ID 1" height="100" width="100"></a>
+            <br />
+            <b>Naam: </b>@prod.productNaam
+            <br />
+            <b>Merk: </b>@prod.productMerk
+            <br />
+        </tr>
+    </p>
+}}

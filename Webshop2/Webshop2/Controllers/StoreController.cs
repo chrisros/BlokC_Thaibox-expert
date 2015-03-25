@@ -107,12 +107,50 @@ namespace Webshop2.Controllers
             return View(producten);
         }
 
+        // shirts, schoenen, broeken, sokken, ondergoed
+
         public ActionResult Shirts()
         {
             ViewBag.H1 = "Shirts";
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalShirtsOp();
+            return View(producten);
+        }
+
+        public ActionResult Schoenen()
+        {
+            ViewBag.H1 = "Schoenen";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalSchoenenOp();
+            return View(producten);
+        }
+
+        public ActionResult Broeken()
+        {
+            ViewBag.H1 = "Broeken";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalBroekenOp();
+            return View(producten);
+        }
+
+        public ActionResult Sokken()
+        {
+            ViewBag.H1 = "Sokken";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalSokkenOp();
+            return View(producten);
+        }
+
+        public ActionResult Ondergoed()
+        {
+            ViewBag.H1 = "Ondergoed";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalOndegoedOp();
             return View(producten);
         }
 

@@ -119,6 +119,7 @@
     <Content Include="images\PlaceHolderImages\Big Pic\planeprop.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\rocket.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\1.png" />
+    <Content Include="images\PlaceHolderImages\Small Pics\11.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\boatpaper.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\2.png" />
     <Content Include="images\PlaceHolderImages\Small Pics\boatsail.png" />
@@ -209,6 +210,10 @@
     <Content Include="Views\Store\ProductToegevoegd.cshtml" />
     <Content Include="Views\Store\Kleding.cshtml" />
     <Content Include="Views\Store\Shirts.cshtml" />
+    <Content Include="Views\Store\Schoenen.cshtml" />
+    <Content Include="Views\Store\Broeken.cshtml" />
+    <Content Include="Views\Store\Sokken.cshtml" />
+    <Content Include="Views\Store\Ondergoed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
