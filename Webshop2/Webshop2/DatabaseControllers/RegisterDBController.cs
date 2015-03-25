@@ -31,7 +31,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter WachtPara = new MySqlParameter("@wwoord", MySqlDbType.VarChar);
                 MySqlParameter MailPara = new MySqlParameter("@amail", MySqlDbType.VarChar);
                 MySqlParameter TelePara = new MySqlParameter("@atel", MySqlDbType.Int32);
-
+                    
                 //Geboortedatum, sla ik nu even over
                 //MySqlParameter GebPara = new MySqlParameter("@ageb", MySqlDbType.DateTime);
 

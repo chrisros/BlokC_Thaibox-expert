@@ -221,6 +221,7 @@
     <Content Include="Views\Store\Borstbescherming.cshtml" />
     <Content Include="Views\Store\Beenbescherming.cshtml" />
     <Content Include="Views\Store\Handbescherming.cshtml" />
+    <Content Include="Views\Store\ProductWijzigen.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
