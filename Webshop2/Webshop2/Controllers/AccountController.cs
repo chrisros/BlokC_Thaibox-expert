@@ -37,6 +37,7 @@ namespace Webshop2.Controllers
             { 
             RegDB.RegisterAccount(account);
             ViewBag.H1 = "Account geregistreerd.";
+            ViewBag.H2 = "";
             return View();
             }
             else if (!RegDB.isNewEmail(account.Email))
@@ -47,7 +48,9 @@ namespace Webshop2.Controllers
             }
             else
             {
+                ViewBag.H2 = "";
                 return View("create", account);
+
             }
             
         }

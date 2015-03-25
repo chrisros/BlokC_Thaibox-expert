@@ -119,7 +119,7 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Open();
 
-                string selectQuery = @"count * as rows from Gebruiker where email = @mail";
+                string selectQuery = @"select count(email) as rows from Gebruiker where email = @mail";
                 MySqlCommand selcmd = new MySqlCommand(selectQuery, conn);
 
                 MySqlParameter mailpara = new MySqlParameter("@mail", MySqlDbType.VarChar);
@@ -131,7 +131,7 @@ namespace Webshop2.DatabaseControllers
 
                 while (dataReader.Read())
                 {
-                    rowCount = dataReader.GetInt32("rows");
+                    rowCount = dataReader.GetInt16("rows");
                 }
             }
             catch (Exception e)

@@ -5,7 +5,7 @@
 }
 
 <h1>@ViewBag.H1</h1>
-<h3>@ViewBag.H2</h3>
+
 <div id='createform'>
     <form name="login" method="post" action="/Account/RegCompleted">
 
@@ -109,6 +109,12 @@
                 </td>
                 <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.BevestigdWachtwoord)
+                </td>
+            </tr>
+            <tr>
+                <td><h3 id="validationerror">@ViewBag.H2</h3></td>
+                <td>
+                    <input type="submit" value="Toevoegen" id="button">
                 </td>
             </tr>
     </table>
