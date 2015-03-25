@@ -8,6 +8,9 @@ namespace Webshop2.Models
 {
     public class AccountModel
     {
+
+        public int GebruikerID { get; set; }
+
         [Required(ErrorMessage="Dit veld is verplicht")]
         public String Naam { get; set; }
 

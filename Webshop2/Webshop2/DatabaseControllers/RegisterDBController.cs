@@ -89,6 +89,7 @@ namespace Webshop2.DatabaseControllers
 
                 while(reader.Read())
                 {
+                    account.GebruikerID = reader.GetInt32("gebruikerID");
                     account.Email = reader.GetString("email");
                     account.Wachtwoord = reader.GetString("wachtwoord");
                     account.Naam = reader.GetString("naam");
