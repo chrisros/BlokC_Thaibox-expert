@@ -1,0 +1,43 @@
+﻿@using Webshop2.Models;
+@model List<Product>
+@{
+    ViewBag.Title = "ProductWijzigen";
+}
+
+<h1>@ViewBag.H1</h1>
+
+    <form name="productToevoegen" method="post" action="/Store/ProductGewijzigd">
+        <table>
+            <thead class="h4">
+            <th>ID</th>
+            <th>Prijs</th>
+            <th>Naam</th>
+            <th>Merk</th>
+            <th>Soort</th>
+            <th>Detail</th>
+            </thead>
+
+            @{
+                foreach (Product prod in Model)
+                {
+                    <tr>
+                        <td>@prod.productID</td>
+                        <td><input type="text" name="firstname" size="2" value="@prod.productPrijs"></td>
+                        <td><input type="text" name="firstname" size="10" value="@prod.productNaam"></td>
+                        <td><input type="text" name="firstname" size="5" value="@prod.productMerk"></td>
+                        <td><input type="text" name="firstname" size="6" value="@prod.productSoort"></td>
+                        <td><input type="text" name="firstname" size="12" value="@prod.productDetail"></td>
+                    </tr>
+
+
+                }
+                
+                <tr>
+                    <td><input type="submit" value="Wijzigen"></td>
+                </tr>
+
+            }
+
+        </table>
+    </form>
+

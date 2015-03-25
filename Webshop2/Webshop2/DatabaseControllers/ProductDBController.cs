@@ -41,6 +41,53 @@ namespace Webshop2.DatabaseControllers
             return producten;
         }
 
+        public void WijzigenProduct(Product product)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, soort = @soort, productOmschrijving = @detail WHERE productID BETWEEN 13 AND 15";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter Naam = new MySqlParameter("@anaam", MySqlDbType.VarChar);
+                MySqlParameter Prijs = new MySqlParameter("@prijs", MySqlDbType.Int32);
+                MySqlParameter Merk = new MySqlParameter("@merk", MySqlDbType.VarChar);
+                MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
+                MySqlParameter Detail = new MySqlParameter("@detail", MySqlDbType.VarChar);
+
+                Naam.Value = product.productNaam;
+                Prijs.Value = product.productPrijs;
+                Merk.Value = product.productMerk;
+                Soort.Value = product.productSoort;
+                Detail.Value = product.productDetail;
+
+                regcmd.Parameters.Add(Naam);
+                regcmd.Parameters.Add(Prijs);
+                regcmd.Parameters.Add(Soort);
+                regcmd.Parameters.Add(Detail);
+                regcmd.Parameters.Add(Merk);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
         public void RegisterProduct(Product product)
         {
             MySqlTransaction trans = null;

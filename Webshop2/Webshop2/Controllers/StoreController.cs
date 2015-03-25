@@ -82,7 +82,6 @@ namespace Webshop2.Controllers
 
             return View();
         }
-
         public ActionResult ProductToegevoegd(Product product)
         {
             ViewBag.H1 = "Account geregistreerd.";
@@ -97,7 +96,31 @@ namespace Webshop2.Controllers
                 return View("ProductToevoegen", product);
             }
         }
+        public ActionResult ProductWijzigen()
+        {
+            ViewBag.H1 = "Wijzigen van producten";
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalProductGegevensOp();
+            return View(producten);
+        }
+        public ActionResult ProductGeWijzigd(Product product)
+        {
+            ViewBag.H1 = "Product is gewzijgid";
+            if (ModelState.IsValid)
+            {
+                ProdDataBase.WijzigenProduct(product);
+                return View();
+            }
+            else
+            {
+                return View("ProductWijzigen", product);
+            }
+        }
 
+
+
+        // Kleding
         public ActionResult Kleding()
         {
             ViewBag.H1 = "Kleding";
@@ -106,9 +129,6 @@ namespace Webshop2.Controllers
             List<Models.Product> producten = prodControl.haalKledingGegevensOp();
             return View(producten);
         }
-
-        // Kleding
-
         public ActionResult Shirts()
         {
             ViewBag.H1 = "Shirts";
@@ -117,7 +137,6 @@ namespace Webshop2.Controllers
             List<Models.Product> producten = prodControl.haalShirtsOp();
             return View(producten);
         }
-
         public ActionResult Schoenen()
         {
             ViewBag.H1 = "Schoenen";
@@ -126,7 +145,6 @@ namespace Webshop2.Controllers
             List<Models.Product> producten = prodControl.haalSchoenenOp();
             return View(producten);
         }
-
         public ActionResult Broeken()
         {
             ViewBag.H1 = "Broeken";
@@ -135,7 +153,6 @@ namespace Webshop2.Controllers
             List<Models.Product> producten = prodControl.haalBroekenOp();
             return View(producten);
         }
-
         public ActionResult Sokken()
         {
             ViewBag.H1 = "Sokken";
@@ -144,7 +161,6 @@ namespace Webshop2.Controllers
             List<Models.Product> producten = prodControl.haalSokkenOp();
             return View(producten);
         }
-
         public ActionResult Ondergoed()
         {
             ViewBag.H1 = "Ondergoed";

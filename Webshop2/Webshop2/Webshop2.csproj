@@ -222,7 +222,11 @@
     <Content Include="Views\Store\Borstbescherming.cshtml" />
     <Content Include="Views\Store\Beenbescherming.cshtml" />
     <Content Include="Views\Store\Handbescherming.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Account\AdminLogin.cshtml" />
+=======
+    <Content Include="Views\Store\ProductWijzigen.cshtml" />
+>>>>>>> origin/master
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

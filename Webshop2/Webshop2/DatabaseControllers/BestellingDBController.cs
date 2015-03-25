@@ -72,5 +72,57 @@ namespace Webshop2.DatabaseControllers
             }
             return producten;
         }
+
+        public void berekenTotaalPRijs()
+        {
+               MySqlTransaction trans = null;
+            int aantal = 0;
+            int prijs = 0;
+            int totaalprijs = 0;
+            List<int> prijzen = new List<int>();
+            List<int> aantallen = new List<int>();
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+                string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = 3;";
+
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    aantal = dataReader.GetInt32("aantal");
+                    prijs = dataReader.GetInt32("prijs");
+                    totaalprijs = dataReader.GetInt32("totaalprijs");
+                    prijzen.Add(prijs);
+                    aantallen.Add(aantal);
+                }
+                conn.Close();
+                for (int i = 0; i < aantallen.Count; i++)
+                {
+                    totaalprijs = totaalprijs + prijzen[i] * aantallen[i];
+                }
+
+             
+                   string updateQuery = "UPDATE Bestelling set totaalprijs = 15000 where bestellingID = 3";
+                    conn.Open();
+
+                    MySqlCommand cmdUpdate = new MySqlCommand(updateQuery, conn);
+                    //cmdUpdate.Parameters.AddWithValue("@totprijs", totaalprijs);
+                    cmd.ExecuteNonQuery();
+                    trans.Commit();
+                    conn.Close();
+
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
