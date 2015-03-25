@@ -75,7 +75,6 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-
                 string selectquery = @"select * from Gebruiker where email = @mail";
                 MySqlCommand selcmd = new MySqlCommand(selectquery, conn);
 
