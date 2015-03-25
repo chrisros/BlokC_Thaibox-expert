@@ -16,6 +16,7 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Winkelwagen";
             bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
+            besteldbcontrol.berekenTotaalPRijs();
             ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             producten = besteldbcontrol.haalProductGegevensOp();
             if (Session["LoggedIn"] != null)
