@@ -20,10 +20,11 @@
         <td>@prod.productNaam</td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
-        <td><form action="~/Views/Cart/Index.cshtml">
-        <input type="number" name="points"
-           min="0" max="100" step="1" value="@prod.productAantal">
-        </form></td>
+        <td><form>
+                <input type="number" onclick="history.go(0)" name="aantalBox" min="0" max="100" step="1" value="@prod.productAantal"  />
+           </form>
+           
+        </td>
         </tr>
       }
       }}
@@ -36,7 +37,9 @@
     }
     if(@ViewBag.loggedin == true)
     {
-        <br /><input type="submit" value="bestel">
+        <br />        <form action="~/cart/toegevoegd">
+            <input type="submit" value="bestel">
+        </form>
     }
 }
 <br />Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.

@@ -10,16 +10,16 @@ namespace Webshop2.DatabaseControllers
 {
     public class BestellingDBController : DatabaseController
     {
-             public Int32 HaalBestellingTotaalPrijsOp()
+             public Int32 HaalBestellingTotaalPrijsOpUser()
         {
-            berekenTotaalPRijs();
+            berekenTotaalPRijsUser();
             int prijs=0;
             int aantal = 0;
             try
             {
                 conn.Open();
                 int ID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
-                string selectQuery = "select * from Bestelling where bestellingID = @ID";
+                string selectQuery = "select * from Bestelling where bestellingID = @ID and betaald = 0";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = ID;
@@ -44,7 +44,7 @@ namespace Webshop2.DatabaseControllers
             return prijs;
         }
 
-        public List<Product> haalProductGegevensOp()
+        public List<Product> haalProductGegevensOpVoorGebruiker()
         {
             List<Product> producten = new List<Product>();
             try
@@ -54,7 +54,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.*, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID" 
                 +" left outer join Uitvoering U on B.uitvoeringID = U.uitvoeringID" 
-                +" left outer join Product P on U.productID = P.productID where A.bestellingID = @ID; ";
+                +" left outer join Product P on U.productID = P.productID where A.bestellingID = @ID and A.betaald = 0; ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = userID;
@@ -84,7 +84,7 @@ namespace Webshop2.DatabaseControllers
             return producten;
         }
 
-        public void updateTotaalPRijs(int totPrijs)
+        public void updateTotaalPRijsUser(int totPrijs)
         {
             
             
@@ -93,7 +93,7 @@ namespace Webshop2.DatabaseControllers
             MySqlTransaction trans = null;
             conn.Open();
             trans = conn.BeginTransaction();
-            MySqlCommand cmd = new MySqlCommand("update Bestelling Set totaalprijs = @prijs where bestellingID = @ID", conn);
+            MySqlCommand cmd = new MySqlCommand("update Bestelling Set totaalprijs = @prijs where bestellingID = @ID and betaald = 0", conn);
             MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Int32);
             MySqlParameter IDPara = new MySqlParameter("@ID", MySqlDbType.Int32);
             prijsPara.Value = totPrijs;
@@ -105,7 +105,7 @@ namespace Webshop2.DatabaseControllers
             conn.Close();
         }
 
-        public void berekenTotaalPRijs()
+        public void berekenTotaalPRijsUser()
         {
             int totaalprijs = 0;
             int ID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
@@ -115,7 +115,7 @@ namespace Webshop2.DatabaseControllers
             conn.Open();
             List<int> prijzen = new List<int>();
             List<int> aantallen = new List<int>();
-                string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID";
+                string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID and Be.betaald = 0";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = ID;
@@ -142,7 +142,38 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Close();
             }
-            updateTotaalPRijs(totaalprijs);
+            updateTotaalPRijsUser(totaalprijs);
+        }
+
+        public Product haalProductGegevensOp(int prodID, int aantal)
+        {
+            Product p = new Product();
+            try
+            {
+            conn.Open();
+            string selectQuery = "select * from Product where productID = @prodID ";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                prodIDPara.Value = prodID;
+                cmd.Parameters.Add(prodIDPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    int prijs = dataReader.GetInt32("prijs");
+                    string naam = dataReader.GetString("naam");
+                    p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal };
+                }
+           }
+            catch(Exception)
+            {
+                
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return p;
         }
     }
 }

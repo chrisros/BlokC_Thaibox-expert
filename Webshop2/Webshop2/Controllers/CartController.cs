@@ -10,25 +10,67 @@ namespace Webshop2.Controllers
     public class CartController : Controller
     {
         // GET: Cart
+        List<Models.Product> producten = new List<Models.Product>();
+        List<int> prijzen = new List<int>();
+        int aantal = 1;
         public ActionResult Index()
         {
-           List<Models.Product> producten = new List<Models.Product>();
+      
             ViewBag.H1 = "Winkelwagen";
             bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
-            ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            producten = besteldbcontrol.haalProductGegevensOp();
             if (Session["LoggedIn"] != null)
             {
                 ingelogd = (bool)Session["LoggedIn"];
+                ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
+                producten = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
             }
             ViewBag.loggedin = ingelogd;
-           // List<Product> producten = (List<Product>)Session["sessietest"];
-            //if (System.Web.HttpContext.Current.Session["Sessionexists"] != null)
-           // {
-            //    Session["Sessionexists"] = 0;
-            //}
+            if(Session["LoggedIn"] == null)
+            {
+                Product p = besteldbcontrol.haalProductGegevensOp(1, aantal);
+                for (int i = 0; i < p.productAantal; i++)
+                {
+                    prijzen.Add(p.productPrijs);
+                }
+                
+                producten.Add(p);
+
+                
+                ViewBag.Prijs = sessieTotaalPrijs();
+
+            }
             return View(producten);
+        }
+
+        public List<Product> getProductenInSessie(int productID)
+        {
+            
+            return producten;
+        }
+
+        public Int32 sessieTotaalPrijs()
+        {
+            int totaalprijs = 0;
+            foreach(int prijs in prijzen)
+            {
+                totaalprijs = totaalprijs + prijs;
+            }
+            return totaalprijs;
+        }
+
+        public ActionResult toegevoegd()
+        {
+            DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
+            Product p = besteldbcontrol.haalProductGegevensOp(1, 5);
+            string naam = p.productNaam;
+            return View(naam);
+        }
+
+        public ActionResult updateProductAantal()
+        {
+            aantal = Convert.ToInt32(Request.Form["aantalBox"]);
+            return RedirectToAction("Index");
         }
     }
 }
