@@ -2,7 +2,7 @@
 @model List<Product>
 
 @{
-    ViewBag.Title = "Kleding";
+    ViewBag.Title = "Bescherming";
 }
 
 <h1>@ViewBag.H1</h1>
@@ -12,14 +12,20 @@
     string afbeelding = prod.productID + ".png";
     <p class="naastElkaar">
         <tr>
-
-            <a href="Store/ProductDetail?productID=@prod.productID"><img src="~/images/PlaceHolderImages/Small Pics/@afbeelding" alt="Artikel met ID 1" height="100" width="100"></a>
+            <a href="Store/ProductDetail?productID=@prod.productID"><img src="~/images/PlaceHolderImages/Small Pics/@afbeelding" alt="AFBEELDING" height="100" width="100" /></a>
             <br />
             <b>Naam: </b>@prod.productNaam
             <br />
             <b>Merk: </b>@prod.productMerk
             <br />
             <b>Soort: </b>@prod.productSoort
+            <br />
         </tr>
     </p>
 }}
+
+
+
+
+
+

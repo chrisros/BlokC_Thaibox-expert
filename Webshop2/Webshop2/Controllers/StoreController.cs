@@ -107,7 +107,7 @@ namespace Webshop2.Controllers
             return View(producten);
         }
 
-        // shirts, schoenen, broeken, sokken, ondergoed
+        // Kleding
 
         public ActionResult Shirts()
         {
@@ -151,6 +151,49 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalOndegoedOp();
+            return View(producten);
+        }
+
+        // Bescherming
+
+        public ActionResult Bescherming()
+        {
+            ViewBag.H1 = "Bescherming";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalBeschermingGegevensOp();
+            return View(producten);
+        }
+        public ActionResult Hoofdbescherming()
+        {
+            ViewBag.H1 = "Hoofdbescherming";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalHoofdOp();
+            return View(producten);
+        }
+        public ActionResult Borstbescherming()
+        {
+            ViewBag.H1 = "Borstbescherming";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalBorstOp();
+            return View(producten);
+        }
+        public ActionResult Beenbescherming()
+        {
+            ViewBag.H1 = "Beenbescherming";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalBeenOp();
+            return View(producten);
+        }
+        public ActionResult Handbescherming()
+        {
+            ViewBag.H1 = "Handbescherming";
+            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalHandOp();
             return View(producten);
         }
 

@@ -216,6 +216,11 @@
     <Content Include="Views\Store\Broeken.cshtml" />
     <Content Include="Views\Store\Sokken.cshtml" />
     <Content Include="Views\Store\Ondergoed.cshtml" />
+    <Content Include="Views\Store\Bescherming.cshtml" />
+    <Content Include="Views\Store\Hoofdbescherming.cshtml" />
+    <Content Include="Views\Store\Borstbescherming.cshtml" />
+    <Content Include="Views\Store\Beenbescherming.cshtml" />
+    <Content Include="Views\Store\Handbescherming.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
