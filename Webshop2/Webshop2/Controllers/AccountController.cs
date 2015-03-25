@@ -57,12 +57,35 @@ namespace Webshop2.Controllers
         public ActionResult Login(string username, string password)
         {
             AccountModel account = RegDB.LoginCheck(username, password);
+            bool mailklopt = true;
+            bool passklopt = true;
 
-            bool mailklopt = account.Email.Equals(username);
-            bool passklopt = account.Wachtwoord.Equals(password);
+            if (account.Email == null)
+            {
+                mailklopt = false;
+            }
+            else
+            {
+                if (!account.Email.Equals(username)) {
+                    mailklopt = false;
+                }
+            } 
+            if (account.Wachtwoord == null)
+            {
+                passklopt = false;
+            }
+            else
+            {
+                if (!account.Wachtwoord.Equals(password))
+                {
+                    passklopt = false;
+                }
+            }
 
-            if (!mailklopt || !passklopt) {
-                return View("Index"); 
+            if (!mailklopt || !passklopt)
+            {
+                ViewData["LogError"] = "Uw gegevens zijn onjuist. Probeer het opnieuw.";
+                return View("Index");
             }
             else
             {

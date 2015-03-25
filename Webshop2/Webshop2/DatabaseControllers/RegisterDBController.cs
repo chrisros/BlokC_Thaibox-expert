@@ -87,7 +87,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader reader = selcmd.ExecuteReader();
 
 
-                while (reader.Read())
+                while(reader.Read())
                 {
                     account.Email = reader.GetString("email");
                     account.Wachtwoord = reader.GetString("wachtwoord");
