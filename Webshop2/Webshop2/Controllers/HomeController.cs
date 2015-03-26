@@ -12,7 +12,6 @@ namespace Webshop2.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Session["Sessionexists"] = 1;
             List<Product> prod = new List<Product>();
             Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi" };
             prod.Add(p);

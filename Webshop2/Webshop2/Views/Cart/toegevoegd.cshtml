@@ -18,6 +18,10 @@
         {
             string afbeelding = p.productID + ".png";
             @p.productNaam
+            
+            <br />
+            @p.productAantal
+            <br />
             <a href="../ProductDetail?productID=@p.productID"><img src="~/images/PlaceHolderImages/Small Pics/@afbeelding" height="100" width="100"></a>
             <form action="~/Cart/"><input type="submit" value="Ga naar winkelmandje" /></form>
             
