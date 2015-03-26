@@ -18,12 +18,6 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             {
-            List<Product> prod = new List<Product>();
-            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi", productAantal = 1 };
-            prod.Add(p);
-            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2", productAantal = 1 };
-            prod.Add(p1);
-            Session["sessietest"] = prod;
             Session["SessionExists"] = 1;
             }
             ViewBag.H1 = "Winkelwagen";
@@ -82,9 +76,20 @@ namespace Webshop2.Controllers
             else { return View(productenInSessie); }
         }
 
-        public ActionResult updateProductAantal()
+        public ActionResult updateProductAantal(int productID, int aantal, string kleur, string maat)
         {
-            aantal = Convert.ToInt32(Request.Form["aantalBox"]);
+            Boolean ingelogd = (bool)Session["Ingelogd"];
+            if (ingelogd != true)
+            {
+                var prod = productenInSessie.Where(d => d.productID == productID).FirstOrDefault();
+                if (prod != null) { prod.productAantal = aantal; }
+            }
+            if (ingelogd == true)
+            {
+                DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
+                int uitvoeringID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
+                besteldbcontrol.editAantalWinkelmandGebruiker(aantal, uitvoeringID);
+            }
             return RedirectToAction("Index");
         }
     }

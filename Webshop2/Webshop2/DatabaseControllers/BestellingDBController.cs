@@ -10,7 +10,7 @@ namespace Webshop2.DatabaseControllers
 {
     public class BestellingDBController : DatabaseController
     {
-        int bestelID = 0;
+        static int bestelID = 0;
              public Int32 HaalBestellingTotaalPrijsOpUser()
         {
             berekenTotaalPRijsUser();
@@ -71,7 +71,7 @@ namespace Webshop2.DatabaseControllers
                     string maat = dataReader.GetString("maat");
                     int productPrijs = dataReader.GetInt32("prijs");
                     int productaantal = dataReader.GetInt32("aantal");
-                Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam +" - " + kleur +" - " + maat, productPrijs = productPrijs, productAantal =  productaantal };
+                Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam +" - " + kleur +" - " + maat, productPrijs = productPrijs, productAantal =  productaantal, productMaat = maat, productKleur = kleur };
                 producten.Add(p);
                 }
             }
@@ -243,7 +243,7 @@ namespace Webshop2.DatabaseControllers
 
                 aantPara.Value = 13;
                 bestIDPara.Value = 1;
-                uitvoerIDPara.Value = uitvoeringsID;
+                uitvoerIDPara.Value = 14;
                 cmd.Parameters.Add(aantPara);
                 cmd.Parameters.Add(uitvoerIDPara);
                 cmd.Parameters.Add(bestIDPara);
@@ -254,7 +254,10 @@ namespace Webshop2.DatabaseControllers
 
 
             }
-
+            catch(Exception)
+            {
+                trans.Rollback();
+            }
 
             finally
             {
@@ -264,11 +267,14 @@ namespace Webshop2.DatabaseControllers
 
         public Int32 haalUitvoeringsIDOp(int productID, string maat, string kleur)
         {
-            int uitvoerID = 0;
-
+            int uitvoerID =3 ;
+            MySqlTransaction trans = null;
             try
             {
                 conn.Open();
+                int prodID = productID;
+                string maattest = maat;
+                string kleurtest = kleur;
                 string selectQuery = "select uitvoeringID from Uitvoering where productID = @prodID and maat = @maat and kleur = @kleur";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
@@ -287,15 +293,58 @@ namespace Webshop2.DatabaseControllers
                     uitvoerID = dataReader.GetInt32("uitvoeringID"); 
                 }
             }
-            catch (Exception)
+            catch(Exception)
             {
-
+                trans.Rollback();
             }
             finally
             {
                 conn.Close();
             }
             return uitvoerID;
+        }
+
+        public void editAantalWinkelmandGebruiker( int aantal, int uitvoeringID)
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+            
+            conn.Open();
+            getBestelID();
+            trans = conn.BeginTransaction();
+            MySqlCommand cmd = new MySqlCommand("update BestellingProduct Set aantal = @aant where uitvoeringID = @ID and bestellingID = @bestelID", conn);
+            MySqlParameter aantPara = new MySqlParameter("@aant", MySqlDbType.Int32);
+            MySqlParameter uitvoeringPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+            MySqlParameter bestelPara = new MySqlParameter("@bestelID", MySqlDbType.Int32); 
+            aantPara.Value = aantal;
+            uitvoeringPara.Value = uitvoeringID;
+            bestelPara.Value = bestelID;
+            cmd.Parameters.Add(aantPara);
+            cmd.Parameters.Add(uitvoeringPara);
+            cmd.Parameters.Add(bestelPara);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+            trans.Commit();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void getBestelID()
+        {
+           int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
+           
+           string selectQuery = "select * from Bestelling where gebruiker = " + gebruikerID + " and betaald = 0";
+           MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+           MySqlDataReader dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                bestelID = dataReader.GetInt32("bestellingID");
+            }
+            dataReader.Close();
         }
     }
 }
