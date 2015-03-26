@@ -48,7 +48,7 @@ a:active {
 }
 
 a:visited {
-    color: inherit;
+    color: #ffffff;
     text-decoration: none;
 }
 a:hover {

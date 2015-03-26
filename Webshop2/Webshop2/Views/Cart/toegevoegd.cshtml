@@ -9,15 +9,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Het artikel is toegevoegd aan het winkelmandje!</title>
+    <title>Het onderstaande artikel is toegevoegd aan het winkelmandje!</title>
     <h2>Het artikel is toegevoegd aan uw winkelmandje</h2>
 </head>
 <body>
     <div> 
         @{foreach(Product p in Model)
         {
+            string afbeelding = p.productID + ".png";
             @p.productNaam
+            <a href="../ProductDetail?productID=@p.productID"><img src="~/images/PlaceHolderImages/Small Pics/@afbeelding" height="100" width="100"></a>
             <form action="~/Cart/"><input type="submit" value="Ga naar winkelmandje" /></form>
+            
         }}
       
     </div>
