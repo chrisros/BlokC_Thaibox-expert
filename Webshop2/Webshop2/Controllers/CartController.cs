@@ -83,6 +83,7 @@ namespace Webshop2.Controllers
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public ActionResult updateProductAantalSessie(int aantal, int productID)
         {
                 //var product = productenInSessie.Where(d => d.productID == productID).First();
@@ -108,6 +109,11 @@ namespace Webshop2.Controllers
 
             besteldbcontrol.editAantalInDB(aantal, productID, maat, kleur); 
             
+=======
+        public ActionResult updateProductAantal()
+        {
+            aantal = Convert.ToInt32(Request.Form["aantalBox"]);
+>>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
             return RedirectToAction("Index");
         }
     }
