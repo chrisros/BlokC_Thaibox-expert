@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-
+using System.Web.Mvc;
 
 namespace Webshop2.Models
 {
@@ -19,7 +19,11 @@ namespace Webshop2.Models
         public int productPrijs { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
         public String productSoort { get; set; }
-        public String productAfbeelding { get; set; }
+        //public String productAfbeelding { get; set; }
+
+        public byte[] ImageData { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
 
         public int productAantal { get; set; }
 

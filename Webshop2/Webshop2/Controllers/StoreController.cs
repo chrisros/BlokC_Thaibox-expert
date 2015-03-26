@@ -44,7 +44,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductToegevoegd(Product product)
         {
-            ViewBag.H1 = "Account geregistreerd.";
+            ViewBag.H1 = "Product geregistreerd.";
 
             if (ModelState.IsValid)
             {
@@ -78,7 +78,61 @@ namespace Webshop2.Controllers
             }
         }
 
+        public FileContentResult getImage()
+        {
+            Product product = ProdDataBase.getImageOutDB();
+            if (product != null)
+            {
+                return File(product.ImageData, product.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateImage(Product product, HttpPostedFileBase image)
+        {
 
+            if (image != null)
+            {
+                product.ImageMimeType = image.ContentType;
+                product.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+            }
+            else
+            {
+                //plaatje ophalen van bijbehorend paspoort.
+                Product product2 = ProdDataBase.getImageOutDB();
+                if (product2 != null)
+                {
+                    product.ImageData = product2.ImageData;
+                }
+
+            }
+
+            if (ModelState.IsValid)
+            {
+                ProdDataBase.RegisterProduct(product);
+                return Redirect("ProductToevoegen");
+            }
+            else
+            {
+                return View("ProductToevoegen", product);
+            }
+
+        }
+
+        public ActionResult UploadImage(Product product)
+        {
+            HttpPostedFileBase file = Request.Files["fileuploadImage"];
+
+            // write your code to save image
+            string uploadPath = Server.MapPath("~/images/");
+            file.SaveAs(uploadPath + file.FileName);
+
+            return View("Store", product);
+        }
 
         // Kleding
         public ActionResult Kleding()

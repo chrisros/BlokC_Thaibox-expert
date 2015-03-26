@@ -129,7 +129,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"insert into Product (prijs, naam, merk, soort, productOmschrijving) 
+                string InsertString = @"insert into Product (prijs, naam, merk, soort, productOmschrijving, imagedata, imagemimetype) 
                                   values (@prijs, @naam, @merk, @soort, @detail)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
@@ -138,18 +138,25 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter merkPara = new MySqlParameter("@merk", MySqlDbType.VarChar);
                 MySqlParameter soortPara = new MySqlParameter("@soort", MySqlDbType.VarChar);
                 MySqlParameter detailPara = new MySqlParameter("@detail", MySqlDbType.VarChar);
+
+                //MySqlParameter imagedataPara = new MySqlParameter("@imagedata", MySqlDbType.VarBinary);
+                //MySqlParameter imagemimetypePara = new MySqlParameter("@imagemimetype", MySqlDbType.VarChar);
                 
                 prijsPara.Value = product.productPrijs;
                 naamPara.Value = product.productNaam;
                 merkPara.Value = product.productMerk;
                 soortPara.Value = product.productSoort;
                 detailPara.Value = product.productDetail;
+                //imagedataPara.Value = product.ImageData;
+                //imagemimetypePara.Value = product.ImageMimeType;
 
                 regcmd.Parameters.Add(prijsPara);
                 regcmd.Parameters.Add(naamPara);
                 regcmd.Parameters.Add(merkPara);
                 regcmd.Parameters.Add(soortPara);
                 regcmd.Parameters.Add(detailPara);
+                //regcmd.Parameters.Add(imagedataPara);
+                //regcmd.Parameters.Add(imagemimetypePara);
 
                 regcmd.Prepare();
 
@@ -166,6 +173,52 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
+
+        public Product getImageOutDB()
+        {
+
+            try
+            {
+                conn.Open();
+                string select = @"select imagedata, imagemimetype from Afbeelding";
+
+                MySqlCommand cmd = new MySqlCommand(select, conn);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    byte[] imageData = null;
+                    //Check, want wanneer niet van het type Byte[] wordt er een exceptie gegooid.
+                    if (dataReader["imagedata"] is System.Byte[])
+                    {
+                        imageData = (byte[])dataReader["imagedata"];
+                    }
+
+
+                    string imageMimeType = dataReader.GetString("imagemimetype");
+
+                    return new Product
+                    {
+                        ImageData = imageData,
+                        ImageMimeType = imageMimeType
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
     }
 }
