@@ -107,7 +107,7 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    Product pr = new Product { productMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                    Product pr = new Product { uitvoeringMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
                     //Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
                     producten.Add(pr);
                 }
