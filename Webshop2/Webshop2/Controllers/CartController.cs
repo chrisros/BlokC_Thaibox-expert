@@ -10,8 +10,9 @@ namespace Webshop2.Controllers
     public class CartController : Controller
     {
         // GET: Cart
-        List<Models.Product> producten = new List<Models.Product>();
+        List<Models.Product> productenInDB = new List<Models.Product>();
         List<int> prijzen = new List<int>();
+        List<Models.Product> productenInSessie = (List<Product>)System.Web.HttpContext.Current.Session["sessietest"];
         int aantal = 1;
         public ActionResult Index()
         {
@@ -23,30 +24,29 @@ namespace Webshop2.Controllers
             {
                 ingelogd = (bool)Session["LoggedIn"];
                 ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
-                producten = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
+                productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker(); 
+                return View(productenInDB);
             }
             ViewBag.loggedin = ingelogd;
             if(Session["LoggedIn"] == null)
             {
-                Product p = besteldbcontrol.haalProductGegevensOp(1, aantal);
-                for (int i = 0; i < p.productAantal; i++)
+                Product p = new Product();
+                foreach (Product sesprod in productenInSessie)
                 {
                     prijzen.Add(p.productPrijs);
+                   // productenInSessie.Add(p);
                 }
-                
-                producten.Add(p);
-
-                
+                                
                 ViewBag.Prijs = sessieTotaalPrijs();
-
+                return View(productenInSessie);
             }
-            return View(producten);
+            return View(productenInSessie);
         }
 
         public List<Product> getProductenInSessie(int productID)
         {
             
-            return producten;
+            return productenInSessie;
         }
 
         public Int32 sessieTotaalPrijs()
@@ -63,11 +63,20 @@ namespace Webshop2.Controllers
         {
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
-            besteldbcontrol.ProductAanWinkelmandToevoegenGebruiker();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
-            toegevoegdProd.Add(p);
-            producten.Add(p);
-            return View(producten);
+            if (Session["LoggedIn"] != null)
+            {
+                besteldbcontrol.ProductAanWinkelmandToevoegenGebruiker();
+                
+                return View(productenInDB);
+            }
+            else if (Session["LoggedIn"] == null)
+            {
+                productenInSessie.Add(p);
+                toegevoegdProd.Add(p);
+                return View(toegevoegdProd);
+            }
+            else { return View(productenInSessie); }
         }
 
         public ActionResult updateProductAantal()

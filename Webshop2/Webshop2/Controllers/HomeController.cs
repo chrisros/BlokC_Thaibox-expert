@@ -13,9 +13,9 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             List<Product> prod = new List<Product>();
-            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi" };
+            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi", productAantal = 1 };
             prod.Add(p);
-            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2" };
+            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2", productAantal = 1 };
             prod.Add(p1);
             Session["sessietest"] = prod;
             Session["SessionExists"] = 1;
