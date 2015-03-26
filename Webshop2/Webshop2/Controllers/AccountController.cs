@@ -149,17 +149,33 @@ namespace Webshop2.Controllers
 
         public ActionResult BeheerPagina() 
         {
-            String naam = (String) Session["AdminLoggedIn"];
-            AdminModel admin = RegDB.AdminLoginCheck(naam);
-            ViewBag.H1 = "Sitebeheer.";
-            return View(admin);
+            if (Session["AdminLoggedIn"] != null)
+            {
+                String naam = (String)Session["AdminLoggedIn"];
+                AdminModel admin = RegDB.AdminLoginCheck(naam);
+                ViewBag.H1 = "Sitebeheer.";
+                return View(admin);
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult ProfielPagina()
         {
-            String email = (String)Session["LoggedIn"];
-            AccountModel account = RegDB.LoginCheck(email);
-            ViewBag.H1 = "Profielpagina.";
-            return View(account);
+            if (Session["AdminLoggedIn"] != null)
+            {
+                String email = (String)Session["LoggedIn"];
+                AccountModel account = RegDB.LoginCheck(email);
+                ViewBag.H1 = "Profielpagina.";
+                return View(account);
+            }
+            else 
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
     }
 }

@@ -232,6 +232,7 @@
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Account\BeheerPagina.cshtml" />
     <Content Include="Views\Account\ProfielPagina.cshtml" />
+    <Content Include="Views\Account\LoginFout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
