@@ -97,6 +97,8 @@
     <Content Include="Content\Reset.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\accessoires.jpg" />
+    <Content Include="images\bescherming.jpg" />
     <Content Include="images\bullet.png" />
     <Content Include="images\image-slider-1.jpg" />
     <Content Include="images\image-slider-2.jpg" />
@@ -104,6 +106,7 @@
     <Content Include="images\image-slider-4.jpg" />
     <Content Include="images\image-slider-5.jpg" />
     <Content Include="images\kickboxing.jpg" />
+    <Content Include="images\kleding.jpg" />
     <Content Include="images\loading.gif" />
     <Content Include="images\logo.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\boatbig.png" />
