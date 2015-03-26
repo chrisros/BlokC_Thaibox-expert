@@ -17,6 +17,7 @@ namespace Webshop2.Models
         public int productID { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
         public int productPrijs { get; set; }
+        public string productPrijsString { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
         public String productSoort { get; set; }
         //public String productAfbeelding { get; set; }
@@ -25,7 +26,7 @@ namespace Webshop2.Models
         [HiddenInput(DisplayValue = false)]
         public string ImageMimeType { get; set; }
         public string productMateriaal { get; set; }
-        public string uitvoeringVoorraad { get; set; }
+        public int uitvoeringVoorraad { get; set; }
         public string uitvoeringKleur { get; set; }
         public string productGewicht { get; set; }
         public string productAuteur { get; set; }
