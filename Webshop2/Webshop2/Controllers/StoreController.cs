@@ -42,7 +42,7 @@ namespace Webshop2.Controllers
 
             return View();
         }
-        public ActionResult ProductToegevoegd(Product product)
+        public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
         {
             ViewBag.H1 = "Product geregistreerd.";
 
@@ -54,6 +54,25 @@ namespace Webshop2.Controllers
             else
             {
                 return View("ProductToevoegen", product);
+            }
+            //afhendelen van de foto upload
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(
+                                       Server.MapPath("~/images/PlaceHolderImages/SmallPics"), pic);
+                // file is uploaded
+                file.SaveAs(path);
+
+                // save the image path path to the database or you can send image 
+                // directly to database
+                // in-case if you want to store byte[] ie. for DB
+                //using (MemoryStream ms = new MemoryStream())
+                //{
+                //    file.InputStream.CopyTo(ms);
+                //    byte[] array = ms.GetBuffer();
+                //}
+
             }
         }
         public ActionResult ProductWijzigen()
