@@ -10,13 +10,22 @@ namespace Webshop2.Controllers
     public class CartController : Controller
     {
         // GET: Cart
+        
         List<Models.Product> productenInDB = new List<Models.Product>();
         List<int> prijzen = new List<int>();
         List<Models.Product> productenInSessie = (List<Product>)System.Web.HttpContext.Current.Session["sessietest"];
         int aantal = 1;
         public ActionResult Index()
         {
-      
+            {
+            List<Product> prod = new List<Product>();
+            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi", productAantal = 1 };
+            prod.Add(p);
+            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2", productAantal = 1 };
+            prod.Add(p1);
+            Session["sessietest"] = prod;
+            Session["SessionExists"] = 1;
+            }
             ViewBag.H1 = "Winkelwagen";
             bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
@@ -34,7 +43,6 @@ namespace Webshop2.Controllers
                 foreach (Product sesprod in productenInSessie)
                 {
                     prijzen.Add(p.productPrijs);
-                   // productenInSessie.Add(p);
                 }
                                 
                 ViewBag.Prijs = sessieTotaalPrijs();
