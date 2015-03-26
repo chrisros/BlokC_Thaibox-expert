@@ -31,13 +31,13 @@ namespace Webshop2.Controllers
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
             if (Session["LoggedIn"] != null)
             {
-                ingelogd = (bool)Session["LoggedIn"];
+                ingelogd = (bool)Session["Ingelogd"];
                 ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker(); 
                 return View(productenInDB);
             }
             ViewBag.loggedin = ingelogd;
-            if(Session["LoggedIn"] == null)
+            if (Session["Ingelogd"] == null)
             {
                 Product p = new Product();
                 foreach (Product sesprod in productenInSessie)
@@ -49,12 +49,6 @@ namespace Webshop2.Controllers
                 return View(productenInSessie);
             }
             return View(productenInSessie);
-        }
-
-        public List<Product> getProductenInSessie(int productID)
-        {
-            
-            return productenInSessie;
         }
 
         public Int32 sessieTotaalPrijs()
@@ -72,13 +66,14 @@ namespace Webshop2.Controllers
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
-            if (Session["LoggedIn"] != null)
+            if (Session["Ingelogd"] != null)
             {
-                besteldbcontrol.ProductAanWinkelmandToevoegenGebruiker();
-                
-                return View(productenInDB);
+                besteldbcontrol.productToevoegenWinkelWagenGebruiker(1, aantal);
+                toegevoegdProd.Add(p);
+
+                return View(toegevoegdProd);
             }
-            else if (Session["LoggedIn"] == null)
+            else if (Session["Ingelogd"] == null)
             {
                 productenInSessie.Add(p);
                 toegevoegdProd.Add(p);

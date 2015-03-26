@@ -26,6 +26,7 @@ namespace Webshop2.Models
         public string ImageMimeType { get; set; }
 
         public int productAantal { get; set; }
-
+        public string productMaat { get; set; }
+        public string productKleur { get; set; }
     }
 }

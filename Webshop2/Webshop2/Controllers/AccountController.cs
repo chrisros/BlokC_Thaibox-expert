@@ -133,6 +133,7 @@ namespace Webshop2.Controllers
             else
             {
                 Session["LoggedIn"] = account.Email;
+                Session["Ingelogd"] = true;
                 Session["gebruikerID"] = account.GebruikerID;
                 return View(account);
             }

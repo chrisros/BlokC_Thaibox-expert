@@ -54,7 +54,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.*, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID" 
                 +" left outer join Uitvoering U on B.uitvoeringID = U.uitvoeringID" 
-                +" left outer join Product P on U.productID = P.productID where A.bestellingID = @ID and A.betaald = 0; ";
+                +" left outer join Product P on U.productID = P.productID where A.gebruiker = @ID and A.betaald = 0; ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = userID;
@@ -64,6 +64,7 @@ namespace Webshop2.DatabaseControllers
                 while(dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
+                    int bestellingID = dataReader.GetInt32("bestellingID");
                     string productNaam = dataReader.GetString("naam");
                     string kleur = dataReader.GetString("kleur");
                     string maat = dataReader.GetString("maat");
@@ -151,7 +152,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
             conn.Open();
-            string selectQuery = "select * from Product where productID = @prodID ";
+            string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID where P.productID = @prodID;";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
                 prodIDPara.Value = prodID;
@@ -162,7 +163,9 @@ namespace Webshop2.DatabaseControllers
                 {
                     int prijs = dataReader.GetInt32("prijs");
                     string naam = dataReader.GetString("naam");
-                    p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal };
+                    string maat = dataReader.GetString("maat");
+                    string kleur = dataReader.GetString("kleur");
+                    p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal, productKleur = kleur, productMaat = maat };
                 }
            }
             catch(Exception)
@@ -223,38 +226,37 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
-        public void ProductAanWinkelmandToevoegenGebruiker()
+        public void productToevoegenWinkelWagenGebruiker(int bestellingID, int aantal)
         {
-            int gebruiker = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
             MySqlTransaction trans = null;
-            string insertQuery = @"insert into BestellingProduct(uitvoeringID, bestellingID, aantal)
-                                    values(1, @gebruiker, @aantal)";
-            try
+            try 
             {
                 conn.Open();
                 trans = conn.BeginTransaction();
-                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
-                MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int32);
-                MySqlParameter aantalPara = new MySqlParameter("@aantal", MySqlDbType.Int32);
+                string insertString = "insert into BestellingProduct(uitvoeringID, bestellingID, aantal) values(18, @bestelID, @aantal)";
 
-                gebruikerPara.Value = gebruiker;
-                aantalPara.Value = 10;
+                MySqlCommand cmd = new MySqlCommand(insertString, conn);
+                MySqlParameter bestIDPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
+                MySqlParameter aantPara = new MySqlParameter("aantal", MySqlDbType.Int32);
 
-                cmd.Parameters.Add(gebruikerPara);
-                cmd.Parameters.Add(aantalPara);
+                aantPara.Value = aantal;
+                bestIDPara.Value = bestellingID;
 
+                cmd.Parameters.Add(aantPara);
+                cmd.Parameters.Add(bestIDPara);
                 cmd.Prepare();
-
                 cmd.ExecuteNonQuery();
-
                 trans.Commit();
+            
+            
+            
+            
             }
             catch(Exception)
             {
-                trans.Rollback();
+
             }
-            finally
-            {
+            finally{
                 conn.Close();
             }
         }
