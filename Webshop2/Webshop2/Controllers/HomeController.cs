@@ -18,6 +18,7 @@ namespace Webshop2.Controllers
             Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2" };
             prod.Add(p1);
             Session["sessietest"] = prod;
+            Session["SessionExists"] = 1;
             ViewBag.H2 = "Welkom";
             return View();
         }
