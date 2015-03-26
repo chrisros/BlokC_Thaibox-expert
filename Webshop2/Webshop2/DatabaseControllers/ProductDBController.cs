@@ -47,8 +47,8 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
-                //string selectQuery = "select * from Product where (productID = " + productID + ")";
+                //string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
+                string selectQuery = "select * from Product where (productID = " + productID + ")";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -59,11 +59,13 @@ namespace Webshop2.DatabaseControllers
                     int productPrijs = dataReader.GetInt32("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
                     string productSoort = dataReader.GetString("soort");
+                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+                    producten.Add(p);
 
                     //string maat = dataReader.GetString("maat");
                     //string kleur = dataReader.GetString("kleur");
                     //int uitvoeringsID = dataReader.GetInt32("uitvoeringID");
-                    if (productSoort == "kleding" || productSoort == "shirt" || productSoort == "broek" || productSoort == "schoenen" || productSoort == "sokken" || productSoort == "ondergoed")
+                    if (productSoort == "Kleding" || productSoort == "Shirt" || productSoort == "Broek" || productSoort == "Schoenen" || productSoort == "Sokken" || productSoort == "Ondergoed")
                     {
                         string selectQquery = "select * from Kleding where (productID = " + productID + ")";
                         MySqlCommand cmdd = new MySqlCommand(selectQuery, conn);
@@ -72,8 +74,8 @@ namespace Webshop2.DatabaseControllers
                         {
                             string productGeslacht = dataReader.GetString("geslacht");
                             string productMateriaal = dataReader.GetString("meteriaal");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGeslacht = productGeslacht, productMateriaal = productMateriaal };
-                            producten.Add(p);
+                            Product r = new Product { productGeslacht = productGeslacht, productMateriaal = productMateriaal };
+                            producten.Add(r);
                         }
                     }
                     else if (productSoort == "LesMateriaal")
@@ -85,8 +87,8 @@ namespace Webshop2.DatabaseControllers
                         {
                             string productAuteur = dataReader.GetString("auteur");
                             string productUitgever = dataReader.GetString("uitgever");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productAuteur = productAuteur, productUitgever = productUitgever };
-                            producten.Add(p);
+                          //  Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productAuteur = productAuteur, productUitgever = productUitgever };
+                         //   producten.Add(p);
                         }
                     }
                     else
@@ -98,8 +100,8 @@ namespace Webshop2.DatabaseControllers
                         {
                             string productGewicht = dataReader.GetString("gewicht");
                             string productMateriaal = dataReader.GetString("meteriaal");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGewicht = productGewicht, productMateriaal = productMateriaal };
-                            producten.Add(p);
+                       //     Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGewicht = productGewicht, productMateriaal = productMateriaal };
+                       //     producten.Add(p);
                         }
                     }
                     string selectQQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
@@ -107,9 +109,15 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
+<<<<<<< HEAD
                     Product pr = new Product { uitvoeringMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                  //  Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+=======
+                    Product pr = new Product { productMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
                     //Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+>>>>>>> origin/master
                     producten.Add(pr);
+                  //  producten.Add(p);
                 }
             }
             catch (Exception)
