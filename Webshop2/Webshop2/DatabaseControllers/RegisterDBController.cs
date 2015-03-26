@@ -69,7 +69,7 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
-        public AccountModel LoginCheck(String email, string wachtwoord) 
+        public AccountModel LoginCheck(String email) 
         {
             AccountModel account = new AccountModel();
             try
@@ -151,7 +151,7 @@ namespace Webshop2.DatabaseControllers
             return isNewEmail;
         }
 
-        public AdminModel AdminLoginCheck(String gebruiker, String password) 
+        public AdminModel AdminLoginCheck(String gebruiker) 
         {
             AdminModel admin = new AdminModel();
             try{

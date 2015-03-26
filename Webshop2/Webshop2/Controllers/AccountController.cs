@@ -27,7 +27,7 @@ namespace Webshop2.Controllers
         public ActionResult AdminLogin(string username, string password) {
 
             ViewBag.H1 = "Ingelogd als medewerker";
-            AdminModel admin = RegDB.AdminLoginCheck(username, password);
+            AdminModel admin = RegDB.AdminLoginCheck(username);
             
             bool userklopt = true;
             bool passklopt = true;
@@ -62,7 +62,7 @@ namespace Webshop2.Controllers
             }
             else
             {
-                Session["AdminLoggedIn"] = true;
+                Session["AdminLoggedIn"] = admin.Naam;
                 return View(admin);
             }
         }
@@ -99,7 +99,7 @@ namespace Webshop2.Controllers
         public ActionResult Login(string username, string password)
         {
             ViewBag.H1 = "Ingelogd";
-            AccountModel account = RegDB.LoginCheck(username, password);
+            AccountModel account = RegDB.LoginCheck(username);
             bool mailklopt = true;
             bool passklopt = true;
 
@@ -132,10 +132,33 @@ namespace Webshop2.Controllers
             }
             else
             {
-                Session["LoggedIn"] = true;
+                Session["LoggedIn"] = account.Email;
                 Session["gebruikerID"] = account.GebruikerID;
                 return View(account);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            ViewBag.H1 = "Uitgelogd.";
+            Session["LoggedIn"] = null;
+            Session["AdminLoggedIn"] = null;
+            return View();
+        }
+
+        public ActionResult BeheerPagina() 
+        {
+            String naam = (String) Session["AdminLoggedIn"];
+            AdminModel admin = RegDB.AdminLoginCheck(naam);
+            ViewBag.H1 = "Sitebeheer.";
+            return View(admin);
+        }
+        public ActionResult ProfielPagina()
+        {
+            String email = (String)Session["LoggedIn"];
+            AccountModel account = RegDB.LoginCheck(email);
+            ViewBag.H1 = "Profielpagina.";
+            return View(account);
         }
     }
 }

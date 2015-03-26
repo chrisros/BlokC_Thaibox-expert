@@ -1,0 +1,22 @@
+﻿@using Webshop2.Models
+@model AdminModel
+
+@{
+    ViewBag.Title = "Sitebeheer.";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div>
+    <p>Welkom, @Model.Functie @Model.Naam.</p>
+
+    <p>Als @Model.Functie heeft u de volgende mogelijkheden:
+       <ol>
+           <li><a href="/Store/ProductToevoegen">Een product toevoegen aan het assortiment.</a></li>
+           <li><a href="/Store/ProductWijzigen">Een product uit het asssortiment wijzigen.</a></li>
+           <li>Een product uit het assortiment verwijderen.</li>
+       </ol>
+    </p>
+
+</div>
+

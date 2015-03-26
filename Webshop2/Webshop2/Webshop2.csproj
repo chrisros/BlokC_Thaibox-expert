@@ -226,6 +226,9 @@
     <Content Include="Views\Store\ProductWijzigen.cshtml" />
     <Content Include="Views\Cart\toegevoegd.cshtml" />
     <Content Include="Views\Verzendkosten.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Account\BeheerPagina.cshtml" />
+    <Content Include="Views\Account\ProfielPagina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

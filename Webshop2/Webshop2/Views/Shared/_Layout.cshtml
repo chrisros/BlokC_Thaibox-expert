@@ -44,7 +44,37 @@
                     <li><a href="/store"><i class="fa fa-home"></i> Shop</a></li>
                     <li><a href="/about"><i class="fa fa-question-circle"></i> Over ons</a></li>
                     <li><a href="/contact"><i class="fa fa-phone-square"></i> Contact</a></li>
-                    <li><a href="/account"><i class="fa fa-sign-in"></i> Login</a></li>
+                    @if(Session["LoggedIn"] == null && Session["AdminLoggedIn"] == null)
+                    {
+                        <li>
+                            <a href="/account"><i class="fa fa-sign-in"></i> Inloggen</a>
+                        </li>
+                    }
+                    else
+                    {
+                        if (Session["LoggedIn"] != null) 
+                        { 
+                          <li> 
+                                 <a href="/account/profielpagina"><i class="fa fa-user"></i> Uw profielpagina</a>
+                          </li>
+                          <li>
+                                 <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
+                          </li>
+                        }
+                        else
+                        {
+                            if (Session["AdminLoggedIn"] != null) 
+                            { 
+                                <li>
+                                        <a href="/account/beheerpagina"><i class="fa fa-eye"></i> Beheerpagina</a>
+                                </li>
+                                <li>
+                                        <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
+                                </li>
+                        
+                            }
+                        }
+                    }   
                     <li><a href="/cart" id="totalPrice"><i class="fa fa-shopping-cart"></i> Winkelwagen € 13,37</a></li>
                     
                 </ul>

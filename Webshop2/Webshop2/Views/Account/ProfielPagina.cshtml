@@ -1,0 +1,26 @@
+﻿@using Webshop2.Models
+@model AccountModel
+
+@{
+    ViewBag.Title = "Profielpagina.";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div>
+    <p>Welkom, @Model.Gebruikersnaam @Model.Naam. </p>
+
+    Uw gegevens:
+    <form>
+        <label>Voornaam: </label><input type="text", name ="voornaam" value="@Model.Gebruikersnaam" /><br />
+        <label>Achternaam: </label><input type="text", value="@Model.Naam" /><br />
+        <label>Adres: </label><input type="text", value="@Model.Woonadres" /><br />
+        <label>Postcode: </label><input type="text", value="@Model.Woonpostcode" /><br />
+        <label>Woonplaats: </label><input type="text", value="@Model.Woonplaats" /><br />
+        <label>Email: </label><input type="text", value="@Model.Email" /><br />
+        <label>Telefoonnummer: </label><input type="text", value="0 @Model.Telefoonnummer"/><br />
+    </form> 
+   
+
+
+</div>
