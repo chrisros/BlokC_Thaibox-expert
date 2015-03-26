@@ -18,35 +18,13 @@
         {
         
     <tr>    
-        <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam - @prod.productKleur - @prod.productMaat.</a></td>
+        <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam.</a></td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <td><form action="~/Cart/updateProductAantalGebruikerInDB" method="get">
-    <input type="number" name="aantal" min="0" max="300" step="1" value="@prod.productAantal" />
-    <input type="hidden" name="productID" value="@prod.productID" />
-    <input type="hidden" name="kleur" value="@prod.productKleur" />
-    <input type="hidden" name="maat" value="@prod.productMaat" />
-    <input type="submit" value="Bevestig" />
-</form>
-=======
-=======
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
-=======
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
         <td><form action="updateProductAantal" method="post">
                 <input type="number" onmouseout="updateProductAantal()" name="aantalBox" min="0" max="100" step="1" value="@prod.productAantal"  />
            </form>
            
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
-=======
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
-=======
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
         </td>
         </tr>
       }

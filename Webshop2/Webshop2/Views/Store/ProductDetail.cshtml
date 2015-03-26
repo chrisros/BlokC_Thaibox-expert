@@ -11,11 +11,10 @@
   {
         <p>
             <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br/>
-            <B> Naam: </B>@prod.productNaam <br />
+            <B> Naam:: </B>@prod.productNaam <br />
             <B> Prijs: </B>€@prod.productPrijs <br />
             <B> Merk: </B>@prod.productMerk <br/>
             <B> Omschrijving: </B>@prod.productDetail <br />
-            <b> geslacht: </b>@prod.productGeslacht <br />
 
             <form action="~/Cart/toegevoegd" method="get">
                 <input type="hidden" name="productID" value="@prod.productID" />

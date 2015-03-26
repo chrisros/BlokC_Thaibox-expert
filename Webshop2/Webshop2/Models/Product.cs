@@ -25,9 +25,8 @@ namespace Webshop2.Models
         [HiddenInput(DisplayValue = false)]
         public string ImageMimeType { get; set; }
         public string productMateriaal { get; set; }
-        public int uitvoeringVoorraad { get; set; }
+        public string uitvoeringVoorraad { get; set; }
         public string uitvoeringKleur { get; set; }
-        public string uitvoeringMaat { get; set; }
         public string productGewicht { get; set; }
         public string productAuteur { get; set; }
         public string productUitgever { get; set; }

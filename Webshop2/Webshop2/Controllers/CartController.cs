@@ -82,38 +82,9 @@ namespace Webshop2.Controllers
             else { return View(productenInSessie); }
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public ActionResult updateProductAantalSessie(int aantal, int productID)
-        {
-                //var product = productenInSessie.Where(d => d.productID == productID).First();
-                //if (product != null) { product.productAantal = aantal; }
-
-                var i = productenInSessie.FindIndex(x => x.productID == productID);
-                productenInSessie[i].productAantal = aantal;
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult deleteProductInWinkelwagen()
-=======
-        public ActionResult updateProductAantal()
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
-        {
-            aantal = Convert.ToInt32(Request.Form["aantalBox"]);
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult updateProductAantalGebruikerInDB(int aantal, int productID, string maat, string kleur)
-        {
-            DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
-
-            besteldbcontrol.editAantalInDB(aantal, productID, maat, kleur); 
-            
-=======
         public ActionResult updateProductAantal()
         {
             aantal = Convert.ToInt32(Request.Form["aantalBox"]);
->>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
             return RedirectToAction("Index");
         }
     }
