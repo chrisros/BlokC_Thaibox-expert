@@ -68,7 +68,7 @@ namespace Webshop2.Controllers
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
             if (Session["Ingelogd"] != null)
             {
-                besteldbcontrol.productToevoegenWinkelWagenGebruiker(1, aantal);
+                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, 1);
                 toegevoegdProd.Add(p);
 
                 return View(toegevoegdProd);

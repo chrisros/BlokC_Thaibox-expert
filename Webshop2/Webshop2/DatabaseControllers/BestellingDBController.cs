@@ -10,6 +10,7 @@ namespace Webshop2.DatabaseControllers
 {
     public class BestellingDBController : DatabaseController
     {
+        int bestelID = 0;
              public Int32 HaalBestellingTotaalPrijsOpUser()
         {
             berekenTotaalPRijsUser();
@@ -64,7 +65,7 @@ namespace Webshop2.DatabaseControllers
                 while(dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
-                    int bestellingID = dataReader.GetInt32("bestellingID");
+                    bestelID = dataReader.GetInt32("bestellingID");
                     string productNaam = dataReader.GetString("naam");
                     string kleur = dataReader.GetString("kleur");
                     string maat = dataReader.GetString("maat");
@@ -226,39 +227,75 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
-        public void productToevoegenWinkelWagenGebruiker(int bestellingID, int aantal)
+        public void productToevoegenWinkelWagenGebruiker(int aantal, int uitvoeringsID)
         {
             MySqlTransaction trans = null;
-            try 
+            try
             {
                 conn.Open();
                 trans = conn.BeginTransaction();
-                string insertString = "insert into BestellingProduct(uitvoeringID, bestellingID, aantal) values(18, @bestelID, @aantal)";
+                string insertString = "insert into BestellingProduct(uitvoeringID, bestellingID, aantal) values(@uitvoeringID, @bestellingID, @aantal)";
 
                 MySqlCommand cmd = new MySqlCommand(insertString, conn);
-                MySqlParameter bestIDPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
-                MySqlParameter aantPara = new MySqlParameter("aantal", MySqlDbType.Int32);
+                MySqlParameter bestIDPara = new MySqlParameter("@bestellingID", MySqlDbType.Int32);
+                MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoeringID", MySqlDbType.Int32);
+                MySqlParameter aantPara = new MySqlParameter("@aantal", MySqlDbType.Int32);
 
-                aantPara.Value = aantal;
-                bestIDPara.Value = bestellingID;
-
+                aantPara.Value = 13;
+                bestIDPara.Value = 1;
+                uitvoerIDPara.Value = uitvoeringsID;
                 cmd.Parameters.Add(aantPara);
+                cmd.Parameters.Add(uitvoerIDPara);
                 cmd.Parameters.Add(bestIDPara);
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
                 trans.Commit();
-            
-            
-            
-            
+
+
+
             }
-            catch(Exception)
+
+
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Int32 haalUitvoeringsIDOp(int productID, string maat, string kleur)
+        {
+            int uitvoerID = 0;
+
+            try
+            {
+                conn.Open();
+                string selectQuery = "select uitvoeringID from Uitvoering where productID = @prodID and maat = @maat and kleur = @kleur";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                MySqlParameter maatPara = new MySqlParameter("@maat", MySqlDbType.VarChar);
+                MySqlParameter kleurPara = new MySqlParameter("@kleur", MySqlDbType.VarChar); 
+                prodIDPara.Value = productID;
+                maatPara.Value = maat;
+                kleurPara.Value = kleur; 
+                cmd.Parameters.Add(prodIDPara);
+                cmd.Parameters.Add(maatPara);
+                cmd.Parameters.Add(kleurPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    uitvoerID = dataReader.GetInt32("uitvoeringID"); 
+                }
+            }
+            catch (Exception)
             {
 
             }
-            finally{
+            finally
+            {
                 conn.Close();
             }
+            return uitvoerID;
         }
     }
 }
