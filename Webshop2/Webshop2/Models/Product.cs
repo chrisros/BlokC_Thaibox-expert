@@ -24,7 +24,13 @@ namespace Webshop2.Models
         public byte[] ImageData { get; set; }
         [HiddenInput(DisplayValue = false)]
         public string ImageMimeType { get; set; }
-
+        public string productMateriaal { get; set; }
+        public string uitvoeringVoorraad { get; set; }
+        public string uitvoeringKleur { get; set; }
+        public string productGewicht { get; set; }
+        public string productAuteur { get; set; }
+        public string productUitgever { get; set; }
+        public string productGeslacht { get; set; }
         public int productAantal { get; set; }
         public string productMaat { get; set; }
         public string productKleur { get; set; }
