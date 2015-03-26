@@ -59,8 +59,7 @@ namespace Webshop2.Controllers
             if (file != null)
             {
                 string pic = System.IO.Path.GetFileName(file.FileName);
-                string path = System.IO.Path.Combine(
-                                       Server.MapPath("~/images/PlaceHolderImages/SmallPics"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("../productImages"), pic);
                 // file is uploaded
                 file.SaveAs(path);
 

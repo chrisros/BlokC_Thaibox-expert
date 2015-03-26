@@ -10,7 +10,7 @@
 
 <div id='createform'>
 
-    <form name="productToevoegen" method="post" action="/Store/ProductToegevoegd">
+    <form name="productToevoegen" method="post" action="/Store/ProductToegevoegd" enctype="multipart/form-data">
 
         <table>
             <tr>
@@ -73,13 +73,11 @@
                     <label for="file">Upload Image:</label>
                 </td>
                 <td>
-                    <input type="file" name="file" id="file" style="width: 100%;" />@*<input type="submit" value="Upload" class="submit" />*@ 
+                    <input type="file" name="file" id="file" style="width: 100%;" />@*<input type="submit" value="Upload" class="submit" />*@
                 </td>
-                </tr>
-                <tr>
-                <td>
-                    
-                </td>
+            </tr>
+            <tr>
+                <td></td>
                 <td>
                     <input type="submit" value="Toevoegen">
                 </td>
