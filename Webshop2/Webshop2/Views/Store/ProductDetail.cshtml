@@ -7,7 +7,7 @@
 
 <h1>@ViewBag.H1</h1>
 
-@{foreach (Product prod in Model)
+@{foreach(Product prod in Model)
   {
         <p>
             <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br/>
@@ -18,6 +18,14 @@
 
             <form action="~/Cart/toegevoegd" method="get">
                 <input type="hidden" name="productID" value="@prod.productID" />
+                <select>
+                    <option value="@prod.productKleur">@prod.productKleur</option>
+                    
+                </select>
+                <select>
+                    <option value="@prod.productMaat">@prod.productMaat</option>
+
+                </select>
                 <input type="number" name="aantal" value="1"/>
                 <input type="submit" value="Toevoegen aan Winkelmandje" />
             </form>

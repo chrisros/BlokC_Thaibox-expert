@@ -29,8 +29,7 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Product Detail";
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalProductDetailGegevensOp(productID);
-
+            List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             ViewBag.H1 = "Product Detail";
 
             return View(producten);
