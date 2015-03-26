@@ -12,16 +12,17 @@
         <th>Prijs</th>
         <th>Aantal</th>
 </thead>
-    @{if (Session["Sessionexists"] !=null)
-      { 
-        foreach (Product prod in Model)
+    @{if (Session["Sessionexists"] != null)
     {
+        foreach (Product prod in Model)
+        {
+        
     <tr>    
-        <td>@prod.productNaam</td>
+        <td><a href="Store/ProductDetail?productID=@prod.productID">@prod.productNaam.</a></td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
-        <td><form>
-                <input type="number" onclick="history.go(0)" name="aantalBox" min="0" max="100" step="1" value="@prod.productAantal"  />
+        <td><form action="updateProductAantal" method="post">
+                <input type="number" onmouseout="updateProductAantal()" name="aantalBox" min="0" max="100" step="1" value="@prod.productAantal"  />
            </form>
            
         </td>

@@ -175,5 +175,88 @@ namespace Webshop2.DatabaseControllers
             }
             return p;
         }
+
+        public void NieuweBestellingGebruiker()
+        {
+            int gebruiker = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
+            MySqlTransaction trans = null;
+            string insertQuery = @"insert into Bestelling(totaalPrijs, bestellingStatus, betaald, bezorgDatum, gebruiker, bestelDatum)
+                                    values(@totprijs, @bestellingstatus, 0, @bezorgDatum, @gebruiker, @bestelDatum)";
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Int32);
+                MySqlParameter bestStatPara = new MySqlParameter("@totprijs", MySqlDbType.VarChar);
+                MySqlParameter bezorgDatumPara = new MySqlParameter("@bezorgDatum", MySqlDbType.Date);
+                MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int32);
+                MySqlParameter besteldatumPara = new MySqlParameter("@bestelDatum", MySqlDbType.Date);
+
+                totPrijsPara.Value = HaalBestellingTotaalPrijsOpUser();
+                bestStatPara.Value = "In Behandeling";
+                bezorgDatumPara.Value = "2020-01-20";
+                gebruikerPara.Value = gebruiker;
+                besteldatumPara.Value = DateTime.Today;
+
+                cmd.Parameters.Add(totPrijsPara);
+                cmd.Parameters.Add(bestStatPara);
+                cmd.Parameters.Add(bezorgDatumPara);
+                cmd.Parameters.Add(gebruikerPara);
+                cmd.Parameters.Add(besteldatumPara);
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+
+                trans.Commit();
+
+
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void ProductAanWinkelmandToevoegenGebruiker()
+        {
+            int gebruiker = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
+            MySqlTransaction trans = null;
+            string insertQuery = @"insert into BestellingProduct(uitvoeringID, bestellingID, aantal)
+                                    values(1, @gebruiker, @aantal)";
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int32);
+                MySqlParameter aantalPara = new MySqlParameter("@aantal", MySqlDbType.Int32);
+
+                gebruikerPara.Value = gebruiker;
+                aantalPara.Value = 10;
+
+                cmd.Parameters.Add(gebruikerPara);
+                cmd.Parameters.Add(aantalPara);
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch(Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

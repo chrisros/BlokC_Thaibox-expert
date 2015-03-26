@@ -59,12 +59,15 @@ namespace Webshop2.Controllers
             return totaalprijs;
         }
 
-        public ActionResult toegevoegd()
+        public ActionResult toegevoegd(int productID)
         {
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
-            Product p = besteldbcontrol.haalProductGegevensOp(1, 5);
-            string naam = p.productNaam;
-            return View(naam);
+            List<Product> toegevoegdProd = new List<Product>();
+            besteldbcontrol.ProductAanWinkelmandToevoegenGebruiker();
+            Product p = besteldbcontrol.haalProductGegevensOp(productID, 10);
+            toegevoegdProd.Add(p);
+            producten.Add(p);
+            return View(toegevoegdProd);
         }
 
         public ActionResult updateProductAantal()

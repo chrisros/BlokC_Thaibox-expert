@@ -19,6 +19,11 @@
             <br />
             <b>Merk: </b>@prod.productMerk
             <br />
-        </tr>
+            <form action="~/Cart/toegevoegd" method="get">
+                <input type="hidden" name="productID" value="@prod.productID" />
+                <input type="submit" value="Toevoegen aan Winkelmandje" />
+            </form>
+                
+</tr>
     </p>
 }}
