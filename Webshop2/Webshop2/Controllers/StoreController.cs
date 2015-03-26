@@ -44,22 +44,10 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
         {
-            ViewBag.H1 = "Product geregistreerd.";
-
-            if (ModelState.IsValid)
-            {
-                ProdDataBase.RegisterProduct(product);
-                return View();
-            }
-            else
-            {
-                return View("ProductToevoegen", product);
-            }
-            //afhendelen van de foto upload
             if (file != null)
             {
                 string pic = System.IO.Path.GetFileName(file.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("../productImages"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("/productImages"), pic);
                 // file is uploaded
                 file.SaveAs(path);
 
@@ -73,6 +61,19 @@ namespace Webshop2.Controllers
                 //}
 
             }
+            ViewBag.H1 = "Product geregistreerd.";
+
+            if (ModelState.IsValid)
+            {
+                ProdDataBase.RegisterProduct(product);
+                return View();
+            }
+            else
+            {
+                return View("ProductToevoegen", product);
+            }
+            //afhendelen van de foto upload
+            
         }
         public ActionResult ProductWijzigen()
         {
