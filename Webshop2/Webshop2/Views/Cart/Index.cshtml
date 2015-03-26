@@ -18,14 +18,16 @@
         {
         
     <tr>    
-        <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam.</a></td>
+        <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam - @prod.productKleur - @prod.productMaat.</a></td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
-        <td><form action="~/Cart/updateProductAantalSessie" method="get">
-                <input type="number" name="aantal" min="0" max="300" step="1" value="@prod.productAantal"  />
-                <input type="hidden" name="productID" value="@prod.productID" />
-                <input type="submit" value="Bevestig" />
-           </form>
+        <td><form action="~/Cart/updateProductAantalGebruikerInDB" method="get">
+    <input type="number" name="aantal" min="0" max="300" step="1" value="@prod.productAantal" />
+    <input type="hidden" name="productID" value="@prod.productID" />
+    <input type="hidden" name="kleur" value="@prod.productKleur" />
+    <input type="hidden" name="maat" value="@prod.productMaat" />
+    <input type="submit" value="Bevestig" />
+</form>
         </td>
         </tr>
       }

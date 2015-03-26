@@ -80,14 +80,26 @@ namespace Webshop2.Controllers
 
         public ActionResult updateProductAantalSessie(int aantal, int productID)
         {
-                var product = productenInSessie.Where(d => d.productID == productID).First();
-                if (product != null) { product.productAantal = aantal; }
+                //var product = productenInSessie.Where(d => d.productID == productID).First();
+                //if (product != null) { product.productAantal = aantal; }
+
+                var i = productenInSessie.FindIndex(x => x.productID == productID);
+                productenInSessie[i].productAantal = aantal;
             return RedirectToAction("Index");
         }
 
         public ActionResult deleteProductInWinkelwagen()
         {
 
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult updateProductAantalGebruikerInDB(int aantal, int productID, string maat, string kleur)
+        {
+            DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
+
+            besteldbcontrol.editAantalInDB(aantal, productID, maat, kleur); 
+            
             return RedirectToAction("Index");
         }
     }
