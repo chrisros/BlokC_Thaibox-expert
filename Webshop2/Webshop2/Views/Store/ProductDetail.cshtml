@@ -18,7 +18,7 @@
             <b> geslacht: </b>@prod.productGeslacht <br />
 
             <form action="~/Cart/toegevoegd" method="get">
-3
+                <input type="hidden" name="productID" value="@prod.productID" />
                 <select>
                     <option value="@prod.productKleur">@prod.productKleur</option>
                     

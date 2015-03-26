@@ -17,7 +17,15 @@ namespace Webshop2.Controllers
         int aantal = 1;
         public ActionResult Index()
         {
-
+            {
+            List<Product> prod = new List<Product>();
+            Product p = new Product { productID = 1, productNaam = "testnaam", productMerk = "testmerk", productPrijs = 10000, productDetail = "hoi", productAantal = 1 };
+            prod.Add(p);
+            Product p1 = new Product { productID = 2, productNaam = "Thaibox handschoenen extremo", productMerk = "testmerk2", productPrijs = 20000, productDetail = "hoi2", productAantal = 1 };
+            prod.Add(p1);
+            Session["sessietest"] = prod;
+            Session["SessionExists"] = 1;
+            }
             ViewBag.H1 = "Winkelwagen";
             bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
@@ -32,12 +40,9 @@ namespace Webshop2.Controllers
             if (Session["Ingelogd"] == null)
             {
                 Product p = new Product();
-                if(productenInSessie != null)
+                foreach (Product sesprod in productenInSessie)
                 {
-                    foreach (Product sesprod in productenInSessie)
-                    {
                     prijzen.Add(p.productPrijs);
-                    }
                 }
                                 
                 ViewBag.Prijs = sessieTotaalPrijs();
@@ -65,7 +70,6 @@ namespace Webshop2.Controllers
             {
                 besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, 1);
                 toegevoegdProd.Add(p);
-                prijzen.Add(p.productPrijs);
 
                 return View(toegevoegdProd);
             }
@@ -78,6 +82,7 @@ namespace Webshop2.Controllers
             else { return View(productenInSessie); }
         }
 
+<<<<<<< HEAD
         public ActionResult updateProductAantalSessie(int aantal, int productID)
         {
                 //var product = productenInSessie.Where(d => d.productID == productID).First();
@@ -89,8 +94,11 @@ namespace Webshop2.Controllers
         }
 
         public ActionResult deleteProductInWinkelwagen()
+=======
+        public ActionResult updateProductAantal()
+>>>>>>> parent of 2c77894... aantal aanpassen in winkelmandje bij sessie
         {
-
+            aantal = Convert.ToInt32(Request.Form["aantalBox"]);
             return RedirectToAction("Index");
         }
 
