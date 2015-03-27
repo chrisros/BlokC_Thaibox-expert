@@ -316,10 +316,16 @@ textarea{
     margin-left: 0px;
 }
 #button{
-    font-family: "Open Sans",sans-serif;
     font-size: 20px;
     background-color: #ffffff;
     width: 200px;
+}
+
+input[type=submit]{
+    font-family: "Open Sans",sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
+    width: 130px;
     color: #000000;
     border: solid;
     border-width: 1px;
