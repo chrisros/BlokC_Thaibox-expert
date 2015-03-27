@@ -32,7 +32,6 @@ namespace Webshop2.Controllers
             List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             List<Product> uitvoering = prodControl.haalProductDetailGegevensOp(productID);
             ViewBag.H1 = "Product Detail";
-
             return View(producten);
         }
 
@@ -73,7 +72,7 @@ namespace Webshop2.Controllers
                 return View("ProductToevoegen", product);
             }
             //afhendelen van de foto upload
-            
+
         }
         public ActionResult ProductWijzigen()
         {

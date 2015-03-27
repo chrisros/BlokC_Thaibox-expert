@@ -26,7 +26,7 @@ namespace Webshop2.DatabaseControllers
                     int productPrijs = dataReader.GetInt32("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
                     string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs};
+                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
                     producten.Add(p);
                 }
             }
@@ -59,6 +59,13 @@ namespace Webshop2.DatabaseControllers
                     int productPrijs = dataReader.GetInt32("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
                     string productSoort = dataReader.GetString("soort");
+                    string uitvoeringMaat = dataReader.GetString("maat");
+                    string uitvoeringKleur = dataReader.GetString("kleur");
+                    int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
+                    int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
+                    Product pr = new Product { productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, uitvoeringMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                    //Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+                    producten.Add(pr);
 
                     //string maat = dataReader.GetString("maat");
                     //string kleur = dataReader.GetString("kleur");
@@ -71,7 +78,7 @@ namespace Webshop2.DatabaseControllers
                         while (dataReader.Read())
                         {
                             string productGeslacht = dataReader.GetString("geslacht");
-                            string productMateriaal = dataReader.GetString("meteriaal");
+                            string productMateriaal = dataReader.GetString("materiaal");
                             Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGeslacht = productGeslacht, productMateriaal = productMateriaal };
                             producten.Add(p);
                         }
@@ -97,19 +104,13 @@ namespace Webshop2.DatabaseControllers
                         while (dataReader.Read())
                         {
                             string productGewicht = dataReader.GetString("gewicht");
-                            string productMateriaal = dataReader.GetString("meteriaal");
+                            string productMateriaal = dataReader.GetString("materiaal");
                             Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGewicht = productGewicht, productMateriaal = productMateriaal };
                             producten.Add(p);
                         }
                     }
-                    string selectQQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
-                    string uitvoeringMaat = dataReader.GetString("maat");
-                    string uitvoeringKleur = dataReader.GetString("kleur");
-                    int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
-                    int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    Product pr = new Product { uitvoeringMaat = uitvoeringMaat, uitvoeringKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
-                    //Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(pr);
+                    //   string selectQQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
+
                 }
             }
             catch (Exception)
@@ -120,17 +121,16 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Close();
             }
-            getUitvoeringenKleur(productID);
             return producten;
         }
 
         public List<string> getUitvoeringenKleur(int productID)
-        {    
+        {
             List<string> kleuren = new List<string>();
             try
             {
                 conn.Open();
-            
+
                 string selectQuery = "select kleur from Uitvoering where (productID = " + productID + ")";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
@@ -144,7 +144,7 @@ namespace Webshop2.DatabaseControllers
             {
 
             }
-                
+
             finally
             {
                 conn.Close();
@@ -152,7 +152,7 @@ namespace Webshop2.DatabaseControllers
             return kleuren;
         }
 
-        
+
 
         public void WijzigenProduct(Product product)
         {
@@ -222,7 +222,7 @@ namespace Webshop2.DatabaseControllers
 
                 //MySqlParameter imagedataPara = new MySqlParameter("@imagedata", MySqlDbType.VarBinary);
                 //MySqlParameter imagemimetypePara = new MySqlParameter("@imagemimetype", MySqlDbType.VarChar);
-                
+
                 prijsPara.Value = product.productPrijs;
                 naamPara.Value = product.productNaam;
                 merkPara.Value = product.productMerk;

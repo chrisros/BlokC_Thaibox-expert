@@ -6,30 +6,32 @@
 }
 
 <h1>@ViewBag.H1</h1>
-
-
-            <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br/>
-            <B> Naam: </B>@ViewBag.productNaam <br />
-            <B> Prijs: </B>@ViewBag.productPrijsString <br />
-            <B> Merk: </B>@ViewBag.productMerk <br/>
-            <B> Omschrijving: </B>@ViewBag.productDetail <br />
-
-
-
-            <form action="~/Cart/toegevoegd" method="get">
-                <input type="hidden" name="productID" value="@ViewBag.productID" />
-                <select>
-
-    @{foreach (Product prod in Model)
-    {
-    <option value="@prod.uitvoeringKleur @prod.productMaat">@prod.uitvoeringKleur @prod.productMaat</option> }
-
-
-
-
-                <input type="number" name="aantal" value="1"/>
-                <input type="submit" value="Toevoegen aan Winkelmandje" />
-                    
-    
-
 }
+@{foreach (Product produ in Model)
+{
+
+    <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br />
+    <b> Naam: </b>@produ.productNaam <br />
+    <b> Prijs: </b>@produ.productPrijs <br />
+    <b> Merk: </b>@produ.productMerk <<br />
+    <b> Omschrijving: </b>@produ.productDetail <br />
+}}
+
+
+
+
+@{foreach (Product prod in Model)
+{
+    <form action="~/Cart/toegevoegd" method="get">
+        <select>
+            <option value="@prod.uitvoeringKleur @prod.productMaat">@prod.uitvoeringKleur @prod.productMaat</option>
+            <input type="hidden" name="productID" value="@prod.productID" />
+
+            <input type="number" name="aantal" value="1" />
+            <input type="submit" value="Toevoegen aan Winkelmandje" />
+        </select>
+    </form>
+
+
+
+}}
