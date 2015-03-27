@@ -65,6 +65,7 @@ namespace Webshop2.DatabaseControllers
                     
                     int value = dataReader.GetInt32("gebruiker");
                     orderperson = value;
+
                 }
 
             }
@@ -184,6 +185,69 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
             return email;
+        }
+
+        public Boolean knownGoldCustomer(int userid)
+        {
+            Boolean gold = false;
+            try
+            {
+                conn.Open();
+
+                string selectQuery = "select isGoldCustomer from Gebruiker where gebruikerID = @ID";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                idPara.Value = userid;
+                cmd.Parameters.Add(idPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    String data = dataReader.GetString("isGoldCustomer");
+                    if (data.Equals("1"))
+                    {
+                        gold = true;
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return gold;
+        }
+
+        public void updateGoldCustomerStatus(int userid)
+        {
+            try
+            {
+                         conn.Open();
+                        MySqlTransaction trans = null;
+                        trans = conn.BeginTransaction();
+                        string insertQuery = "insert into Gebruiker (isGoldCustomer) values (1) where gebruikerID = @ID";
+                        MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                        MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                        idPara.Value = userid;
+                        cmd.Parameters.Add(idPara);
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                        trans.Commit();
+            
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public string getNaam(int userid)

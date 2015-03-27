@@ -42,10 +42,10 @@ namespace Webshop2.Controllers
 
             email.SendEmail();
 
-            Boolean isgold = ordermailDBControll.isGoldCustomer(userid);
 
-            if (isgold==true)
+            if (ordermailDBControll.isGoldCustomer(userid)==true && ordermailDBControll.knownGoldCustomer(userid)==false)
             {
+                ordermailDBControll.updateGoldCustomerStatus(userid);
                 //invullen van variabelen voor mail
             onderwerp = "U bent GOLD-Customer"+orderid ;   
             mail = "thaiboxexpert@chros.nl";
