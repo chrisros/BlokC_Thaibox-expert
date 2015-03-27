@@ -56,22 +56,26 @@ namespace Webshop2.Controllers
             return totaalprijs;
         }
 
-        public ActionResult toegevoegd(int productID, int aantal)
+        public ActionResult toegevoegd(int productID, int aantal, string maat, string kleur)
         {
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
-            if (Session["Ingelogd"] != null)
+            Boolean ingelogd = (bool)Session["Ingelogd"];
+            if (ingelogd != true)
             {
-                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, 1);
+                ingelogd = false;   
+                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, productID);
                 toegevoegdProd.Add(p);
+                productenInSessie.Add(p);
 
                 return View(toegevoegdProd);
             }
-            else if (Session["Ingelogd"] == null)
+            if (ingelogd == true)
             {
-                
-                productenInSessie.Add(p);
+                ingelogd = true;
+                int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
+                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, uitvoerID) ;
                 toegevoegdProd.Add(p);
                 return View(toegevoegdProd);
             }

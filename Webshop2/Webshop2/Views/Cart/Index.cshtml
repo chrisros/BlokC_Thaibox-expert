@@ -21,18 +21,20 @@
         <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam.</a></td>
         <td>Gratis</td>
         <td>@prod.productPrijs</td>
-        <td><form action="~/Cart/updateProductAantal" method="get">
-        <input type="number" name="aantal" min="0" max="100" step="1" value="@prod.productAantal" />
-        <input type="hidden" name="kleur" value="@prod.productKleur" />
-        <input type="hidden" name="maat" value="@prod.productMaat" />
-        <input type="hidden" name="productID" value="@prod.productID"/>
-        <input type="submit" value="bevestig aantal" />
-</form>
-            <form action="~/Cart/deleteProduct" method="get">
-                <input type="hidden" name="kleur" value="@prod.productKleur"/>
-                <input type="hidden" name="maat" value="@prod.productMaat"/>
-                <input type="hidden" name="productID" value="@prod.productID"/>
-                <input type="submit" value="verwijder"/>
+        <td>
+            <form action="~/Cart/updateProductAantal" method="get">
+                <input type="number" name="aantal" min="0" max="100" step="1" value="@prod.productAantal" />
+                <input type="hidden" name="kleur" value="@prod.productKleur" />
+                <input type="hidden" name="maat" value="@prod.productMaat" />
+                <input type="hidden" name="productID" value="@prod.productID" />
+                <input type="submit" value="bevestig aantal" />
+            </form>
+        <td>
+            <form action="~/Cart/toegevoegd" method="get">
+                <input type="hidden" name="kleur" value="@prod.productKleur" />
+                <input type="hidden" name="maat" value="@prod.productMaat" />
+                <input type="hidden" name="productID" value="@prod.productID" />
+                <input type="submit" value="verwijder" />
 
             </form>
 
@@ -44,11 +46,12 @@
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
 
+
         <br />        
             <form action="checkout/index/" method="get">
             <input type="hidden" name="orderid" value="@ViewBag.bestelID"/>
-            <input type="submit" value="bestel"><b>werkt alleen als u ingelogt bent</b>
+            <input type="submit" value="bestel"><b> (Werkt alleen als u ingelogt bent)</b>
              
         </form>
 
-<br />Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.
+    <br /><b>Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.</b>

@@ -233,6 +233,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
+                getBestelID();
                 trans = conn.BeginTransaction();
                 string insertString = "insert into BestellingProduct(uitvoeringID, bestellingID, aantal) values(@uitvoeringID, @bestellingID, @aantal)";
 
@@ -241,9 +242,9 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoeringID", MySqlDbType.Int32);
                 MySqlParameter aantPara = new MySqlParameter("@aantal", MySqlDbType.Int32);
 
-                aantPara.Value = 13;
-                bestIDPara.Value = 1;
-                uitvoerIDPara.Value = 14;
+                aantPara.Value = aantal;
+                bestIDPara.Value = bestelID;
+                uitvoerIDPara.Value = uitvoeringsID;
                 cmd.Parameters.Add(aantPara);
                 cmd.Parameters.Add(uitvoerIDPara);
                 cmd.Parameters.Add(bestIDPara);
