@@ -122,6 +122,101 @@ namespace Webshop2.DatabaseControllers
             return adreslijst;
         }
 
+        public Boolean isGoldCustomer(int userid)
+        {
+            Boolean goldCustomer = false;
+            try
+            {
+                conn.Open();
+               
+                string selectQuery = "select sum(totaalPrijs) as total from Bestelling where gebruiker = @ID";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                idPara.Value = userid;
+                cmd.Parameters.Add(idPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    double total = dataReader.GetDouble("total");
+                    int total2 = Convert.ToInt32(total);
+                    if (total2 > 500) { goldCustomer = true; }
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return goldCustomer;
+        }
+
+        public string getEmail(int userid)
+        {
+            string email = "";
+            try
+            {
+                conn.Open();
+
+                string selectQuery = "select email from Gebruiker where gebruikerID = @ID";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                idPara.Value = userid;
+                cmd.Parameters.Add(idPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    email = dataReader.GetString("email");
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return email;
+        }
+
+        public string getNaam(int userid)
+        {
+            string naam = "";
+            try
+            {
+                conn.Open();
+
+                string selectQuery = "select naam from Gebruiker where gebruiker = @ID";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                idPara.Value = userid;
+                cmd.Parameters.Add(idPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    naam = dataReader.GetString("naam");
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return naam;
+        }
+
     }
 
  

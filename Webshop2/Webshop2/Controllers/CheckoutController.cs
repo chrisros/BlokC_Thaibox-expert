@@ -21,8 +21,8 @@ namespace Webshop2.Controllers
 
         //Deze methode wordt uitgevoerd na het 'betalen'//
         public ActionResult Succes()
-        {
-            
+        {          
+
             string orderid = Request.QueryString["orderid"];
             int userid = ordermailDBControll.getorderperson(orderid);
             //invullen van variabelen voor mail
@@ -39,7 +39,32 @@ namespace Webshop2.Controllers
                 emailAdreszender =   mail, 
                 Naam =               naam 
             };
+
             email.SendEmail();
+
+            Boolean isgold = ordermailDBControll.isGoldCustomer(userid);
+
+            if (isgold==true)
+            {
+                //invullen van variabelen voor mail
+            onderwerp = "U bent GOLD-Customer"+orderid ;   
+            mail = "thaiboxexpert@chros.nl";
+            naam = ordermailDBControll.getNaam(userid);
+            string EmailAdres = ordermailDBControll.getEmail(userid);
+            bericht = " Omdat u al meer dan 500 euro aan producten heeft besteld bent u vanaf heden gold customer. <br>Als gold customer krijgt u 4% korting op het gehele asortiment";
+
+            GoldSendController email2 = new GoldSendController
+            {
+                EmailAdresNaar = EmailAdres,
+                Onderwerp = onderwerp,
+                Bericht = bericht,
+                emailAdreszender = mail,
+                Naam = naam
+
+            };
+            email2.SendEmail();
+            }
+
             ViewBag.H1 = "Bestelling compleet!";
             ViewBag.H2 = "order met id: " + orderid+"is verstuurd en wordt z.s.m afgehandeld";
             return View();
