@@ -175,6 +175,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -182,11 +183,13 @@
     <Compile Include="DatabaseControllers\BestellingDBController.cs" />
     <Compile Include="DatabaseControllers\CategorieDBController.cs" />
     <Compile Include="DatabaseControllers\DatabaseController.cs" />
+    <Compile Include="DatabaseControllers\ordermailDBController.cs" />
     <Compile Include="DatabaseControllers\ProductDBController.cs" />
     <Compile Include="DatabaseControllers\RegisterDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MailControllers\OrderSendController.cs" />
     <Compile Include="MailControllers\MailSendController.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -233,6 +236,8 @@
     <Content Include="Views\Account\BeheerPagina.cshtml" />
     <Content Include="Views\Account\ProfielPagina.cshtml" />
     <Content Include="Views\Account\LoginFout.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Succes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +250,7 @@
     <Folder Include="productImages\" />
     <Folder Include="Views\BestellingDB\" />
     <Folder Include="Views\MailSend\" />
+    <Folder Include="Views\ordermailDB\" />
     <Folder Include="Views\ProductDB\" />
     <Folder Include="Views\Store\Categorie\" />
   </ItemGroup>
