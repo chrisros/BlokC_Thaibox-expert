@@ -189,11 +189,11 @@ namespace Webshop2.DatabaseControllers
                                     values(@totprijs, @bestellingstatus, 0, @bezorgDatum, @gebruiker, @bestelDatum)";
             try
             {
-                conn.Open();
-                trans = conn.BeginTransaction();
-                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                conn2.Open();
+                trans = conn2.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn2);
                 MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Int32);
-                MySqlParameter bestStatPara = new MySqlParameter("@totprijs", MySqlDbType.VarChar);
+                MySqlParameter bestStatPara = new MySqlParameter("@bestellingStatus", MySqlDbType.VarChar);
                 MySqlParameter bezorgDatumPara = new MySqlParameter("@bezorgDatum", MySqlDbType.Date);
                 MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int32);
                 MySqlParameter besteldatumPara = new MySqlParameter("@bestelDatum", MySqlDbType.Date);
@@ -203,7 +203,7 @@ namespace Webshop2.DatabaseControllers
                 bezorgDatumPara.Value = "2020-01-20";
                 gebruikerPara.Value = gebruiker;
                 besteldatumPara.Value = "2015-03-27";
-
+                conn.Open();
                 cmd.Parameters.Add(totPrijsPara);
                 cmd.Parameters.Add(bestStatPara);
                 cmd.Parameters.Add(bezorgDatumPara);
@@ -218,13 +218,9 @@ namespace Webshop2.DatabaseControllers
 
 
             }
-            catch (Exception)
-            {
-                
-            }
             finally
             {
-                conn.Close();
+                conn2.Close();
             }
         }
 

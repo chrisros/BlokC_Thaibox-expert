@@ -9,11 +9,13 @@ namespace Webshop2.DatabaseControllers
     public abstract class DatabaseController
     {
         protected MySqlConnection conn;
+        protected MySqlConnection conn2;
 
         public DatabaseController()
         {
             //Vul hier de juiste gegevens in!!
             conn = new MySqlConnection("Server=meru.hhs.nl;Database=14108011;Uid=14108011;Pwd=iNucairahf;");
+            conn2 = new MySqlConnection("Server=meru.hhs.nl;Database=14108011;Uid=14108011;Pwd=iNucairahf;");
         }
     }
 }
