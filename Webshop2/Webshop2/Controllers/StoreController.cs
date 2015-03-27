@@ -32,7 +32,6 @@ namespace Webshop2.Controllers
             List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             List<Product> uitvoering = prodControl.haalProductDetailGegevensOp(productID);
             ViewBag.H1 = "Product Detail";
-
             return View(producten);
         }
 
