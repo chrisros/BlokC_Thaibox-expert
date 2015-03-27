@@ -64,7 +64,8 @@ namespace Webshop2.Controllers
             Boolean ingelogd = (bool)Session["Ingelogd"];
             if (ingelogd != true)
             {
-                ingelogd = false;   
+                ingelogd = false;
+                int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
                 besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, productID);
                 toegevoegdProd.Add(p);
                 productenInSessie.Add(p);
