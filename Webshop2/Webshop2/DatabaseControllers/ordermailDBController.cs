@@ -230,7 +230,7 @@ namespace Webshop2.DatabaseControllers
                          conn.Open();
                         MySqlTransaction trans = null;
                         trans = conn.BeginTransaction();
-                        string insertQuery = "insert into Gebruiker (isGoldCustomer) values (1) where gebruikerID = @ID";
+                        string insertQuery = "update Gebruiker set isGoldCustomer=1 where gebruikerID = @ID";
                         MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
                         MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                         idPara.Value = userid;
