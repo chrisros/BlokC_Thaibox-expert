@@ -193,7 +193,7 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Open();
 
-                string selectQuery = "select naam from Gebruiker where gebruiker = @ID";
+                string selectQuery = "select naam from Gebruiker where gebruikerID = @ID";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = userid;
