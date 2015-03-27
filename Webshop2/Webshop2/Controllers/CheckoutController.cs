@@ -51,7 +51,7 @@ namespace Webshop2.Controllers
             mail = "thaiboxexpert@chros.nl";
             naam = ordermailDBControll.getNaam(userid);
             string EmailAdres = ordermailDBControll.getEmail(userid);
-            bericht = " Omdat u al meer dan 500 euro aan producten heeft besteld bent u vanaf heden gold customer. <br>Als gold customer krijgt u 4% korting op het gehele asortiment";
+            bericht = " Omdat u al meer dan 500 euro aan producten heeft besteld bent u vanaf heden gold customer. <br>Als gold customer krijgt u 4% korting op het gehele assortiment";
 
             GoldSendController email2 = new GoldSendController
             {

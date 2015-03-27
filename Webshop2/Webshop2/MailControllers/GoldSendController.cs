@@ -30,7 +30,7 @@ namespace Webshop2.mailControllers
             msg.From = new MailAddress(emailAdresVan);
             msg.To.Add(new MailAddress(EmailAdresNaar));
             msg.Subject = Onderwerp;
-            msg.Body = "Beste: <b>" + Naam + "</b><br><br><br>" + Bericht + "<br><br><br>" + "Groeten, het Thaibox-Expert Team!";
+            msg.Body = "Beste <b>" + Naam + ",</b><br><br><br>" + Bericht + "<br><br><br>" + "Met vriendelijke groeten, het Thaibox-Expert Team!";
             msg.IsBodyHtml = true;
 
             //Als SmtpClient ga ik in dit voorbeeld uit van gmail. Je bent natuurlijk vrij om een ander smtpclient te kiezen. 
