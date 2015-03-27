@@ -147,29 +147,6 @@
     <Content Include="images\PlaceHolderImages\Big Pic\truckbig.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\truckearly.png" />
     <Content Include="images\PlaceHolderImages\Big Pic\truckfire.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\1.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\11.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\2.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\3.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\4.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\boatpaper.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\boatsail.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\busdouble.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\busgreen.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\busred.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\carconvert.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\carearly.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\carfast.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\carfaster.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\carracer.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\planeace.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\planeglider.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\planepaper.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\planeprop.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\rocket.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\truckbig.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\truckearly.png" />
-    <Content Include="images\PlaceHolderImages\SmallPics\truckfire.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -181,7 +158,6 @@
     <Content Include="ClassDiagram1.cd" />
     <Content Include="images\PlaceHolderImages\Big Pic\Thumbs.db" />
     <Content Include="images\PlaceHolderImages\Small Pics\Thumbs.db" />
-    <Content Include="images\PlaceHolderImages\SmallPics\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -199,6 +175,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -206,11 +183,14 @@
     <Compile Include="DatabaseControllers\BestellingDBController.cs" />
     <Compile Include="DatabaseControllers\CategorieDBController.cs" />
     <Compile Include="DatabaseControllers\DatabaseController.cs" />
+    <Compile Include="DatabaseControllers\ordermailDBController.cs" />
     <Compile Include="DatabaseControllers\ProductDBController.cs" />
     <Compile Include="DatabaseControllers\RegisterDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MailControllers\GoldSendController.cs" />
+    <Compile Include="MailControllers\OrderSendController.cs" />
     <Compile Include="MailControllers\MailSendController.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -257,6 +237,8 @@
     <Content Include="Views\Account\BeheerPagina.cshtml" />
     <Content Include="Views\Account\ProfielPagina.cshtml" />
     <Content Include="Views\Account\LoginFout.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Succes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -269,6 +251,7 @@
     <Folder Include="productImages\" />
     <Folder Include="Views\BestellingDB\" />
     <Folder Include="Views\MailSend\" />
+    <Folder Include="Views\ordermailDB\" />
     <Folder Include="Views\ProductDB\" />
     <Folder Include="Views\Store\Categorie\" />
   </ItemGroup>

@@ -6,15 +6,14 @@
 }
 
 <h1>@ViewBag.H1</h1>
-
+}
 @{foreach (Product produ in Model)
 {
-    string afbeelding = produ.productID + ".png";
 
-    <img src="~/images/PlaceHolderImages/SmallPics/@afbeelding" alt="AFBEELDING" height="500" width="500" /><br />
+    <img src="~/images/PlaceHolderImages/Small Pics/carracer.png" alt="Artikel met ID 1" height="500" width="500"><br />
     <b> Naam: </b>@produ.productNaam <br />
     <b> Prijs: </b>@produ.productPrijs <br />
-    <b> Merk: </b>@produ.productMerk <br />
+    <b> Merk: </b>@produ.productMerk <<br />
     <b> Omschrijving: </b>@produ.productDetail <br />
 }}
 
