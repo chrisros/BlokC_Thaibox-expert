@@ -164,7 +164,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProfielPagina()
         {
-            if (Session["AdminLoggedIn"] != null)
+            if (Session["LoggedIn"] != null)
             {
                 String email = (String)Session["LoggedIn"];
                 AccountModel account = RegDB.LoginCheck(email);
