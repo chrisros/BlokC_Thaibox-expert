@@ -11,6 +11,7 @@ namespace Webshop2.DatabaseControllers
     public class BestellingDBController : DatabaseController
     {
         static int bestelID = 0;
+        int id = 0;
              public Int32 HaalBestellingTotaalPrijsOpUser()
         {
             berekenTotaalPRijsUser();
@@ -201,7 +202,7 @@ namespace Webshop2.DatabaseControllers
                 bestStatPara.Value = "In Behandeling";
                 bezorgDatumPara.Value = "2020-01-20";
                 gebruikerPara.Value = gebruiker;
-                besteldatumPara.Value = DateTime.Today;
+                besteldatumPara.Value = "2015-03-27";
 
                 cmd.Parameters.Add(totPrijsPara);
                 cmd.Parameters.Add(bestStatPara);
@@ -219,7 +220,7 @@ namespace Webshop2.DatabaseControllers
             }
             catch (Exception)
             {
-                trans.Rollback();
+                
             }
             finally
             {
@@ -379,6 +380,10 @@ namespace Webshop2.DatabaseControllers
             catch(Exception)
             {
                 trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

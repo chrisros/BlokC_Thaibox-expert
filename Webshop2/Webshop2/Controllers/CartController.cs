@@ -66,7 +66,6 @@ namespace Webshop2.Controllers
             {
                 ingelogd = false;
                 int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
-                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, productID);
                 toegevoegdProd.Add(p);
                 productenInSessie.Add(p);
 
@@ -125,6 +124,14 @@ namespace Webshop2.Controllers
                 besteldbcontrol.deleteWinkelMandProductGebruiker(uitvoeringID);
 
             }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult nieuweBestelling()
+        {
+            DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
+            besteldbcontrol.NieuweBestellingGebruiker();
+
             return RedirectToAction("Index");
         }
     }
