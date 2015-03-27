@@ -41,16 +41,15 @@ namespace Webshop2.Controllers
             };
 
             email.SendEmail();
-
+            string EmailAdres = ordermailDBControll.getEmail(userid);
 
             if (ordermailDBControll.isGoldCustomer(userid)==true && ordermailDBControll.knownGoldCustomer(userid)==false)
             {
                 ordermailDBControll.updateGoldCustomerStatus(userid);
                 //invullen van variabelen voor mail
-            onderwerp = "U bent GOLD-Customer"+orderid ;   
+            onderwerp = "U bent GOLD-Customer" ;   
             mail = "thaiboxexpert@chros.nl";
             naam = ordermailDBControll.getNaam(userid);
-            string EmailAdres = ordermailDBControll.getEmail(userid);
             bericht = " Omdat u al meer dan 500 euro aan producten heeft besteld bent u vanaf heden gold customer. <br>Als gold customer krijgt u 4% korting op het gehele assortiment";
 
             GoldSendController email2 = new GoldSendController
@@ -64,9 +63,27 @@ namespace Webshop2.Controllers
             };
             email2.SendEmail();
             }
+            //versturen van mail naar klant
+                ordermailDBControll.updateGoldCustomerStatus(userid);
+                //invullen van variabelen voor mail
+                onderwerp = "Order: " + orderid+" Bevestiging";
+                mail = "thaiboxexpert@chros.nl";
+                naam = ordermailDBControll.getNaam(userid);
+                bericht = "Uw order is succesvol ontvangen en wordt zo spoedig mogelijk verwerkt, voor vragen en/of opmerkingen kunt u contact opnemen met de klantenservice.<br><br><p>Wagenstraat 79 <br/>2512 AR Den Haag <br/>Nederland <br/>Tel: 070-36002817<br />email: <a href=\"mailto:mailto:thaiboxexpert@chros.nl?subject=Contact 'www.chrisros.eu\">info@thaibox-expert.nl</a><br /></p>";
+                GoldSendController email3 = new GoldSendController
+                {
+                    EmailAdresNaar = EmailAdres,
+                    Onderwerp = onderwerp,
+                    Bericht = bericht,
+                    emailAdreszender = mail,
+                    Naam = naam
+
+                };
+                email3.SendEmail();
+            
 
             ViewBag.H1 = "Bestelling compleet!";
-            ViewBag.H2 = "order met id: " + orderid+"is verstuurd en wordt z.s.m afgehandeld";
+            ViewBag.H2 = "order met id: " + orderid+" is verstuurd en wordt z.s.m afgehandeld";
             return View();
         }
     }

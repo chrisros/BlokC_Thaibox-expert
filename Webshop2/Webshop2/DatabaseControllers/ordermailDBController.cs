@@ -10,6 +10,7 @@ namespace Webshop2.DatabaseControllers
 {
     public class ordermailDBController : DatabaseController
     {
+        //maakt een tabel voor het versturen van een order 
         public string getbestelling(string orderid)
         {
             int orderidint = Int32.Parse(orderid);
@@ -44,7 +45,7 @@ namespace Webshop2.DatabaseControllers
             }
             return bestellijst;
         }
-
+        //haalt de gebruiker van een bepaalde bestelling op voor het ophalen van verdere gegevens
         public int getorderperson(string orderid)
         {
             int orderidint = Int32.Parse(orderid);
@@ -79,7 +80,7 @@ namespace Webshop2.DatabaseControllers
             }
             return orderperson;
         }
-
+        //haalt een tabel met alle persoonsgegevens op voor het invoegin in de mail
         public string getPersoonGegevens(int orderid)
         {
             int orderidint = orderid;
@@ -122,7 +123,7 @@ namespace Webshop2.DatabaseControllers
             }
             return adreslijst;
         }
-
+        //kijkt of iemand in aanmerking komt om golduser te worden (kijkt of er meer als 500 eur is uitgegeven)
         public Boolean isGoldCustomer(int userid)
         {
             Boolean goldCustomer = false;
@@ -155,7 +156,7 @@ namespace Webshop2.DatabaseControllers
             }
             return goldCustomer;
         }
-
+        //haalt de email van een gebruiker uit de database
         public string getEmail(int userid)
         {
             string email = "";
@@ -186,10 +187,11 @@ namespace Webshop2.DatabaseControllers
             }
             return email;
         }
-
+        //returned TRUE als iemand in de DB als goldcustomer staat.
         public Boolean knownGoldCustomer(int userid)
         {
             Boolean gold = false;
+            int data = 0;
             try
             {
                 conn.Open();
@@ -203,8 +205,8 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    String data = dataReader.GetString("isGoldCustomer");
-                    if (data.Equals("1"))
+                    data = dataReader.GetInt32("isGoldCustomer");
+                    if (data==1)
                     {
                         gold = true;
 
@@ -249,7 +251,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
-
+        //haalt de naam van een persoon op om te gebruiken in een mai
         public string getNaam(int userid)
         {
             string naam = "";
