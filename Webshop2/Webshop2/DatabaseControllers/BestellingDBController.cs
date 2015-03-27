@@ -333,10 +333,11 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
-        public void getBestelID()
+        public Int32 getBestelID()
         {
            int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
-           
+           conn.Close();
+           conn.Open();
            string selectQuery = "select * from Bestelling where gebruiker = " + gebruikerID + " and betaald = 0";
            MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
            MySqlDataReader dataReader = cmd.ExecuteReader();
@@ -345,6 +346,39 @@ namespace Webshop2.DatabaseControllers
                 bestelID = dataReader.GetInt32("bestellingID");
             }
             dataReader.Close();
+            return bestelID;
+        }
+
+        public void deleteWinkelMandProductGebruiker(int uitvoeringID)
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+                conn.Open();
+                getBestelID();
+                trans = conn.BeginTransaction();
+                int bestID = bestelID;
+                int uitvoID = uitvoeringID;
+                MySqlCommand cmd = new MySqlCommand("delete from BestellingProduct where uitvoeringID = @uitvoeringID and bestellingID = @bestelID ", conn);
+                MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoeringID", MySqlDbType.Int32);
+                MySqlParameter bestelIDPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
+
+                bestelIDPara.Value = bestelID;
+                uitvoerIDPara.Value = uitvoeringID;
+
+                cmd.Parameters.Add(bestelIDPara);
+                cmd.Parameters.Add(uitvoerIDPara);
+
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                trans.Commit();
+
+
+            }
+            catch(Exception)
+            {
+                trans.Rollback();
+            }
         }
     }
 }

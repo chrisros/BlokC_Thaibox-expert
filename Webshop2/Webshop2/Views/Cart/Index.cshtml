@@ -26,9 +26,16 @@
         <input type="hidden" name="kleur" value="@prod.productKleur" />
         <input type="hidden" name="maat" value="@prod.productMaat" />
         <input type="hidden" name="productID" value="@prod.productID"/>
-        <input type="submit" value="bevestig" />
+        <input type="submit" value="bevestig aantal" />
 </form>
-           
+            <form action="~/Cart/deleteProduct" method="get">
+                <input type="hidden" name="kleur" value="@prod.productKleur"/>
+                <input type="hidden" name="maat" value="@prod.productMaat"/>
+                <input type="hidden" name="productID" value="@prod.productID"/>
+                <input type="submit" value="verwijder"/>
+
+            </form>
+
         </td>
         </tr>
       }
@@ -36,15 +43,12 @@
 
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
-@{if(@ViewBag.loggedin != true)
-    { 
-    <br /><b>Om te kunnen bestellen moet u een account hebben en ingelogd zijn.</b>
-    }
-    if(@ViewBag.loggedin == true)
-    {
-        <br />        <form action="~/cart/toegevoegd">
-            <input type="submit" value="bestel">
+
+        <br />        
+            <form action="checkout/index/" method="get">
+            <input type="hidden" name="orderid" value="@ViewBag.bestelID"/>
+            <input type="submit" value="bestel"><b>werkt alleen als u ingelogt bent</b>
+             
         </form>
-    }
-}
+
 <br />Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.

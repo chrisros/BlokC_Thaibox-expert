@@ -27,11 +27,12 @@ namespace Webshop2.Controllers
             {
                 ingelogd = (bool)Session["Ingelogd"];
                 ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
-                productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker(); 
+                productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
+                ViewBag.bestelID = besteldbcontrol.getBestelID();
                 return View(productenInDB);
             }
             ViewBag.loggedin = ingelogd;
-            if (Session["Ingelogd"] == null)
+            if (ingelogd == false)
             {
                 Product p = new Product();
                 foreach (Product sesprod in productenInSessie)
@@ -47,7 +48,7 @@ namespace Webshop2.Controllers
 
         public Int32 sessieTotaalPrijs()
         {
-            int totaalprijs = 0;
+            int totaalprijs = 30000;
             foreach(int prijs in prijzen)
             {
                 totaalprijs = totaalprijs + prijs;
@@ -69,6 +70,7 @@ namespace Webshop2.Controllers
             }
             else if (Session["Ingelogd"] == null)
             {
+                
                 productenInSessie.Add(p);
                 toegevoegdProd.Add(p);
                 return View(toegevoegdProd);
@@ -79,16 +81,44 @@ namespace Webshop2.Controllers
         public ActionResult updateProductAantal(int productID, int aantal, string kleur, string maat)
         {
             Boolean ingelogd = (bool)Session["Ingelogd"];
-            if (ingelogd != true)
+            if (ingelogd == null)
             {
+                ingelogd = false;
+                ViewBag.loggedin = ingelogd;
                 var prod = productenInSessie.Where(d => d.productID == productID).FirstOrDefault();
                 if (prod != null) { prod.productAantal = aantal; }
             }
             if (ingelogd == true)
             {
+                ingelogd = true;
+                ViewBag.loggedin = ingelogd;
                 DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
                 int uitvoeringID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
                 besteldbcontrol.editAantalWinkelmandGebruiker(aantal, uitvoeringID);
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult deleteProduct(int productID, string kleur, string maat)
+        {
+            Boolean ingelogd = (bool)Session["Ingelogd"];
+            if (ingelogd == false)
+            {
+                ingelogd = false;
+                ViewBag.loggedin = ingelogd;
+                var prod = productenInSessie.Where(d => d.productID == productID).FirstOrDefault();
+                if (prod != null) { productenInSessie.Remove(prod); }
+                List<Product> test = productenInSessie;
+            }
+            if (ingelogd == true)
+            {
+                ingelogd = true;
+                ViewBag.loggedin = ingelogd;
+                DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
+                int uitvoeringID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
+                besteldbcontrol.deleteWinkelMandProductGebruiker(uitvoeringID);
+
             }
             return RedirectToAction("Index");
         }
