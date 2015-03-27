@@ -1,17 +1,17 @@
 ﻿@using Webshop2.Models;
 @model List<Product>
-@
+
 @{
     ViewBag.Title = "Toegevoegd";
 }
+<h2>Product toegevoegd aan uw winkelwagen.</h2><br><br>
     <div> 
-        @{foreach(Product p in Model)
+        @{foreach (Product p in Model)
         {
             string afbeelding = p.productID + ".png";
-            @p.productNaam
-            
-            <br />
-            @p.productAantal
+
+            <p><b>Product: </b>@p.productNaam</p>
+            <p><b>Aantal: </b>@p.productAantal</p>
             <br />
             <img src="~/images/PlaceHolderImages/SmallPics/@afbeelding" alt="AFBEELDING" height="500" width="500" /><br />
             <form action="~/Cart/"><input type="submit" value="Ga naar winkelmandje" /></form>
