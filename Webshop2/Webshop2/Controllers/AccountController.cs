@@ -177,5 +177,12 @@ namespace Webshop2.Controllers
                 return View("LoginFout");
             }
         }
+        public ActionResult betaaldeProducten()
+        {
+            BestellingDBController  besteldbcontrol = new BestellingDBController();
+            
+            List<Product> producten = besteldbcontrol.getBetaaldeProducten();
+            return View(producten);
+        }
     }
 }

@@ -336,8 +336,12 @@ namespace Webshop2.DatabaseControllers
            int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
            conn.Close();
            conn.Open();
-           string selectQuery = "select * from Bestelling where gebruiker = " + gebruikerID + " and betaald = 0";
+           string selectQuery = "select * from Bestelling where gebruiker = @gebruiker and betaald = 0";
            MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+           MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int16);
+           gebruikerPara.Value = gebruikerID;
+           cmd.Parameters.Add(gebruikerPara);
+           cmd.Prepare();
            MySqlDataReader dataReader = cmd.ExecuteReader();
             while(dataReader.Read())
             {
@@ -381,6 +385,48 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Close();
             }
+        }
+
+        public List<Product> getBetaaldeProducten()
+        {
+            List<Product> producten = new List<Product>();
+            try
+            {
+                int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
+
+
+                string selectQuery = "select B.*, BP.*, U.*, P.naam, P.prijs from Bestelling B join BestellingProduct BP on B.bestellingID = BP.bestellingID join Uitvoering U on BP.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where betaald = 1 and B.gebruiker = @gebruiker";
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int16);
+                gebruikerPara.Value = gebruikerID;
+                cmd.Parameters.Add(gebruikerPara);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+
+
+                    string productNaam = dataReader.GetString("naam");
+                    string productKleur = dataReader.GetString("kleur");
+                    string productMaat = dataReader.GetString("maat");
+                    int productAantal = dataReader.GetInt16("aantal");
+                    int productPrijs = dataReader.GetInt16("prijs");
+                    Product p = new Product { productNaam = productNaam + " - " + productKleur + " - " + productMaat, productPrijs = productPrijs, productAantal = productAantal };
+                    producten.Add(p);
+                }
+                dataReader.Close();
+               
+            }
+            catch(Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return producten;
         }
     }
 }

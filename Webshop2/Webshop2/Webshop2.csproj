@@ -239,6 +239,7 @@
     <Content Include="Views\Account\LoginFout.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Succes.cshtml" />
+    <Content Include="Views\Account\betaaldeProducten.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
