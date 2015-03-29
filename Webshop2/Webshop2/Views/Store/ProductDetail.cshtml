@@ -9,7 +9,7 @@
 <h1>@ViewBag.H1</h1>
 @{
     string afbeelding = ViewBag.productID + ".png";
-    <img src="~/images/PlaceHolderImages/SmallPics/afbeelding" alt="AFBEELDING" height="500" width="500" /><br />
+    <img src="~/images/PlaceHolderImages/SmallPics/@afbeelding" alt="AFBEELDING" height="00" width="500" /><br /><br />
 }
     <b> Naam: </b>@ViewBag.productNaam <br />
     <b> Prijs: </b>@ViewBag.productPrijs <br />
@@ -21,19 +21,31 @@
 
 
     <form action="~/Cart/toegevoegd" method="get">
-        <select>
-@{foreach (Product prod in Model)
+        <select name="kleur">
+            @{foreach (Product prod in Model)
+            {
+
+                <option value="@prod.productKleur">@prod.productKleur</option>
+
+            }
+            }
+        </select>
+        <select name="maat">
+            @{foreach (Product prod in Model)
+            {
+
+                <option value="@prod.productMaat">@prod.productMaat</option>
+
+            }
+            }
+        </select>
+
+                @{foreach (Product prod in Model)
 {
-            <option value="@prod.productKleur @prod.productMaat">@prod.productKleur @prod.productMaat</option>
-}
-}
-@{foreach (Product prod in Model)
-{
-            <input type="hidden" name="productID" value="@prod.productID" />
-            <input type="hidden" name="kleur" value="@prod.productKleur" />
-            <input type="hidden" name="maat" value="@prod.productMaat" />
-            <input type="number" name="aantal" value="1" />
-            <input type="submit" value="Toevoegen aan Winkelmandje" />
+                    <input type="hidden" name="productID" value="@prod.productID" />
+                    
+                    
 }}
-<form />
-<select />
+        <input type="number" name="aantal" value="1" /> 
+        <input type="submit" value="Toevoegen aan Winkelmandje" />
+     </form>
