@@ -1,38 +1,39 @@
 ﻿@using Webshop2.Models
 @model List<Product>
 
+
 @{
     ViewBag.Title = "Product Detail";
 }
 
 <h1>@ViewBag.H1</h1>
-@{foreach (Product produ in Model)
-{
-    string afbeelding = produ.productID + ".png";
-    <img src="~/images/PlaceHolderImages/SmallPics/@afbeelding" alt="AFBEELDING" height="500" width="500" /><br />
-    <b> Naam: </b>@produ.productNaam <br />
-    <b> Prijs: </b>@produ.productPrijs <br />
-    <b> Merk: </b>@produ.productMerk <br />
-    <b> Omschrijving: </b>@produ.productDetail <br />
-}}
+@{
+    string afbeelding = ViewBag.productID + ".png";
+    <img src="~/images/PlaceHolderImages/SmallPics/afbeelding" alt="AFBEELDING" height="500" width="500" /><br />
+}
+    <b> Naam: </b>@ViewBag.productNaam <br />
+    <b> Prijs: </b>@ViewBag.productPrijs <br />
+    <b> Merk: </b>@ViewBag.productMerk <br />
+    <b> Omschrijving: </b>@ViewBag.productDetail <br /> 
 
 
 
 
-@{foreach (Product prod in Model)
-{
+
     <form action="~/Cart/toegevoegd" method="get">
         <select>
-            <option value="@prod.productKleur">@prod.productKleur</option>
-        </select>
-        <select>
-            <option value="@prod.productMaat">@prod.productMaat</option>
-        </select>
-        <input type="hidden" name="productID" value="@prod.productID" />
-        <input type="hidden" name="kleur" value="@prod.productKleur" />
-        <input type="hidden" name="maat" value="@prod.productMaat" />
-        <input type="number" name="aantal" value="1" />
-        <input type="submit" value="Toevoegen aan Winkelmandje" />
-    </form>
-
+@{foreach (Product prod in Model)
+{
+            <option value="@prod.productKleur @prod.productMaat">@prod.productKleur @prod.productMaat</option>
+}
+}
+@{foreach (Product prod in Model)
+{
+            <input type="hidden" name="productID" value="@prod.productID" />
+            <input type="hidden" name="kleur" value="@prod.productKleur" />
+            <input type="hidden" name="maat" value="@prod.productMaat" />
+            <input type="number" name="aantal" value="1" />
+            <input type="submit" value="Toevoegen aan Winkelmandje" />
 }}
+<form />
+<select />

@@ -30,8 +30,16 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
-            List<Product> uitvoering = prodControl.haalProductDetailGegevensOp(productID);
             ViewBag.H1 = "Product Detail";
+
+            foreach (Product produ in producten)
+            {
+                ViewBag.productID = produ.productID;
+                ViewBag.productNaam = produ.productNaam;
+                ViewBag.productPrijs = produ.productPrijs;
+                ViewBag.productMerk = produ.productMerk;
+                ViewBag.productDetail = produ.productDetail;
+            }
             return View(producten);
         }
 

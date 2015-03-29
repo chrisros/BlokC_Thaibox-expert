@@ -48,7 +48,6 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Open();
                 string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
-                //string selectQuery = "select * from Product where (productID = " + productID + ")";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -63,54 +62,8 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    Product pr = new Product { productID = ID, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
-                    //Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(pr);
-
-                    //string maat = dataReader.GetString("maat");
-                    //string kleur = dataReader.GetString("kleur");
-                    //int uitvoeringsID = dataReader.GetInt32("uitvoeringID");
-                    if (productSoort == "kleding" || productSoort == "shirt" || productSoort == "broek" || productSoort == "schoenen" || productSoort == "sokken" || productSoort == "ondergoed")
-                    {
-                        string selectQquery = "select * from Kleding where (productID = " + productID + ")";
-                        MySqlCommand cmdd = new MySqlCommand(selectQuery, conn);
-                        MySqlDataReader dattaReader = cmd.ExecuteReader();
-                        while (dataReader.Read())
-                        {
-                            string productGeslacht = dataReader.GetString("geslacht");
-                            string productMateriaal = dataReader.GetString("materiaal");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGeslacht = productGeslacht, productMateriaal = productMateriaal };
-                            producten.Add(p);
-                        }
-                    }
-                    else if (productSoort == "LesMateriaal")
-                    {
-                        string selectQquery = "select * from LesMateriaal where (productID = " + productID + ")";
-                        MySqlCommand cmdd = new MySqlCommand(selectQuery, conn);
-                        MySqlDataReader dattaReader = cmd.ExecuteReader();
-                        while (dataReader.Read())
-                        {
-                            string productAuteur = dataReader.GetString("auteur");
-                            string productUitgever = dataReader.GetString("uitgever");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productAuteur = productAuteur, productUitgever = productUitgever };
-                            producten.Add(p);
-                        }
-                    }
-                    else
-                    {
-                        string selectQquery = "select * from OefenMateriaal where (productID = " + productID + ")";
-                        MySqlCommand cmdd = new MySqlCommand(selectQuery, conn);
-                        MySqlDataReader dattaReader = cmd.ExecuteReader();
-                        while (dataReader.Read())
-                        {
-                            string productGewicht = dataReader.GetString("gewicht");
-                            string productMateriaal = dataReader.GetString("materiaal");
-                            Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs, productGewicht = productGewicht, productMateriaal = productMateriaal };
-                            producten.Add(p);
-                        }
-                    }
-                    //   string selectQQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
-
+                    Product p = new Product { productID = ID, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                    producten.Add(p);
                 }
             }
             catch (Exception)
