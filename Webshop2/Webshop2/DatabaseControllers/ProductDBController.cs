@@ -43,12 +43,16 @@ namespace Webshop2.DatabaseControllers
 
         public List<Product> haalProductDetailGegevensOp(int productID)
         {
+            int prodID = productID;
             List<Product> producten = new List<Product>();
             try
             {
                 conn.Open();
-                string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = " + productID + ")";
+                string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID  where (P.productID = @prodID)";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                prodIDPara.Value = productID;
+                cmd.Parameters.Add(prodIDPara);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
@@ -79,13 +83,17 @@ namespace Webshop2.DatabaseControllers
 
         public List<string> getUitvoeringenKleur(int productID)
         {
+            int prodID = productID;
             List<string> kleuren = new List<string>();
             try
             {
                 conn.Open();
 
-                string selectQuery = "select kleur from Uitvoering where (productID = " + productID + ")";
+                string selectQuery = "select kleur from Uitvoering where (productID = @prodID)";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                prodIDPara.Value = productID;
+                cmd.Parameters.Add(prodIDPara);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
