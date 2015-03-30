@@ -12,10 +12,10 @@ namespace Webshop2.DatabaseControllers
     {
         static int bestelID = 0;
         int id = 0;
-             public Int32 HaalBestellingTotaalPrijsOpUser()
+             public double HaalBestellingTotaalPrijsOpUser()
         {
             berekenTotaalPRijsUser();
-            int prijs=0;
+            double prijs=0;
             int aantal = 0;
             try
             {
@@ -31,7 +31,7 @@ namespace Webshop2.DatabaseControllers
 
                 while (dataReader.Read())
                 {
-                    prijs = dataReader.GetInt32("totaalprijs");
+                    prijs = dataReader.GetDouble("totaalprijs");
                 }
             }
             catch (Exception e)
@@ -87,7 +87,7 @@ namespace Webshop2.DatabaseControllers
             return producten;
         }
 
-        public void updateTotaalPRijsUser(int totPrijs)
+        public void updateTotaalPRijsUser(double totPrijs)
         {
             
             
@@ -110,7 +110,7 @@ namespace Webshop2.DatabaseControllers
 
         public void berekenTotaalPRijsUser()
         {
-            int totaalprijs = 0;
+            double totaalprijs = 0.0;
             int ID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
 
             try
@@ -145,7 +145,16 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Close();
             }
-            updateTotaalPRijsUser(totaalprijs);
+            DatabaseControllers.ordermailDBController ordercont = new DatabaseControllers.ordermailDBController();
+            if (ordercont.isGoldCustomer(ID) == true)
+            {
+                double totprijs = totaalprijs * 0.96;
+                updateTotaalPRijsUser(totprijs);
+            }
+            else
+            {
+                updateTotaalPRijsUser(totaalprijs);
+            }
         }
 
         public Product haalProductGegevensOp(int prodID, int aantal)

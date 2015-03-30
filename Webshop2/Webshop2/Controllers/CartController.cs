@@ -14,21 +14,29 @@ namespace Webshop2.Controllers
         List<Models.Product> productenInDB = new List<Models.Product>();
         List<int> prijzen = new List<int>();
         List<Models.Product> productenInSessie = (List<Product>)System.Web.HttpContext.Current.Session["sessietest"];
-        int aantal = 1;
+        int aantal = 1;            
+        
         public ActionResult Index()
         {
+            @ViewBag.goldcustomer = false;
             {
             Session["SessionExists"] = 1;
             }
             ViewBag.H1 = "Winkelwagen";
             bool ingelogd = false;
             DatabaseControllers.BestellingDBController besteldbcontrol= new DatabaseControllers.BestellingDBController();
+            DatabaseControllers.ordermailDBController ordercont = new DatabaseControllers.ordermailDBController();
+
             if (Session["LoggedIn"] != null)
             {
                 ingelogd = (bool)Session["Ingelogd"];
                 ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
                 ViewBag.bestelID = besteldbcontrol.getBestelID();
+                if(ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) != null)
+                {
+                    @ViewBag.goldcustomer = true;
+                }
                 return View(productenInDB);
             }
             ViewBag.loggedin = ingelogd;
@@ -43,6 +51,8 @@ namespace Webshop2.Controllers
                 ViewBag.Prijs = sessieTotaalPrijs();
                 return View(productenInSessie);
             }
+
+
             return View(productenInSessie);
         }
 

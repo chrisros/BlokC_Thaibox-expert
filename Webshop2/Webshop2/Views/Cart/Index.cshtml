@@ -46,6 +46,12 @@
 
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
+@{
+    if(@ViewBag.goldcustomer == true)
+    {
+        <b>U bent Gold Customer en ontvangt 4% korting op al uw bestellingen!</b>
+    }
+}
 
 
         <br />        
