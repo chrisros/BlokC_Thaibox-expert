@@ -194,6 +194,7 @@
     <Compile Include="MailControllers\MailSendController.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\Bestelling.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,6 +241,7 @@
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Succes.cshtml" />
     <Content Include="Views\Account\betaaldeProducten.cshtml" />
+    <Content Include="Views\Account\Overzichtpagina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -184,5 +184,37 @@ namespace Webshop2.Controllers
             List<Product> producten = besteldbcontrol.getBetaaldeProducten();
             return View(producten);
         }
+        public ActionResult Overzichtpagina()
+        {
+            if (Session["AdminLoggedIn"] != null)
+            {
+                String naam = (String)Session["AdminLoggedIn"];
+                AdminModel admin = RegDB.AdminLoginCheck(naam);
+                ViewBag.H1 = "Financieel overzicht.";
+                if (admin.Functie.Equals("manager"))
+                {
+                    List<Bestelling> overzicht = RegDB.MaandOverzicht();
+                    int inkomst = 0;
+                    foreach (Bestelling b in overzicht)
+                    {
+                        inkomst = inkomst + b.totaalPrijs;
+                    }
+                    ViewData["inkomst"] = inkomst;
+                    return View(overzicht);
+                }
+                else
+                {
+                    ViewBag.H1 = "Niet ingelogd";
+                    return View("LoginFout");
+                }
+                
+            }
+            else 
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
+            
+        }
     }
 }

@@ -176,10 +176,10 @@ namespace Webshop2.DatabaseControllers
                     admin.email = reader.GetString("email");
                     string functie = reader.GetString("functie");
                     if (functie.Equals("w")) {
-                        admin.Functie = "Beheerder";
+                        admin.Functie = "beheerder";
                     }
                     else if (functie.Equals("f")) {
-                        admin.Functie = "Manager";
+                        admin.Functie = "manager";
                     }
                 }
                 
@@ -194,6 +194,29 @@ namespace Webshop2.DatabaseControllers
             }
             
             return admin;
+        }
+
+        public List<Bestelling> MaandOverzicht() 
+        {
+            List<Bestelling> Overzicht = new List<Bestelling>();
+            conn.Open();
+            string overselect = @"select * from Bestelling where betaald = '1' AND Month(bestelDatum) = Month(CURRENT_DATE) AND Year(bestelDatum) = Year(CURRENT_DATE)";
+            MySqlCommand overcmd = new MySqlCommand(overselect, conn);
+
+            MySqlDataReader reader = overcmd.ExecuteReader();
+
+            while (reader.Read()) 
+            {
+                Bestelling b = new Bestelling();
+                b.bestellingID = reader.GetInt32("bestellingID");
+                b.gebruiker = reader.GetInt32("gebruiker");
+                b.totaalPrijs = reader.GetInt32("totaalPrijs");
+                b.bestellingStatus = reader.GetString("bestellingStatus");
+                b.bestelDatum = reader.GetDateTime("bestelDatum");
+                b.bezorgDatum = reader.GetDateTime("bezorgDatum");
+                Overzicht.Add(b);
+            }
+            return (Overzicht);
         }
     }
 }

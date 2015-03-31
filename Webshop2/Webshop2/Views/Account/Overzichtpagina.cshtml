@@ -1,0 +1,17 @@
+﻿@using Webshop2.Models
+@model List<Bestelling>
+
+@{
+    ViewBag.Title = "Financieel Overzicht.";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div>
+        Inkomsten per bestelling:
+        @foreach (Bestelling b in Model)
+        {
+            <p> Bestelling geplaatst op: </p> @b.bestelDatum <label> met een totale prijs van: </label>  @b.totaalPrijs <br />
+        }
+        Totaal inkomsten voor deze maand: @ViewData["inkomst"]
+</div>
