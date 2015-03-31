@@ -16,7 +16,7 @@ namespace Webshop2.Models
         public String productMerk { get; set; }
         public int productID { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
-        public int productPrijs { get; set; }
+        public double productPrijs { get; set; }
         public string productPrijsString { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
         public String productSoort { get; set; }

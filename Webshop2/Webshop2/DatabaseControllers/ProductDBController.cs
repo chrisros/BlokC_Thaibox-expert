@@ -23,7 +23,7 @@ namespace Webshop2.DatabaseControllers
                     int ID = dataReader.GetInt32("productID");
                     string productNaam = dataReader.GetString("naam");
                     string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
+                    double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
                     string productSoort = dataReader.GetString("soort");
                     Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
@@ -59,7 +59,7 @@ namespace Webshop2.DatabaseControllers
                     int ID = dataReader.GetInt32("productID");
                     string productNaam = dataReader.GetString("naam");
                     string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
+                    double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
                     string productSoort = dataReader.GetString("soort");
                     string uitvoeringMaat = dataReader.GetString("maat");
@@ -128,7 +128,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
                 MySqlParameter Naam = new MySqlParameter("@anaam", MySqlDbType.VarChar);
-                MySqlParameter Prijs = new MySqlParameter("@prijs", MySqlDbType.Int32);
+                MySqlParameter Prijs = new MySqlParameter("@prijs", MySqlDbType.Double);
                 MySqlParameter Merk = new MySqlParameter("@merk", MySqlDbType.VarChar);
                 MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
                 MySqlParameter Detail = new MySqlParameter("@detail", MySqlDbType.VarChar);

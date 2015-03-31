@@ -12,7 +12,7 @@ namespace Webshop2.Controllers
         // GET: Cart
         
         List<Models.Product> productenInDB = new List<Models.Product>();
-        List<int> prijzen = new List<int>();
+        List<double> prijzen = new List<double>();
         List<Models.Product> productenInSessie = (List<Product>)System.Web.HttpContext.Current.Session["sessietest"];
         int aantal = 1;            
         
