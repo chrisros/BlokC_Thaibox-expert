@@ -25,7 +25,9 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
 
-
+            DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+            string reactietabel = reactieDBControll.getReactieTable();
+            ViewBag.reacties = reactietabel;
             return View();
         }
     }

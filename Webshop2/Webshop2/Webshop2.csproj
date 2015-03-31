@@ -185,6 +185,7 @@
     <Compile Include="DatabaseControllers\DatabaseController.cs" />
     <Compile Include="DatabaseControllers\ordermailDBController.cs" />
     <Compile Include="DatabaseControllers\ProductDBController.cs" />
+    <Compile Include="DatabaseControllers\ReactieDBController.cs" />
     <Compile Include="DatabaseControllers\RegisterDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +261,7 @@
     <Folder Include="Views\MailSend\" />
     <Folder Include="Views\ordermailDB\" />
     <Folder Include="Views\ProductDB\" />
+    <Folder Include="Views\ReactieDB\" />
     <Folder Include="Views\Store\Categorie\" />
   </ItemGroup>
   <PropertyGroup>
