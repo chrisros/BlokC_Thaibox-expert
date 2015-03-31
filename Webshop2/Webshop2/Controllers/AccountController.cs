@@ -23,11 +23,15 @@ namespace Webshop2.Controllers
         }
         public ActionResult Admin()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Beheer login";
             return View();
         }
         public ActionResult AdminLogin(string username, string password) {
 
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Ingelogd als medewerker";
             AdminModel admin = RegDB.AdminLoginCheck(username);
             
@@ -70,11 +74,15 @@ namespace Webshop2.Controllers
         }
         public ActionResult create()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Account creëren";
             return View();
         }
         public ActionResult RegCompleted(AccountModel account)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Account geregistreerd.";
 
             if (ModelState.IsValid && RegDB.isNewEmail(account.Email))
@@ -100,6 +108,8 @@ namespace Webshop2.Controllers
         }
         public ActionResult Login(string username, string password)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Ingelogd";
             AccountModel account = RegDB.LoginCheck(username);
             bool mailklopt = true;
@@ -143,6 +153,8 @@ namespace Webshop2.Controllers
 
         public ActionResult Logout()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Uitgelogd.";
             Session["LoggedIn"] = null;
             Session["AdminLoggedIn"] = null;
@@ -151,6 +163,8 @@ namespace Webshop2.Controllers
 
         public ActionResult BeheerPagina() 
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];
@@ -166,6 +180,8 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProfielPagina()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (Session["LoggedIn"] != null)
             {
                 String email = (String)Session["LoggedIn"];
@@ -182,12 +198,15 @@ namespace Webshop2.Controllers
         public ActionResult betaaldeProducten()
         {
             BestellingDBController  besteldbcontrol = new BestellingDBController();
-            
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             List<Product> producten = besteldbcontrol.getBetaaldeProducten();
             return View(producten);
         }
         public ActionResult Overzichtpagina()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];
@@ -220,6 +239,8 @@ namespace Webshop2.Controllers
         }
         public ActionResult GoedVerkocht() 
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];

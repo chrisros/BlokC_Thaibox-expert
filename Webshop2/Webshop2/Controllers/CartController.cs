@@ -70,6 +70,8 @@ namespace Webshop2.Controllers
 
         public ActionResult toegevoegd(int productID, int aantal, string maat, string kleur)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);

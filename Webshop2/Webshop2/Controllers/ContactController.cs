@@ -20,7 +20,9 @@ namespace Webshop2.Controllers
        [HttpPost]
         public ActionResult Mailsend(FormCollection formCollection)
         {
-            MailSendController email = new MailSendController { EmailAdresNaar = "thaiboxexpert@chros.nl", Onderwerp = formCollection["subject"], Bericht = formCollection["message"], emailAdreszender = formCollection["email"], Naam = formCollection["name"] };
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp(); 
+           MailSendController email = new MailSendController { EmailAdresNaar = "thaiboxexpert@chros.nl", Onderwerp = formCollection["subject"], Bericht = formCollection["message"], emailAdreszender = formCollection["email"], Naam = formCollection["name"] };
             email.SendEmail();
             ViewBag.H1 = "Over ons";
             ViewBag.feedback = "Mail verstuurd, u hoort zo spoedig mogelijk van ons.";
