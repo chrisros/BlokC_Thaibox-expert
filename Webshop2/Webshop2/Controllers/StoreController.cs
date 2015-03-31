@@ -44,6 +44,7 @@ namespace Webshop2.Controllers
                 ViewBag.productPrijs = produ.productPrijs;
                 ViewBag.productMerk = produ.productMerk;
                 ViewBag.productDetail = produ.productDetail;
+                ViewBag.productAfbeelding = produ.productAfbeelding;
             }
             return View(producten);
         }

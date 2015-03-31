@@ -23,7 +23,7 @@ namespace Webshop2.Models
         //public String productAfbeelding { get; set; }
 
         public string ImageData { get; set; }
-        
+        public string productAfbeelding { get; set; }
         public string productMateriaal { get; set; }
         public int uitvoeringVoorraad { get; set; }
         public string uitvoeringKleur { get; set; }

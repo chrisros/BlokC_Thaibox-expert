@@ -8,7 +8,7 @@
 
 <h1>@ViewBag.H1</h1>
 @{
-    string afbeelding = ViewBag.productID + ".png";
+    string afbeelding = ViewBag.afbeelding + ".png";
     <img src="~/images/PlaceHolderImages/SmallPics/@afbeelding" alt="AFBEELDING" height="00" width="500" /><br /><br />
 }
     <b> Naam: </b>@ViewBag.productNaam <br />
@@ -25,21 +25,11 @@
             @{foreach (Product prod in Model)
             {
 
-                <option value="@prod.productKleur">@prod.productKleur</option>
+                <option value="@prod.productKleur, @prod.productMaat">@prod.productKleur, @prod.productMaat</option>
 
             }
             }
         </select>
-        <select name="maat">
-            @{foreach (Product prod in Model)
-            {
-
-                <option value="@prod.productMaat">@prod.productMaat</option>
-
-            }
-            }
-        </select>
-
                 @{foreach (Product prod in Model)
 {
                     <input type="hidden" name="productID" value="@prod.productID" />

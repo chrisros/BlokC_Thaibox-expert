@@ -26,7 +26,8 @@ namespace Webshop2.DatabaseControllers
                     double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
            //         string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
+                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
                     producten.Add(p);
                 }
             }
@@ -66,7 +67,8 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    Product p = new Product { productID = ID, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
                     producten.Add(p);
                 }
             }
