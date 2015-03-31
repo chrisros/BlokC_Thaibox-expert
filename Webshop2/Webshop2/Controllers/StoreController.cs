@@ -247,6 +247,15 @@ namespace Webshop2.Controllers
             return View(producten);
         }
 
-
+        public ActionResult zoekProducten(string zoekTerm)
+        {
+            ViewBag.H1 = "Gevonden Producten";
+                DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+                //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+                List<Models.Product> producten = prodControl.zoekProduct(zoekTerm);
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
+            return View(producten);
+        }
     }
 }

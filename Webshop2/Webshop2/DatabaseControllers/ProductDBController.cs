@@ -220,5 +220,43 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
+        public List<Product> zoekProduct(string zoekTerm)
+        {
+            List<Product> producten = new List<Product>();
+            try
+            {
+                conn.Open();
+                string selectQuery = "select * from Product where (naam like '%" +@zoekTerm +"%')";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                //MySqlParameter termPara = new MySqlParameter("@term", MySqlDbType.Int32);
+                //termPara.Value = zoekTerm;
+                //cmd.Parameters.Add(termPara);
+                //cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    int ID = dataReader.GetInt32("productID");
+                    string productNaam = dataReader.GetString("naam");
+                    string productMerk = dataReader.GetString("merk");
+                    double productPrijs = dataReader.GetDouble("prijs");
+                    string productDetail = dataReader.GetString("productOmschrijving");
+           //         string productSoort = dataReader.GetString("soort");
+                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
+                    producten.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return producten;
+        }
+        
+
     }
 }
