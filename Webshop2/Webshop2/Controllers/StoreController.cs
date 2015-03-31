@@ -34,6 +34,8 @@ namespace Webshop2.Controllers
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             ViewBag.H1 = "Product Detail";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
 
             foreach (Product produ in producten)
             {
@@ -49,11 +51,15 @@ namespace Webshop2.Controllers
         public ActionResult ProductToevoegen()
         {
             ViewBag.H1 = "Toevoegen producten";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
 
             return View();
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (ModelState.IsValid)
             {
                 if (file != null)
@@ -78,6 +84,8 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductWijzigen()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Wijzigen van producten";
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
@@ -86,6 +94,8 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductGeWijzigd(Product product)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Product is gewzijgid";
             if (ModelState.IsValid)
             {
@@ -99,11 +109,15 @@ namespace Webshop2.Controllers
         }
         public ActionResult CategorieToevoegen()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.H1 = "Categorie Toevoegen";
             return View();
         }
         public ActionResult CategorieToegvoegd(Categorie categorie)
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             if (ModelState.IsValid)
             {
                 ViewBag.H1 = "Categorie Toegevoegd.";
@@ -119,10 +133,13 @@ namespace Webshop2.Controllers
         // Kleding
         public ActionResult Kleding()
         {
+
             ViewBag.H1 = "Kleding";
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalKledingGegevensOp();
+            List<Models.Product> producten = prodControl.haalKledingGegevensOp();            
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Shirts()
@@ -131,6 +148,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalShirtsOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Schoenen()
@@ -139,6 +158,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalSchoenenOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Broeken()
@@ -147,6 +168,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalBroekenOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Sokken()
@@ -155,6 +178,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalSokkenOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Ondergoed()
@@ -163,6 +188,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalOndegoedOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
 
@@ -174,6 +201,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalBeschermingGegevensOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Hoofdbescherming()
@@ -182,6 +211,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalHoofdOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Borstbescherming()
@@ -190,6 +221,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalBorstOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Beenbescherming()
@@ -198,6 +231,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalBeenOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
         public ActionResult Handbescherming()
@@ -206,6 +241,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalHandOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
 
