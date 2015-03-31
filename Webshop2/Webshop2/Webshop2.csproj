@@ -242,6 +242,7 @@
     <Content Include="Views\Checkout\Succes.cshtml" />
     <Content Include="Views\Account\betaaldeProducten.cshtml" />
     <Content Include="Views\Account\Overzichtpagina.cshtml" />
+    <Content Include="Views\Account\GoedVerkocht.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

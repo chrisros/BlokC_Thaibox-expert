@@ -218,5 +218,26 @@ namespace Webshop2.DatabaseControllers
             }
             return (Overzicht);
         }
+
+        public List<Product> ProductOverzicht() {
+
+            List<Product> goedverkocht = new List<Product>();
+            conn.Open();
+            string poselect = @"select uitvoeringID, sum(aantal) as totaalAantal from BestellingProduct
+                        where aantal in (select aantal from BestellingProduct) group by uitvoeringID 
+                        order by totaalAantal DESC Limit 5";
+            MySqlCommand pocmd = new MySqlCommand(poselect, conn);
+
+            MySqlDataReader reader = pocmd.ExecuteReader();
+
+            while (reader.Read())
+            { 
+                Product p = new Product();
+                p.productUitvoeringID = reader.GetInt32("uitvoeringID");
+                p.productAantal = reader.GetInt32("totaalAantal");
+                goedverkocht.Add(p);
+            }
+            return goedverkocht;
+        }
     }
 }

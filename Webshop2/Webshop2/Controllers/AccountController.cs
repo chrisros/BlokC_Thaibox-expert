@@ -216,5 +216,30 @@ namespace Webshop2.Controllers
             }
             
         }
+        public ActionResult GoedVerkocht() 
+        {
+            if (Session["AdminLoggedIn"] != null)
+            {
+                String naam = (String)Session["AdminLoggedIn"];
+                AdminModel admin = RegDB.AdminLoginCheck(naam);
+                ViewBag.H1 = "Overzicht van goedverkochte producten.";
+                if (admin.Functie.Equals("manager"))
+                {
+                    List<Product> verkocht = RegDB.ProductOverzicht();
+                    return View(verkocht);
+                }
+                else
+                {
+                    ViewBag.H1 = "Niet ingelogd";
+                    return View("LoginFout");
+                }
+
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿@using Webshop2.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "Productoverzicht.";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<div>
+    <p>
+        <ul>
+            Bestverkochte producten per bestelling:
+            @foreach (Product p in Model)
+            {
+                <li>Uitvoering: @p.productUitvoeringID Aantal: @p.productAantal</li>
+            }
+        </ul>
+
+    </p>
+</div>

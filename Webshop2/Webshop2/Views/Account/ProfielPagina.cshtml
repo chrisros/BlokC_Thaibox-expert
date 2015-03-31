@@ -11,15 +11,16 @@
     <p>Welkom, @Model.Gebruikersnaam @Model.Naam. </p>
 
     Uw gegevens:
-    <form>
-        <label>Voornaam: </label><input type="text", name ="voornaam" value="@Model.Gebruikersnaam" /><br />
-        <label>Achternaam: </label><input type="text", value="@Model.Naam" /><br />
-        <label>Adres: </label><input type="text", value="@Model.Woonadres" /><br />
-        <label>Postcode: </label><input type="text", value="@Model.Woonpostcode" /><br />
-        <label>Woonplaats: </label><input type="text", value="@Model.Woonplaats" /><br />
-        <label>Email: </label><input type="text", value="@Model.Email" /><br />
-        <label>Telefoonnummer: </label><input type="text", value="0 @Model.Telefoonnummer"/><br />
-    </form> 
+    <table>
+        <tr><td>Voornaam:</td><td>@Model.Gebruikersnaam</td></tr>
+        <tr><td>Achternaam:</td><td>@Model.Naam</td></tr>
+        <tr><td>Adres:</td><td>@Model.Woonadres</td></tr>
+        <tr><td>Postcode:</td><td>@Model.Woonpostcode</td></tr>
+        <tr><td>Woonplaats:</td><td>@Model.Woonplaats</td></tr>
+        <tr><td>E-mail:</td><td>@Model.Email</td></tr>
+        <tr><td>Telefoonnummer:</td><td>@Model.Telefoonnummer</td></tr>
+    </table>
+    
 
     <br />Klik <a href="~/account/betaaldeProducten" id="pLink">hier</a> om uw betaalde producten in te zien.</b>
 
