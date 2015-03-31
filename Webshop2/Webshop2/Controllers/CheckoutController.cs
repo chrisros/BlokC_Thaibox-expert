@@ -13,6 +13,8 @@ namespace Webshop2.Controllers
         // GET: Checkout
         public ActionResult Index()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             string orderid = Request.QueryString["orderid"];
             ViewBag.orderid = orderid;
             ViewBag.H1 = "Afrekenen";

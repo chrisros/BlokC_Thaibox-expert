@@ -105,8 +105,7 @@
 
 
                         @using Webshop2.Models
-                        @model List<Categorie>
-                        @foreach (Categorie cate in Model)
+                        @foreach (Categorie cate in @ViewBag.categorieen)
                         {
                             <li><a class="subCat" href="/store/@cate.categorieNaam"> @cate.categorieNaam</a></li>
                         }

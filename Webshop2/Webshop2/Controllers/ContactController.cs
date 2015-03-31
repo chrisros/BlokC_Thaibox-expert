@@ -13,6 +13,8 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             ViewBag.H1 = "Contact";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View();
         }
        [HttpPost]

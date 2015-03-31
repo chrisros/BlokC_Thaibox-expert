@@ -17,6 +17,8 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             ViewBag.H1 = "Log in!";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View();
         }
         public ActionResult Admin()

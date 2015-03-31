@@ -13,6 +13,8 @@ namespace Webshop2.Controllers
         public ActionResult Index()
         {
             ViewBag.H1 = "Over ons";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View();
         }
         

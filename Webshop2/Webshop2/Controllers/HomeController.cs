@@ -23,10 +23,10 @@ namespace Webshop2.Controllers
             ViewBag.H2 = "Welkom";
 
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Categorie> cat = catControl.haalCatNamenOp();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
 
-            return View(cat);
+
+            return View();
         }
     }
 }

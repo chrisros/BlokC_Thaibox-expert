@@ -22,6 +22,8 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             List<Models.Product> producten = prodControl.haalProductGegevensOp();
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             return View(producten);
         }
 

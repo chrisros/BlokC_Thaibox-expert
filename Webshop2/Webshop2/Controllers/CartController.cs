@@ -18,6 +18,8 @@ namespace Webshop2.Controllers
         
         public ActionResult Index()
         {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             @ViewBag.goldcustomer = false;
             {
             Session["SessionExists"] = 1;
