@@ -42,6 +42,49 @@ namespace Webshop2.DatabaseControllers
             return table;
         }
 
+        public void RegisterReactie(string gebr, string scher, string text, int rating)
+        {
+            MySqlTransaction trans = null;
 
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"insert into Reactie (gebruikersnaam, schermNaam, reactie, rating) 
+                                  values (@gebr, @scher, @text, @rating)";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter gebr2 = new MySqlParameter("@gebr", MySqlDbType.VarChar);
+                MySqlParameter scher2 = new MySqlParameter("@scher", MySqlDbType.VarChar);
+                MySqlParameter text2 = new MySqlParameter("@text", MySqlDbType.Text);
+                MySqlParameter rating2 = new MySqlParameter("@rating", MySqlDbType.Int16);
+
+                gebr2.Value = gebr;
+                scher2.Value = scher;
+                text2.Value = text;
+                rating2.Value = rating;
+
+
+                regcmd.Parameters.Add(gebr);
+                regcmd.Parameters.Add(scher);
+                regcmd.Parameters.Add(text);
+                regcmd.Parameters.Add(rating);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
