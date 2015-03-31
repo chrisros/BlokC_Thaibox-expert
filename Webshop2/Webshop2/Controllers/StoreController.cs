@@ -13,6 +13,7 @@ namespace Webshop2.Controllers
     {
 
         static ProductDBController ProdDataBase = new ProductDBController();
+        static CategorieDBController CatDataBase = new CategorieDBController();
 
         // GET: Store
         public ActionResult Index()
@@ -51,27 +52,18 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
         {
-            if (file != null)
-            {
-                string pic = System.IO.Path.GetFileName(file.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("/productImages"), pic);
-                // file is uploaded
-                file.SaveAs(path);
-
-                // save the image path path to the database or you can send image 
-                // directly to database
-                // in-case if you want to store byte[] ie. for DB
-                //using (MemoryStream ms = new MemoryStream())
-                //{
-                //    file.InputStream.CopyTo(ms);
-                //    byte[] array = ms.GetBuffer();
-                //}
-
-            }
-            ViewBag.H1 = "Product geregistreerd.";
-
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string pic = System.IO.Path.GetFileName(file.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("/productImages"), pic);
+                    // file is uploaded
+                    product.ImageData = pic;
+                    file.SaveAs(path);
+
+                }
+                ViewBag.H1 = "Product geregistreerd.";
                 ProdDataBase.RegisterProduct(product);
                 return View();
             }
@@ -103,61 +95,23 @@ namespace Webshop2.Controllers
                 return View("ProductWijzigen", product);
             }
         }
-
-        public FileContentResult getImage()
+        public ActionResult CategorieToevoegen()
         {
-            Product product = ProdDataBase.getImageOutDB();
-            if (product != null)
-            {
-                return File(product.ImageData, product.ImageMimeType);
-            }
-            else
-            {
-                return null;
-            }
+            ViewBag.H1 = "Categorie Toevoegen";
+            return View();
         }
-        [HttpPost]
-        public ActionResult UpdateImage(Product product, HttpPostedFileBase image)
+        public ActionResult CategorieToegvoegd(Categorie categorie)
         {
-
-            if (image != null)
-            {
-                product.ImageMimeType = image.ContentType;
-                product.ImageData = new byte[image.ContentLength];
-                image.InputStream.Read(product.ImageData, 0, image.ContentLength);
-            }
-            else
-            {
-                //plaatje ophalen van bijbehorend paspoort.
-                Product product2 = ProdDataBase.getImageOutDB();
-                if (product2 != null)
-                {
-                    product.ImageData = product2.ImageData;
-                }
-
-            }
-
             if (ModelState.IsValid)
             {
-                ProdDataBase.RegisterProduct(product);
-                return Redirect("ProductToevoegen");
+                ViewBag.H1 = "Categorie Toegevoegd.";
+                CatDataBase.voegCatToe(categorie);
+                return View();
             }
             else
             {
-                return View("ProductToevoegen", product);
+                return View("CategorieToevoegen", categorie);
             }
-
-        }
-
-        public ActionResult UploadImage(Product product)
-        {
-            HttpPostedFileBase file = Request.Files["fileuploadImage"];
-
-            // write your code to save image
-            string uploadPath = Server.MapPath("~/images/");
-            file.SaveAs(uploadPath + file.FileName);
-
-            return View("Store", product);
         }
 
         // Kleding

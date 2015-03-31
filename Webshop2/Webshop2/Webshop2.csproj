@@ -195,6 +195,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Bestelling.cs" />
+    <Compile Include="Models\Categorie.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -242,7 +243,12 @@
     <Content Include="Views\Checkout\Succes.cshtml" />
     <Content Include="Views\Account\betaaldeProducten.cshtml" />
     <Content Include="Views\Account\Overzichtpagina.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Account\GoedVerkocht.cshtml" />
+=======
+    <Content Include="Views\Store\CategorieToevoegen.cshtml" />
+    <Content Include="Views\Store\CategorieToegvoegd.cshtml" />
+>>>>>>> origin/master
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -288,7 +294,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54561</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

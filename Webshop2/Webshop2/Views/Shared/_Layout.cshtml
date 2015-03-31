@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,7 +13,7 @@
     <script src="~/Scripts/dropdown.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/js-image-slider.js"></script>
-    
+
     @*Favicon & app-icon*@
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -40,11 +41,11 @@
             <a href="/"><img src="/images/logo.png" alt="Logo thaibox expert"></a>
             <nav>
                 @*list met menu items in de navbar*@
-                <ul> 
+                <ul>
                     <li><a href="/store"><i class="fa fa-home"></i> Shop</a></li>
                     <li><a href="/about"><i class="fa fa-question-circle"></i> Over ons</a></li>
                     <li><a href="/contact"><i class="fa fa-phone-square"></i> Contact</a></li>
-                    @if(Session["LoggedIn"] == null && Session["AdminLoggedIn"] == null)
+                    @if (Session["LoggedIn"] == null && Session["AdminLoggedIn"] == null)
                     {
                         <li>
                             <a href="/account"><i class="fa fa-sign-in"></i> Inloggen</a>
@@ -52,79 +53,89 @@
                     }
                     else
                     {
-                        if (Session["LoggedIn"] != null) 
-                        { 
-                          <li> 
-                                 <a href="/account/profielpagina"><i class="fa fa-user"></i> Uw profielpagina</a>
-                          </li>
-                          <li>
-                                 <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
-                          </li>
+                        if (Session["LoggedIn"] != null)
+                        {
+                            <li>
+                                <a href="/account/profielpagina"><i class="fa fa-user"></i> Uw profielpagina</a>
+                            </li>
+                            <li>
+                                <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
+                            </li>
                         }
                         else
                         {
-                            if (Session["AdminLoggedIn"] != null) 
-                            { 
+                            if (Session["AdminLoggedIn"] != null)
+                            {
                                 <li>
-                                        <a href="/account/beheerpagina"><i class="fa fa-eye"></i> Beheerpagina</a>
+                                    <a href="/account/beheerpagina"><i class="fa fa-eye"></i> Beheerpagina</a>
                                 </li>
                                 <li>
-                                        <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
+                                    <a href="/account/logout"><i class="fa fa-sign-out"></i> Uitloggen</a>
                                 </li>
-                        
+
                             }
                         }
-                    }   
+                    }
                     <li><a href="/cart" id="totalPrice"><i class="fa fa-shopping-cart"></i> Winkelwagen</a></li>
-                    
+
                 </ul>
             </nav>
         </div>
     </header>
-    
 
 
-        <div id="content">
-            <div class="container">
-                @*slider*@
-                <div id="sliderFrame">
-                    <div id="slider">
-                        <img src="/images/image-slider-1.jpg" alt="Slider Image" />
-                        <img src="/images/image-slider-2.jpg" alt="Slider Image" />
-                        <img src="/images/image-slider-3.jpg" alt="Slider Image" />
-                        <img src="/images/image-slider-4.jpg" alt="Slider Image" />
-                        <img src="/images/image-slider-5.jpg" alt="Slider Image" />
-                    </div>
-            </div>
 
-                @*start van content*@
-                <div class="units-row">
-                    <div id="vertNav" class="unit-20">
-                        <ul>
-                            <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
-                            <li><a class="subCat" href="/store/Shirts">Shirts</a></li>
-                            <li><a class="subCat" href="/store/Broeken">Broeken</a></li>
-                            <li><a class="subCat" href="/store/Schoenen">Schoenen</a></li>
-                            <li><a class="subCat" href="/store/Sokken">Sokken</a></li>
-                            <li><a class="subCat" href="/store/Ondergoed">Ondergoed</a></li>
-                            <li><a class="topCat" href="/store/Bescherming">Bescherming</a></li>
-                            <li><a class="subCat" href="/store/Hoofdbescherming">Hoofd</a></li>
-                            <li><a class="subCat" href="/store/Borstbescherming">Borst</a></li>
-                            <li><a class="subCat" href="/store/Beenbescherming">Been</a></li>
-                            <li><a class="subCat" href="/store/Handbescherming">Hand</a></li>
-                        </ul>
-                    </div>
-                    <div id="vertCont" div class="unit-80">
-
-                        @RenderBody()
-                    </div>
+    <div id="content">
+        <div class="container">
+            @*slider*@
+            <div id="sliderFrame">
+                <div id="slider">
+                    <img src="/images/image-slider-1.jpg" alt="Slider Image" />
+                    <img src="/images/image-slider-2.jpg" alt="Slider Image" />
+                    <img src="/images/image-slider-3.jpg" alt="Slider Image" />
+                    <img src="/images/image-slider-4.jpg" alt="Slider Image" />
+                    <img src="/images/image-slider-5.jpg" alt="Slider Image" />
                 </div>
-                
-                 
-                
-
-                @*end of content*@
             </div>
+
+            @*start van content*@
+            <div class="units-row">
+                <div id="vertNav" class="unit-20">
+                    <ul>
+
+
+                        @using Webshop2.Models
+                        @model List<Categorie>
+                        @foreach (Categorie cate in Model)
+                        {
+                            <li><a class="subCat" href="/store/@cate.categorieNaam"> @cate.categorieNaam</a></li>
+                        }
+                        @*
+    <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
+    <li><a class="subCat" href="/store/Shirts">Shirts</a></li>
+    <li><a class="subCat" href="/store/Broeken">Broeken</a></li>
+    <li><a class="subCat" href="/store/Schoenen">Schoenen</a></li>
+    <li><a class="subCat" href="/store/Sokken">Sokken</a></li>
+    <li><a class="subCat" href="/store/Ondergoed">Ondergoed</a></li>
+    <li><a class="topCat" href="/store/Bescherming">Bescherming</a></li>
+    <li><a class="subCat" href="/store/Hoofdbescherming">Hoofd</a></li>
+    <li><a class="subCat" href="/store/Borstbescherming">Borst</a></li>
+    <li><a class="subCat" href="/store/Beenbescherming">Been</a></li>
+    <li><a class="subCat" href="/store/Handbescherming">Hand</a></li>
+                        *@
+                    </ul>
+                </div>
+                <div id="vertCont" div class="unit-80">
+
+                    @RenderBody()
+                </div>
+            </div>
+
+
+
+
+            @*end of content*@
+        </div>
     </div>
 
 

@@ -22,9 +22,8 @@ namespace Webshop2.Models
         public String productSoort { get; set; }
         //public String productAfbeelding { get; set; }
 
-        public byte[] ImageData { get; set; }
-        [HiddenInput(DisplayValue = false)] 
-        public string ImageMimeType { get; set; }
+        public string ImageData { get; set; }
+        
         public string productMateriaal { get; set; }
         public int uitvoeringVoorraad { get; set; }
         public string uitvoeringKleur { get; set; }
