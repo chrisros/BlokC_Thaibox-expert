@@ -10,6 +10,7 @@ namespace Webshop2.Models
     public class Categorie
     {
         public int categorieID { get; set; }
+
         [Required(ErrorMessage = "Dit veld is verplicht")]
         public string categorieNaam { get; set; }
     }

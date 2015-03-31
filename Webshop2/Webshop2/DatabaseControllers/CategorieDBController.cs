@@ -45,7 +45,34 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
+        
+        public List<Categorie> haalCatNamenOp()
+        {
+            List<Categorie> categorie = new List<Categorie>();
+            try
+            {
+                conn.Open();
+                string selectQuery = "SELECT * FROM Categorie ";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    int ID = dataReader.GetInt32("categorieID");
+                    string catNaam = dataReader.GetString("categorieNaam");
+                    Categorie c = new Categorie { categorieID = ID, categorieNaam = catNaam };
+                    categorie.Add(c);
+                }
+            }
+            catch (Exception)
+            {
 
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return categorie;
+        }
 
 
         // Kleding

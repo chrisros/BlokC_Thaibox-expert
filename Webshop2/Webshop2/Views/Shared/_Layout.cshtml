@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -101,6 +102,17 @@
                 <div class="units-row">
                     <div id="vertNav" class="unit-20">
                         <ul>
+                            
+@*
+    @using Webshop2.Models
+    @model List<Categorie>
+               @foreach (Categorie cate in Model)
+               {
+                   <li>Soort: @cate.categorieNaam</li>
+               }
+
+*@
+
                             <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
                             <li><a class="subCat" href="/store/Shirts">Shirts</a></li>
                             <li><a class="subCat" href="/store/Broeken">Broeken</a></li>
