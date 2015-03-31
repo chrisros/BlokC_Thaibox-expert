@@ -25,8 +25,8 @@ namespace Webshop2.DatabaseControllers
                     string productMerk = dataReader.GetString("merk");
                     double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+           //         string productSoort = dataReader.GetString("soort");
+                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
                     producten.Add(p);
                 }
             }
@@ -61,7 +61,7 @@ namespace Webshop2.DatabaseControllers
                     string productMerk = dataReader.GetString("merk");
                     double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
+                 //   string productSoort = dataReader.GetString("soort");
                     string uitvoeringMaat = dataReader.GetString("maat");
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
@@ -124,24 +124,24 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, soort = @soort, productOmschrijving = @detail WHERE productID BETWEEN 13 AND 15";
+                string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, productOmschrijving = @detail WHERE productID BETWEEN 13 AND 15";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
                 MySqlParameter Naam = new MySqlParameter("@anaam", MySqlDbType.VarChar);
                 MySqlParameter Prijs = new MySqlParameter("@prijs", MySqlDbType.Double);
                 MySqlParameter Merk = new MySqlParameter("@merk", MySqlDbType.VarChar);
-                MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
+         //       MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
                 MySqlParameter Detail = new MySqlParameter("@detail", MySqlDbType.VarChar);
 
                 Naam.Value = product.productNaam;
                 Prijs.Value = product.productPrijs;
                 Merk.Value = product.productMerk;
-                Soort.Value = product.productSoort;
+           //     Soort.Value = product.productSoort;
                 Detail.Value = product.productDetail;
 
                 regcmd.Parameters.Add(Naam);
                 regcmd.Parameters.Add(Prijs);
-                regcmd.Parameters.Add(Soort);
+           //     regcmd.Parameters.Add(Soort);
                 regcmd.Parameters.Add(Detail);
                 regcmd.Parameters.Add(Merk);
 
