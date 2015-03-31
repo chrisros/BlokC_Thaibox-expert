@@ -9,6 +9,45 @@ namespace Webshop2.DatabaseControllers
 {
     public class CategorieDBController : DatabaseController
     {
+
+        public void voegCatToe(Categorie categorie)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"insert into Categorie(categorieNaam) values (@soort);";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+
+                MySqlParameter soortPara = new MySqlParameter("@soort", MySqlDbType.VarChar);
+
+                soortPara.Value = categorie.categorieNaam;
+
+                regcmd.Parameters.Add(soortPara);
+               
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+
         // Kleding
         public List<Product> haalKledingGegevensOp()
         {

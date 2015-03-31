@@ -1,0 +1,34 @@
+﻿@using Webshop2.Models
+@model Categorie
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>@ViewBag.H1</h1>
+
+    <form name="productToevoegen" method="post" action="/Store/CategorieToegvoegd">
+
+    <table>
+        <tr>
+            <td>
+                <label>Categorie Naam :</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.categorieNaam)
+            </td>
+            <td id="validationerror">
+                @Html.ValidationMessageFor(model => model.categorieNaam)
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Toevoegen">
+            </td>
+        </tr>
+    </table>
+
+</form>
+</div>

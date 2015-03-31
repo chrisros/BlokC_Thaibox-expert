@@ -13,6 +13,7 @@ namespace Webshop2.Controllers
     {
 
         static ProductDBController ProdDataBase = new ProductDBController();
+        static CategorieDBController CatDataBase = new CategorieDBController();
 
         // GET: Store
         public ActionResult Index()
@@ -51,8 +52,6 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
         {
-
-
             if (ModelState.IsValid)
             {
                 if (file != null)
@@ -94,6 +93,24 @@ namespace Webshop2.Controllers
             else
             {
                 return View("ProductWijzigen", product);
+            }
+        }
+        public ActionResult CategorieToevoegen()
+        {
+            ViewBag.H1 = "Categorie Toevoegen";
+            return View();
+        }
+        public ActionResult CategorieToegvoegd(Categorie categorie)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.H1 = "Categorie Toegevoegd.";
+                CatDataBase.voegCatToe(categorie);
+                return View();
+            }
+            else
+            {
+                return View("CategorieToevoegen", categorie);
             }
         }
 
