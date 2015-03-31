@@ -21,7 +21,12 @@ namespace Webshop2.Controllers
             Session["Ingelogd"] = false;
             Session["SessionExists"] = 1;
             ViewBag.H2 = "Welkom";
-            return View();
+
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Categorie> cat = catControl.haalCatNamenOp();
+
+            return View(cat);
         }
     }
 }
