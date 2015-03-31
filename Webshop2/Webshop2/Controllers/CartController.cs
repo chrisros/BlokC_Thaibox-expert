@@ -68,8 +68,13 @@ namespace Webshop2.Controllers
             return totaalprijs;
         }
 
-        public ActionResult toegevoegd(int productID, int aantal, string maat, string kleur)
+        public ActionResult toegevoegd(int productID, int aantal, string maatkleur)
         {
+            string[] maatkleurArray = maatkleur.Split(',');
+            
+            string kleur = maatkleurArray[0];
+            string maat = maatkleurArray[1].Replace(" ", string.Empty);
+            
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
