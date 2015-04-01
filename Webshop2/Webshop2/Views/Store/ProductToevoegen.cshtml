@@ -1,6 +1,7 @@
 ﻿@using Webshop2.Models
 @model Product
 
+
 @{
     ViewBag.Title = "create";
 }
@@ -38,7 +39,24 @@
                     <label>Product categorie :</label>
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.categorieNaam)
+                    
+                        <select name="categorieID">
+                            @foreach (Categorie cat in ViewBag.categorieen)
+                            {
+
+                                <option value="@cat.categorieNaam, @cat.categorieID">@cat.categorieNaam </option>
+
+                            }
+                            
+                        </select>
+                        @foreach (Product pro in ViewBag.productLijstje)
+                        {
+                            <input type="hidden" name="catID" value="@pro.productCat" />
+
+
+                        }
+                        
+
                 </td>
                 <td id="validationerror">
                     @Html.ValidationMessageFor(model => model.categorieNaam)

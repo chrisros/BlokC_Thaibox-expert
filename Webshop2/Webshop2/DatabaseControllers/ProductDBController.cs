@@ -172,7 +172,7 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Open();
                 trans = conn.BeginTransaction();
-
+                    
                 string InsertString = @"insert into Product (prijs, naam, merk, productOmschrijving, categorieID, afbeeldingPath) 
                                   values (@prijs, @naam, @merk, @detail, @catID, @afbeeldingPath)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
@@ -191,7 +191,7 @@ namespace Webshop2.DatabaseControllers
                 merkPara.Value = product.productMerk;
                 //soortPara.Value = product.productSoort;
                 detailPara.Value = product.productDetail;
-                catPar.Value = 1;
+                catPar.Value = product.productCat;
                 imagedataPara.Value = product.ImageData;
                 //imagemimetypePara.Value = product.ImageMimeType;
 

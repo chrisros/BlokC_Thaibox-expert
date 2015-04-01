@@ -60,9 +60,11 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Toevoegen producten";
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
 
             return View();
         }
