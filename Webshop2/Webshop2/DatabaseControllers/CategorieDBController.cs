@@ -53,7 +53,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "SELECT * FROM Categorie ";
+                string selectQuery = "SELECT * FROM Categorie ORDER BY categorieNaam DESC ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -85,10 +85,6 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where (C.categorieNaam like '%" + @catNaam + "%')";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                //MySqlParameter catPara = new MySqlParameter("@cat", MySqlDbType.VarChar);
-
-                //catPara.Value = catNaam;
-                //cmd.Parameters.Add(catPara);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
