@@ -221,17 +221,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Store\ProductToevoegen.cshtml" />
     <Content Include="Views\Store\ProductToegevoegd.cshtml" />
-    <Content Include="Views\Store\Kleding.cshtml" />
-    <Content Include="Views\Store\Shirts.cshtml" />
-    <Content Include="Views\Store\Schoenen.cshtml" />
-    <Content Include="Views\Store\Broeken.cshtml" />
-    <Content Include="Views\Store\Sokken.cshtml" />
-    <Content Include="Views\Store\Ondergoed.cshtml" />
-    <Content Include="Views\Store\Bescherming.cshtml" />
-    <Content Include="Views\Store\Hoofdbescherming.cshtml" />
-    <Content Include="Views\Store\Borstbescherming.cshtml" />
-    <Content Include="Views\Store\Beenbescherming.cshtml" />
-    <Content Include="Views\Store\Handbescherming.cshtml" />
     <Content Include="Views\Account\AdminLogin.cshtml" />
     <Content Include="Views\Store\ProductWijzigen.cshtml" />
     <Content Include="Views\Cart\toegevoegd.cshtml" />
