@@ -248,6 +248,7 @@
     <Content Include="Views\Store\CategorieToevoegen.cshtml" />
     <Content Include="Views\Store\CategorieToegvoegd.cshtml" />
     <Content Include="Views\Store\zoekProducten.cshtml" />
+    <Content Include="Views\Store\Cat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

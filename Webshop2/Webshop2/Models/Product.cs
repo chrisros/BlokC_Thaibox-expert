@@ -19,7 +19,7 @@ namespace Webshop2.Models
         public double productPrijs { get; set; }
         public string productPrijsString { get; set; }
         [Required(ErrorMessage = "Dit veld is verplicht")]
-        public String productSoort { get; set; }
+        public int productCat { get; set; }
         //public String productAfbeelding { get; set; }
 
         public string ImageData { get; set; }

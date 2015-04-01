@@ -14,6 +14,7 @@ namespace Webshop2.Controllers
 
         static ProductDBController ProdDataBase = new ProductDBController();
         static CategorieDBController CatDataBase = new CategorieDBController();
+        public string categorieParameter;
 
         // GET: Store
         public ActionResult Index()
@@ -131,121 +132,33 @@ namespace Webshop2.Controllers
             }
         }
 
-        // Kleding
-        public ActionResult Kleding()
-        {
 
-            ViewBag.H1 = "Kleding";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalKledingGegevensOp();            
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Shirts()
+
+
+
+        public ActionResult Cat(string catNaam)
         {
-            ViewBag.H1 = "Shirts";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.H1 = catNaam;
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalShirtsOp();
+            //List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
+            //cat
+            categorieParameter = catNaam;
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Schoenen()
-        {
-            ViewBag.H1 = "Schoenen";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalSchoenenOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Broeken()
-        {
-            ViewBag.H1 = "Broeken";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalBroekenOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Sokken()
-        {
-            ViewBag.H1 = "Sokken";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalSokkenOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Ondergoed()
-        {
-            ViewBag.H1 = "Ondergoed";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalOndegoedOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
+
+            List<Models.Product> producten = catControl.haalGegevensOpvanCat(catNaam);  
             return View(producten);
         }
 
-        // Bescherming
 
-        public ActionResult Bescherming()
-        {
-            ViewBag.H1 = "Bescherming";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalBeschermingGegevensOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Hoofdbescherming()
-        {
-            ViewBag.H1 = "Hoofdbescherming";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalHoofdOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Borstbescherming()
-        {
-            ViewBag.H1 = "Borstbescherming";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalBorstOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Beenbescherming()
-        {
-            ViewBag.H1 = "Beenbescherming";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalBeenOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
-        public ActionResult Handbescherming()
-        {
-            ViewBag.H1 = "Handbescherming";
-            DatabaseControllers.CategorieDBController prodControl = new DatabaseControllers.CategorieDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalHandOp();
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            return View(producten);
-        }
+
+
+
+
+
+
+        
 
         public ActionResult zoekProducten(string zoekTerm)
         {

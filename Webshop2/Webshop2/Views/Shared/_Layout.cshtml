@@ -107,7 +107,7 @@
                         @using Webshop2.Models
                         @foreach (Categorie cate in @ViewBag.categorieen)
                         {
-                            <li><a class="subCat" href="/store/@cate.categorieNaam"> @cate.categorieNaam</a></li>
+                            <li><a class="subCat" href="/store/cat?catNaam=@cate.categorieNaam"> @cate.categorieNaam</a></li>
                         }
                         @*
     <li><a class="topCat" href="/store/Kleding">Kleding</a></li>

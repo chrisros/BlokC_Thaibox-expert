@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Webshop2.Models;
 using MySql.Data.MySqlClient;
+using Webshop2.Controllers;
 
 namespace Webshop2.DatabaseControllers
 {
@@ -28,7 +29,7 @@ namespace Webshop2.DatabaseControllers
                 soortPara.Value = categorie.categorieNaam;
 
                 regcmd.Parameters.Add(soortPara);
-               
+
 
                 regcmd.Prepare();
 
@@ -45,7 +46,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
-        
+
         public List<Categorie> haalCatNamenOp()
         {
             List<Categorie> categorie = new List<Categorie>();
@@ -76,21 +77,28 @@ namespace Webshop2.DatabaseControllers
 
 
         // Kleding
-        public List<Product> haalKledingGegevensOp()
+        public List<Product> haalGegevensOpvanCat(string catNaam)
         {
             List<Product> producten = new List<Product>();
             try
             {
                 conn.Open();
-                string selectQuery = "SELECT * FROM Product " + 
-                    " WHERE (soort like 'Kleding') " + 
-                    "|| (soort like 'shirts') " + 
-                    "||(soort like 'Schoenen')" + 
-                    "|| (soort like 'Sokken') " + 
-                    "||(soort like 'Ondergoed') " + 
-                    "|| (soort like 'Broeken') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
+                string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where C.categorieNaam like '@cat'";
+                MySqlCommand regcmd = new MySqlCommand(selectQuery, conn);
+
+                MySqlParameter catPara = new MySqlParameter("@cat", MySqlDbType.VarChar);
+                catPara.Value = catNaam;
+
+                regcmd.Parameters.Add(catPara);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                
+
+
+                MySqlDataReader dataReader = regcmd.ExecuteReader();
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
@@ -98,325 +106,20 @@ namespace Webshop2.DatabaseControllers
                     string productMerk = dataReader.GetString("merk");
                     int productPrijs = dataReader.GetInt32("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
+                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    int categorieID = dataReader.GetInt32("categorieID");
+                    string categorie = dataReader.GetString("categorieNaam");
+                    Product p = new Product
+                    {
+                        productID = ID,
+                        productNaam = productNaam,
+                        productMerk = productMerk,
+                        productPrijs = productPrijs,
+                        productDetail = productDetail,
+                        productAfbeelding = productAfbeelding,
+                        productCat = categorieID
 
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalShirtsOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'shirt') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalBroekenOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'broek') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalSchoenenOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'schoenen') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalSokkenOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'sokken') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalOndegoedOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'ondergoed') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-
-        // Bescherming
-        public List<Product> haalBeschermingGegevensOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product " +
-                    " WHERE (soort like '%bescherming%') " +
-                    "|| (soort like 'hoofd%') " +
-                    "||(soort like 'bors%')" +
-                    "|| (soort like 'been%') " +
-                    "||(soort like 'hand%') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalHoofdOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'hoofd%') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalBorstOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'borst%') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalBeenOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'been%') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
-                    producten.Add(p);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return producten;
-        }
-        public List<Product> haalHandOp()
-        {
-            List<Product> producten = new List<Product>();
-            try
-            {
-                conn.Open();
-                string selectQuery = "SELECT * FROM Product WHERE (soort like 'hand%') ";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    int ID = dataReader.GetInt32("productID");
-                    string productNaam = dataReader.GetString("naam");
-                    string productMerk = dataReader.GetString("merk");
-                    int productPrijs = dataReader.GetInt32("prijs");
-                    string productDetail = dataReader.GetString("productOmschrijving");
-                    string productSoort = dataReader.GetString("soort");
-                    Product p = new Product { productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productSoort = productSoort, productPrijs = productPrijs };
+                    };
                     producten.Add(p);
                 }
             }
