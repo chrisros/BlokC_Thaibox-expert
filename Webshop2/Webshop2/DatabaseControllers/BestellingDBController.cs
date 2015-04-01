@@ -222,7 +222,6 @@ namespace Webshop2.DatabaseControllers
                 bezorgDatumPara.Value = "2020-01-20";
                 gebruikerPara.Value = gebruiker;
                 besteldatumPara.Value = "2015-03-27";
-                conn.Open();
                 cmd.Parameters.Add(totPrijsPara);
                 cmd.Parameters.Add(bestStatPara);
                 cmd.Parameters.Add(bezorgDatumPara);
@@ -367,6 +366,7 @@ namespace Webshop2.DatabaseControllers
                 bestelID = dataReader.GetInt32("bestellingID");
             }
             dataReader.Close();
+            conn.Close();
             return bestelID;
         }
 

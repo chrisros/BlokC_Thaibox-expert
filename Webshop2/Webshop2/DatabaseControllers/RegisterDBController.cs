@@ -216,6 +216,7 @@ namespace Webshop2.DatabaseControllers
                 b.bezorgDatum = reader.GetDateTime("bezorgDatum");
                 Overzicht.Add(b);
             }
+            conn.Close();
             return (Overzicht);
         }
 
@@ -246,6 +247,7 @@ namespace Webshop2.DatabaseControllers
                 p.productMerk = reader.GetString("merk");
                 goedverkocht.Add(p);
             }
+            conn.Close();
             return goedverkocht;
         }
     }
