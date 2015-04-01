@@ -83,7 +83,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where (C.categorieNaam like %" + @catNaam + "%')";
+                string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where (C.categorieNaam like '%" + @catNaam + "%')";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 //MySqlParameter catPara = new MySqlParameter("@cat", MySqlDbType.VarChar);
 
