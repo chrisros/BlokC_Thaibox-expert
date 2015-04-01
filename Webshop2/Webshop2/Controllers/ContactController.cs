@@ -15,13 +15,19 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Contact";
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             return View();
         }
        [HttpPost]
         public ActionResult Mailsend(FormCollection formCollection)
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp(); 
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
            MailSendController email = new MailSendController { EmailAdresNaar = "thaiboxexpert@chros.nl", Onderwerp = formCollection["subject"], Bericht = formCollection["message"], emailAdreszender = formCollection["email"], Naam = formCollection["name"] };
             email.SendEmail();
             ViewBag.H1 = "Over ons";

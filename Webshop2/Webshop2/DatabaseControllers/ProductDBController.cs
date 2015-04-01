@@ -256,7 +256,106 @@ namespace Webshop2.DatabaseControllers
             }
             return producten;
         }
-        
 
+        public List<Product> filterProduct(string filterSoort, string filter)
+        {
+            List<Product> producten = new List<Product>();
+            try
+            {
+
+                conn.Open();
+                string selectQuery = "select distinct P.*, U.maat from Product P join Uitvoering U on P.productID = U.productID where (P." + filterSoort + " like '%" + @filter + "%') group by P.productID";
+
+                if(filterSoort.Equals("maat"))
+                {
+                    selectQuery = "select distinct P.*, U.maat from Product P join Uitvoering U on P.productID = U.productID where (U." + filterSoort + " like '%" + @filter + "%') group by P.productID";
+                }
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                //MySqlParameter filterSoortPara = new MySqlParameter("filterSoort", MySqlDbType.VarChar);
+                //MySqlParameter filterPara = new MySqlParameter("filter", MySqlDbType.VarChar);
+                //filterSoortPara.Value = filterSoort;
+                ////filterPara.Value = filter;
+                //cmd.Parameters.Add(filterSoortPara);
+                ////cmd.Parameters.Add(filterPara);
+                //cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    {
+                        int ID = dataReader.GetInt32("productID");
+                        string productNaam = dataReader.GetString("naam");
+                        string productMerk = dataReader.GetString("merk");
+                        double productPrijs = dataReader.GetDouble("prijs");
+                        string productDetail = dataReader.GetString("productOmschrijving");
+                        //         string productSoort = dataReader.GetString("soort");
+                        string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                        Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
+                        producten.Add(p);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return producten;
+        }
+      
+        public List<string> getMerken()
+        {
+            string selectQuery = "select distinct merk from Product";
+            List<string> merken = new List<string>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    string merk = dataReader.GetString("merk");
+                    merken.Add(merk);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return merken;
+
+        }
+        public List<string> getMaten()
+        {
+            string selectQuery = "select distinct maat from Product P join Uitvoering U on P.productID = U.productID";
+            List<string> maten = new List<string>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    string maat = dataReader.GetString("maat");
+                    maten.Add(maat);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return maten;
+        }
+    
     }
 }

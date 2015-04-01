@@ -109,6 +109,22 @@
                         {
                             <li><a class="subCat" href="/store/cat?catNaam=@cate.categorieNaam"> @cate.categorieNaam</a></li>
                         }
+                        
+                        <br /><br />
+                        Merken:<br />
+                        @foreach (string merk in @ViewBag.merkFilters)
+                        {
+                            <a href="/store/filterProducten?filterSoort=merk&filter=@merk ">@merk.ToString();</a>
+                            <br />
+
+                        }
+                        <br />
+                        <h4>Maten:</h4><br>
+                        @foreach (string maat in @ViewBag.maatFilters)
+                        {
+                            <a class="subCat" href="/store/filterProducten?filterSoort=maat&filter=@maat ">@maat.ToString();</a>
+                            <br />
+                        }
                         @*
     <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
     <li><a class="subCat" href="/store/Shirts">Shirts</a></li>

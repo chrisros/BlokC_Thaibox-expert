@@ -20,6 +20,9 @@ namespace Webshop2.Controllers
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             @ViewBag.goldcustomer = false;
             {
             Session["SessionExists"] = 1;
@@ -77,6 +80,9 @@ namespace Webshop2.Controllers
             
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);

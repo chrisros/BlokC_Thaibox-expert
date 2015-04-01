@@ -15,6 +15,9 @@ namespace Webshop2.Controllers
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             string orderid = Request.QueryString["orderid"];
             ViewBag.orderid = orderid;
             ViewBag.H1 = "Afrekenen";
@@ -27,6 +30,9 @@ namespace Webshop2.Controllers
 
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             string orderid = Request.QueryString["orderid"];
             int userid = ordermailDBControll.getorderperson(orderid);
             //invullen van variabelen voor mail

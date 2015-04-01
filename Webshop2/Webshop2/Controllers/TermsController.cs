@@ -14,6 +14,9 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Algemene voorwaarden";
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
+            DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
             return View();
         }
     }
