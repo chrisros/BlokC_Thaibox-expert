@@ -331,3 +331,8 @@ input[type=submit]{
     border-width: 1px;
     border-color: #CCC;
 }
+
+
+#profiledata td{
+    width: 20%;
+}

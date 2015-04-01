@@ -7,7 +7,7 @@
 
 <h1>@ViewBag.H1</h1>
 
-<div>
+<div id="profiledata">
     <p>Welkom, @Model.Gebruikersnaam @Model.Naam. </p>
 
     Uw gegevens:
@@ -18,7 +18,7 @@
         <tr><td>Postcode:</td><td>@Model.Woonpostcode</td></tr>
         <tr><td>Woonplaats:</td><td>@Model.Woonplaats</td></tr>
         <tr><td>E-mail:</td><td>@Model.Email</td></tr>
-        <tr><td>Telefoonnummer:</td><td>@Model.Telefoonnummer</td></tr>
+        <tr><td>Telefoonnummer:</td><td>0 @Model.Telefoonnummer</td></tr>
     </table>
     
 
