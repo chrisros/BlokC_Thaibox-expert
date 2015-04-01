@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Webshop2.DatabaseControllers;
 using Webshop2.Models;
 
 namespace Webshop2.Controllers
@@ -33,5 +34,19 @@ namespace Webshop2.Controllers
             ViewBag.reacties = reactietabel;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult PlaatsReactie(FormCollection formCollection)
+        {
+            DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+            int rating = Int32.Parse(formCollection["rating"]);
+            
+            int gebruikerID = 11;
+           // als je hier zorgt dat session name een value heeft werk de sessie gebruiker herkening
+            if (formCollection["sessionname"] != null) {gebruikerID = Int32.Parse(formCollection["sessionname"]); };
+            reactieDBControll.RegisterReactie(gebruikerID, formCollection["name"], formCollection["message"], rating);
+            return RedirectToAction("index");
+            
+        }   
     }
 }

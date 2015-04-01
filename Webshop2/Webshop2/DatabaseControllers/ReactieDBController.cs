@@ -42,20 +42,21 @@ namespace Webshop2.DatabaseControllers
             return table;
         }
 
-        public void RegisterReactie(string gebr, string scher, string text, int rating)
+        public void RegisterReactie(int gebr, string scher, string text, int rating)
         {
             MySqlTransaction trans = null;
-
+            if (scher == null) { scher = ""; }
+            
             try
             {
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"insert into Reactie (gebruikersnaam, schermNaam, reactie, rating) 
+                string InsertString = @"insert into Reactie (gebruikerID, schermNaam, reactie, rating) 
                                   values (@gebr, @scher, @text, @rating)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
-                MySqlParameter gebr2 = new MySqlParameter("@gebr", MySqlDbType.VarChar);
+                MySqlParameter gebr2 = new MySqlParameter("@gebr", MySqlDbType.Int16);
                 MySqlParameter scher2 = new MySqlParameter("@scher", MySqlDbType.VarChar);
                 MySqlParameter text2 = new MySqlParameter("@text", MySqlDbType.Text);
                 MySqlParameter rating2 = new MySqlParameter("@rating", MySqlDbType.Int16);
@@ -66,10 +67,10 @@ namespace Webshop2.DatabaseControllers
                 rating2.Value = rating;
 
 
-                regcmd.Parameters.Add(gebr);
-                regcmd.Parameters.Add(scher);
-                regcmd.Parameters.Add(text);
-                regcmd.Parameters.Add(rating);
+                regcmd.Parameters.Add(gebr2);
+                regcmd.Parameters.Add(scher2);
+                regcmd.Parameters.Add(text2);
+                regcmd.Parameters.Add(rating2);
 
                 regcmd.Prepare();
 

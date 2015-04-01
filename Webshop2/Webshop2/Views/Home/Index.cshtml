@@ -28,7 +28,13 @@
     </tr>
 
 </table>
-
+<h3>Beoordeel ons!</h3>
+<form name="contactform" method="post" action="/Home/PlaatsReactie">
+    <textarea name="message" rows="5" placeholder="Typ hier uw bericht."></textarea>
+    <label><input type="text" name="name" placeholder="Uw naam"> Geef ons een cijfer: <input type="number" name="rating" min="0" max="10" step="1" value="10"></label>
+    <input type="submit" value="Verstuur" style="float:right; margin-right:10%;"> <br>
+    <p>@ViewBag.feedback</p>
+</form>
 <h3>Gebruikers reacties</h3>
 <table>
      @Html.Raw(ViewBag.reacties)
