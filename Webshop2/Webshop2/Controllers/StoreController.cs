@@ -143,7 +143,6 @@ namespace Webshop2.Controllers
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             //List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             //cat
-            categorieParameter = catNaam;
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
 

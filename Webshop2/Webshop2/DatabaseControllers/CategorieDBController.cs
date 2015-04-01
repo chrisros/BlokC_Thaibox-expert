@@ -83,22 +83,13 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where C.categorieNaam like '@cat'";
-                MySqlCommand regcmd = new MySqlCommand(selectQuery, conn);
+                string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where (C.categorieNaam like %" + @catNaam + "%')";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                //MySqlParameter catPara = new MySqlParameter("@cat", MySqlDbType.VarChar);
 
-                MySqlParameter catPara = new MySqlParameter("@cat", MySqlDbType.VarChar);
-                catPara.Value = catNaam;
-
-                regcmd.Parameters.Add(catPara);
-
-                regcmd.Prepare();
-
-                regcmd.ExecuteNonQuery();
-
-                
-
-
-                MySqlDataReader dataReader = regcmd.ExecuteReader();
+                //catPara.Value = catNaam;
+                //cmd.Parameters.Add(catPara);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
