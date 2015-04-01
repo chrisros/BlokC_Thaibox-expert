@@ -38,7 +38,7 @@ namespace Webshop2.Controllers
                 ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
                 ViewBag.bestelID = besteldbcontrol.getBestelID();
-                if(ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) != null)
+                if(ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true)
                 {
                     @ViewBag.goldcustomer = true;
                 }
@@ -74,7 +74,12 @@ namespace Webshop2.Controllers
         public ActionResult toegevoegd(int productID, int aantal, string maatkleur)
         {
             string[] maatkleurArray = maatkleur.Split(',');
-            
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+            List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
+            foreach(Product produ in producten)
+            {
+                ViewBag.productAfbeelding = produ.productAfbeelding;
+            }
             string kleur = maatkleurArray[0];
             string maat = maatkleurArray[1].Replace(" ", string.Empty);
             
