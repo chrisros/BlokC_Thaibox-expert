@@ -23,8 +23,10 @@ namespace Webshop2.Controllers
 
         //Deze methode wordt uitgevoerd na het 'betalen'//
         public ActionResult Succes()
-        {          
+        {
 
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
             string orderid = Request.QueryString["orderid"];
             int userid = ordermailDBControll.getorderperson(orderid);
             //invullen van variabelen voor mail
