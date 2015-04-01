@@ -9,13 +9,19 @@
 
 <div>
     <p>
-        <ul>
-            Bestverkochte producten per bestelling:
+        <table>
+            <tr>Bestverkochte producten per bestelling:</tr>
+            
             @foreach (Product p in Model)
             {
-                <li>Uitvoering: @p.productUitvoeringID Aantal: @p.productAantal</li>
+                <tr>
+                    <td><b>Product:</b> @p.productNaam <b>Merk:</b> @p.productMerk <br />
+                    <b>Maat:</b> @p.uitvoeringMaat    <b>Kleur:</b> @p.uitvoeringKleur</td>
+                    <td><b>Aantal op voorraad:</b> @p.uitvoeringVoorraad <b>Aantal verkocht:</b> @p.productAantal</td>
+                </tr>
             }
-        </ul>
+                
+        </table>
 
     </p>
 </div>

@@ -223,9 +223,13 @@ namespace Webshop2.DatabaseControllers
 
             List<Product> goedverkocht = new List<Product>();
             conn.Open();
-            string poselect = @"select uitvoeringID, sum(aantal) as totaalAantal from BestellingProduct
-                        where aantal in (select aantal from BestellingProduct) group by uitvoeringID 
-                        order by totaalAantal DESC Limit 5";
+            string poselect = @"select B.uitvoeringID, sum(B.aantal) as totaalAantal, 
+                                U.voorraad, U.maat, U.kleur, P.naam, P.merk
+                                from BestellingProduct B
+                                join Uitvoering U on B.uitvoeringID = U.uitvoeringID
+                                join Product P on U.productID = P.productID
+                                where B.aantal in (select aantal from BestellingProduct)
+                                group by B.uitvoeringID order by totaalAantal DESC Limit 5";
             MySqlCommand pocmd = new MySqlCommand(poselect, conn);
 
             MySqlDataReader reader = pocmd.ExecuteReader();
@@ -235,6 +239,11 @@ namespace Webshop2.DatabaseControllers
                 Product p = new Product();
                 p.productUitvoeringID = reader.GetInt32("uitvoeringID");
                 p.productAantal = reader.GetInt32("totaalAantal");
+                p.uitvoeringVoorraad = reader.GetInt32("voorraad");
+                p.uitvoeringMaat = reader.GetString("maat");
+                p.uitvoeringKleur = reader.GetString("kleur");
+                p.productNaam = reader.GetString("naam");
+                p.productMerk = reader.GetString("merk");
                 goedverkocht.Add(p);
             }
             return goedverkocht;
