@@ -103,40 +103,41 @@
                 <div id="vertNav" class="unit-20">
                     <ul>
 
-
+                        <h4>Catogorien:</h4>
                         @using Webshop2.Models
+
                         @foreach (Categorie cate in @ViewBag.categorieen)
                         {
                             <li><a class="subCat" href="/store/cat?catNaam=@cate.categorieNaam"> @cate.categorieNaam</a></li>
                         }
                         
-                        <br /><br />
-                        Merken:<br />
+                        <br />
+                        <h4>Merken:</h4>
                         @foreach (string merk in @ViewBag.merkFilters)
                         {
-                            <a href="/store/filterProducten?filterSoort=merk&filter=@merk ">@merk.ToString();</a>
-                            <br />
+                            <li><a class="subCat" href="/store/filterProducten?filterSoort=merk&filter=@merk ">@merk.ToString()</a></li>
+                            
 
                         }
                         <br />
-                        <h4>Maten:</h4><br>
+                        <h4>Maten:</h4>
                         @foreach (string maat in @ViewBag.maatFilters)
                         {
-                            <a class="subCat" href="/store/filterProducten?filterSoort=maat&filter=@maat ">@maat.ToString();</a>
-                            <br />
+                            <li><a class="subCat" href="/store/filterProducten?filterSoort=maat&filter=@maat ">@maat.ToString()</a></li>
+                            
                         }
                         @*
-    <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
-    <li><a class="subCat" href="/store/Shirts">Shirts</a></li>
-    <li><a class="subCat" href="/store/Broeken">Broeken</a></li>
-    <li><a class="subCat" href="/store/Schoenen">Schoenen</a></li>
-    <li><a class="subCat" href="/store/Sokken">Sokken</a></li>
-    <li><a class="subCat" href="/store/Ondergoed">Ondergoed</a></li>
-    <li><a class="topCat" href="/store/Bescherming">Bescherming</a></li>
-    <li><a class="subCat" href="/store/Hoofdbescherming">Hoofd</a></li>
-    <li><a class="subCat" href="/store/Borstbescherming">Borst</a></li>
-    <li><a class="subCat" href="/store/Beenbescherming">Been</a></li>
-    <li><a class="subCat" href="/store/Handbescherming">Hand</a></li>
+                         <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
+                        <li><a class="subCat" href="/store/Shirts">Shirts</a></li>
+                        <li><a class="subCat" href="/store/Broeken">Broeken</a></li>
+                        <li><a class="subCat" href="/store/Schoenen">Schoenen</a></li>
+                        <li><a class="subCat" href="/store/Sokken">Sokken</a></li>
+                        <li><a class="subCat" href="/store/Ondergoed">Ondergoed</a></li>
+                        <li><a class="topCat" href="/store/Bescherming">Bescherming</a></li>
+                        <li><a class="subCat" href="/store/Hoofdbescherming">Hoofd</a></li>
+                        <li><a class="subCat" href="/store/Borstbescherming">Borst</a></li>
+                        <li><a class="subCat" href="/store/Beenbescherming">Been</a></li>
+                        <li><a class="subCat" href="/store/Handbescherming">Hand</a></li>
                         *@
                     </ul>
                 </div>

@@ -26,7 +26,7 @@ namespace Webshop2.DatabaseControllers
                     string reactie = dataReader.GetString("reactie");
                     int rating = dataReader.GetInt16("rating");
                     string finalnaam ="";
-                    if (naam1.Length < 1) { finalnaam = naam2; } else if (naam2.Length < 1) { finalnaam = naam1; } else { finalnaam = "N.V.T"; }
+                    if (naam1.Length > 1) { finalnaam = naam1; } else if (naam2.Length > 1) { finalnaam = naam2; } else { finalnaam = "N.V.T"; }
                     table = table + "<tr><td width=\"100px\">Gebruiker: </td><td width=\"100px\">" + finalnaam + "</td><td width=\"100px\">Rating: </td><td width=\"10px\">" + rating + "</td></tr><tr><td width=\"50px\"> Reactie: </td><td width=\"350px\">" + reactie + "</td></tr><tr><td><hr></td></tr>";
                 }
 
