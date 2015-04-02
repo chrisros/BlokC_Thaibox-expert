@@ -221,7 +221,7 @@ namespace Webshop2.DatabaseControllers
                 bestStatPara.Value = "In Behandeling";
                 bezorgDatumPara.Value = "2020-01-20";
                 gebruikerPara.Value = gebruiker;
-                besteldatumPara.Value = "2015-03-27";
+                besteldatumPara.Value = DateTime.Now;
                 cmd.Parameters.Add(totPrijsPara);
                 cmd.Parameters.Add(bestStatPara);
                 cmd.Parameters.Add(bezorgDatumPara);
