@@ -43,14 +43,11 @@
                                 new { enctype = "multipart/form-data" }))
                     { 
                                 <select name="categorieID">
-                                    @foreach (Categorie cat in ViewBag.categorieen)
+                                    @foreach (Categorie cat in @ViewBag.categorieen)
                                     {
-
                                         <option value="@cat.categorieID">@cat.categorieNaam </option>
 
-
                                     }
-                                    Model.productCat = cat.categorieID;
                                 </select>
                     }
 
