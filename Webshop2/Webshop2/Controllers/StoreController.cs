@@ -68,7 +68,7 @@ namespace Webshop2.Controllers
 
             return View();
         }
-        public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file)
+        public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file, int categorieID)
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -87,6 +87,7 @@ namespace Webshop2.Controllers
 
                 }
                 ViewBag.H1 = "Product geregistreerd.";
+                product.productCat = categorieID;
                 ProdDataBase.RegisterProduct(product);
                 return View();
             }

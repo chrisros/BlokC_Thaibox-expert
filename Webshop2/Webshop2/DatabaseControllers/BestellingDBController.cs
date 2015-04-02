@@ -102,9 +102,9 @@ namespace Webshop2.DatabaseControllers
             MySqlTransaction trans = null;
             try
             {
-                conn2.Open();
+                conn.Open();
                 trans = conn.BeginTransaction();
-                MySqlCommand cmd = new MySqlCommand("update Bestelling Set totaalprijs = @prijs where bestellingID = @ID and betaald = 0", conn2);
+                MySqlCommand cmd = new MySqlCommand("update Bestelling Set totaalprijs = @prijs where bestellingID = @ID and betaald = 0", conn);
                 MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Int32);
                 MySqlParameter IDPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 prijsPara.Value = totPrijs;
@@ -119,7 +119,7 @@ namespace Webshop2.DatabaseControllers
                 throw;
             }
             finally { 
-            conn2.Close();}
+            conn.Close();}
         }
 
         public void berekenTotaalPRijsUser()
@@ -133,7 +133,7 @@ namespace Webshop2.DatabaseControllers
             List<int> prijzen = new List<int>();
             List<int> aantallen = new List<int>();
                 string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID and Be.betaald = 0";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = ID;
                 cmd.Parameters.Add(idPara);
@@ -264,7 +264,7 @@ namespace Webshop2.DatabaseControllers
                 cmd.Parameters.Add(bestIDPara);
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
-                trans.Commit();
+                    trans.Commit();
 
 
 
@@ -351,11 +351,10 @@ namespace Webshop2.DatabaseControllers
 
         public Int32 getBestelID()
         {
+            conn2.Open(); 
            int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
-           conn.Close();
-           conn.Open();
            string selectQuery = "select * from Bestelling where gebruiker = @gebruiker and betaald = 0 order by bestellingID desc limit 1";
-           MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+           MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
            MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int16);
            gebruikerPara.Value = gebruikerID;
            cmd.Parameters.Add(gebruikerPara);
@@ -363,10 +362,18 @@ namespace Webshop2.DatabaseControllers
            MySqlDataReader dataReader = cmd.ExecuteReader();
             while(dataReader.Read())
             {
-                bestelID = dataReader.GetInt32("bestellingID");
+                    string firstItem = Convert.ToString(dataReader["bestellingID"]);
+                    if (!string.IsNullOrEmpty(firstItem))
+                    {
+                        bestelID = dataReader.GetInt32("bestellingID");
+                    }
+                    else
+                    {
+                        NieuweBestellingGebruiker();
+                    }
             }
             dataReader.Close();
-            conn.Close();
+            conn2.Close();
             return bestelID;
         }
 
