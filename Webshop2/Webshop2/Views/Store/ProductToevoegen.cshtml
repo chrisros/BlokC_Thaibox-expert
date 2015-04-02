@@ -39,68 +39,82 @@
                     <label>Product categorie :</label>
                 </td>
                 <td>
-                   
-                                <select name="categorieID">
-                                    @foreach (Categorie cat in @ViewBag.categorieen)
-                                    {
-                                        <option value="@cat.categorieID">@cat.categorieNaam </option>
 
-                                    }
-                                </select>
-                    
+                    <select name="categorieID">
+                        @foreach (Categorie cat in @ViewBag.categorieen)
+                        {
+                            <option value="@cat.categorieID">@cat.categorieNaam </option>
 
-                            </td>
-                            <td id="validationerror">
-                                @Html.ValidationMessageFor(model => model.categorieNaam)
-                            </td>
-                        </tr>
-                        <tr>
+                        }
+                    </select>
 
-                            <td>
-                                <label>Product Prijs :</label>
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(model => model.productPrijs)
-                            </td>
-                            <td id="validationerror">
-                                @Html.ValidationMessageFor(model => model.productPrijs)
-                            </td>
-                        </tr>
-                        <tr>
 
-                            <td>
-                                <label>Product Details :</label>
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(model => model.productDetail)
-                            </td>
-                            <td id="validationerror">
-                                @Html.ValidationMessageFor(model => model.productDetail)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="file">Upload Image:</label>
-                            </td>
-                            <td>
-                                @using (Html.BeginForm("ProductToegevoegd", "Store", FormMethod.Post,
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.categorieNaam)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Geslacht</label>
+                </td>
+                <td>
+                    <select name="productGeslacht">
+                        <option value="m">Man</option>
+                        <option value="v">Vrouw</option>
+                        <option value="u">Unisex</option>
+                    </select>
+                </td>
+
+
+            </tr>
+            <tr>
+
+                <td>
+                    <label>Product Prijs :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productPrijs)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.productPrijs)
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <label>Product Details :</label>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.productDetail)
+                </td>
+                <td id="validationerror">
+                    @Html.ValidationMessageFor(model => model.productDetail)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="file">Upload Image:</label>
+                </td>
+                <td>
+                    @using (Html.BeginForm("ProductToegevoegd", "Store", FormMethod.Post,
                                 new { enctype = "multipart/form-data" }))
-                                {
-                                    @*<label for="file">Upload Image:</label>*@
-                                    <input type="file" name="file" id="file" style="width: 100%;" />
-                                    @*<input type="submit" value="Upload" class="submit" />*@
-                                }
+                    {
+                        @*<label for="file">Upload Image:</label>*@
+                        <input type="file" name="file" id="file" style="width: 100%;" />
+                        @*<input type="submit" value="Upload" class="submit" />*@
+                    }
 
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input type="submit" value="Toevoegen">
-                            </td>
-                        </tr>
-                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Toevoegen">
+                </td>
+            </tr>
+        </table>
 
-                </form>
-            </div>
+    </form>
+</div>
