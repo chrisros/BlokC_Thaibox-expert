@@ -39,9 +39,7 @@
                     <label>Product categorie :</label>
                 </td>
                 <td>
-                    @using (Html.BeginForm("ProductToegevoegd", "Store", FormMethod.Post,
-                                new { enctype = "multipart/form-data" }))
-                    { 
+                   
                                 <select name="categorieID">
                                     @foreach (Categorie cat in @ViewBag.categorieen)
                                     {
@@ -49,7 +47,7 @@
 
                                     }
                                 </select>
-                    }
+                    
 
                             </td>
                             <td id="validationerror">

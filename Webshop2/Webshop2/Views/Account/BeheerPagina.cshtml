@@ -10,23 +10,25 @@
 <div>
     <p>Welkom, @Model.Functie @Model.Naam.</p>
 
-    <p>Als @Model.Functie heeft u de volgende mogelijkheden:
-       @if (Model.Functie.Equals("beheerder")) {
-        <ol>
-           <li><a href="/Store/ProductToevoegen">Een product toevoegen aan het assortiment.</a></li>
-           <li><a href="/Store/ProductWijzigen">Een product uit het asssortiment wijzigen.</a></li>
-           <li>Een product uit het assortiment verwijderen.</li>
-           <li>Een reactie verwijderen.</li>
-       </ol>
-       }
-       else
-       {
-        <ol>
-            <li><a href="/Account/Overzichtpagina">De omzet van deze maand bekijken.</a></li>
-            <li><a href="/Account/GoedVerkocht">De top 5 meest verkochte producten bekijken.</a></li>
-        </ol>
-       }
+    <p>
+        Als @Model.Functie heeft u de volgende mogelijkheden:
+        @if (Model.Functie.Equals("beheerder"))
+        {
+            <ol>
+                <li><a href="/Store/ProductToevoegen">Een product toevoegen aan het assortiment.</a></li>
+                <li><a href="/Store/ProductWijzigen">Een product uit het asssortiment wijzigen.</a></li>
+                <li>Een product uit het assortiment verwijderen.</li>
+                <li>Een reactie verwijderen.</li>
+                <li><a href="/Store/CategorieToevoegen">Een categorie toevoegen</a></li>
+            </ol>
+        }
+        else
+        {
+            <ol>
+                <li><a href="/Account/Overzichtpagina">De omzet van deze maand bekijken.</a></li>
+                <li><a href="/Account/GoedVerkocht">De top 5 meest verkochte producten bekijken.</a></li>
+            </ol>
+        }
     </p>
 
 </div>
-
