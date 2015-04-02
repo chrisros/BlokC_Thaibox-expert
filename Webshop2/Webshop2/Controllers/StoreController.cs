@@ -59,17 +59,17 @@ namespace Webshop2.Controllers
 
         public ActionResult ProductToevoegen()
         {
-            ViewBag.H1 = "Toevoegen producten";
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+                ViewBag.H1 = "Toevoegen producten";
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
 
-            return View();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+
+                return View();
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file, int categorieID, string productGeslacht)
         {
@@ -106,17 +106,19 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductWijzigen()
         {
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.H1 = "Wijzigen van producten";
-            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
-            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-            List<Models.Product> producten = prodControl.haalProductGegevensOp();
-            return View(producten);
+            
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.H1 = "Wijzigen van producten";
+                DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+                //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+                List<Models.Product> producten = prodControl.haalProductGegevensOp();
+                return View(producten);
+
         }
         public ActionResult ProductGeWijzigd(Product product)
         {
@@ -139,14 +141,16 @@ namespace Webshop2.Controllers
         }
         public ActionResult CategorieToevoegen()
         {
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.H1 = "Categorie Toevoegen";
-            return View();
+            
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.H1 = "Categorie Toevoegen";
+                return View();
+            
         }
         public ActionResult CategorieToegvoegd(Categorie categorie)
         {
