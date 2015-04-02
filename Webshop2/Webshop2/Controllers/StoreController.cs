@@ -94,6 +94,7 @@ namespace Webshop2.Controllers
                 product.productCat = categorieID;
                 product.productGeslacht = productGeslacht;
                 ProdDataBase.RegisterProduct(product);
+                ProdDataBase.registerUitvoering(product.productMaat, product.productKleur, product.uitvoeringVoorraad);
                 return View();
             }
             else

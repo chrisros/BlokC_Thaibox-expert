@@ -172,7 +172,7 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Open();
                 trans = conn.BeginTransaction();
-                    
+
                 string InsertString = @"insert into Product (prijs, naam, merk, productOmschrijving, categorieID, afbeeldingPath, geslacht) 
                                   values (@prijs, @naam, @merk, @detail, @catID, @afbeeldingPath, @geslacht)";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
@@ -210,6 +210,73 @@ namespace Webshop2.DatabaseControllers
             catch (Exception)
             {
                 trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Int32 getLastProductID()
+        {
+            int productID = 0;
+            try
+            {
+                string selectQuery = "select productID from Product order by productID desc limit 1";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                prodIDPara.Value = productID;
+                cmd.Parameters.Add(prodIDPara);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    productID = dataReader.GetInt32("productID");
+                }
+                dataReader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return productID;
+        }
+        
+        public void registerUitvoering(string maat, string kleur, int voorraad)
+            {
+            MySqlTransaction trans = null;
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+                 
+                string InsertString = @"insert into Uitvoering (productID, voorraad, maat, kleur) 
+                                  values (@productID,  @voorraad, @maat, @kleur)";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter prodIDPara = new MySqlParameter("@productID", MySqlDbType.Int32);
+                MySqlParameter voorraadPara = new MySqlParameter("@voorraad", MySqlDbType.Int32);
+                MySqlParameter maatPara = new MySqlParameter("@maat", MySqlDbType.VarChar);
+                MySqlParameter kleurPara = new MySqlParameter("@kleur", MySqlDbType.VarChar);
+
+                prodIDPara.Value = getLastProductID();
+                voorraadPara.Value = voorraad;
+                maatPara.Value = maat;
+                kleurPara.Value = kleur;
+
+                regcmd.Parameters.Add(prodIDPara);
+                regcmd.Parameters.Add(voorraadPara);
+                regcmd.Parameters.Add(maatPara);
+                regcmd.Parameters.Add(kleurPara);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
