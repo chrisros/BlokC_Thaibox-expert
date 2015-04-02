@@ -18,6 +18,7 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             return View();
         }
        [HttpPost]
@@ -28,6 +29,7 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
            MailSendController email = new MailSendController { EmailAdresNaar = "thaiboxexpert@chros.nl", Onderwerp = formCollection["subject"], Bericht = formCollection["message"], emailAdreszender = formCollection["email"], Naam = formCollection["name"] };
             email.SendEmail();
             ViewBag.H1 = "Over ons";

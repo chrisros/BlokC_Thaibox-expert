@@ -27,6 +27,7 @@ namespace Webshop2.Controllers
             ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.merkFilters = prodControl.getMerken();
             ViewBag.maatFilters = prodControl.getMaten();
+            ViewBag.geslachtFilters = prodControl.getGeslacht();
             return View(producten);
         }
 
@@ -42,6 +43,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
 
             foreach (Product produ in producten)
             {
@@ -64,6 +66,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
 
             return View();
@@ -75,6 +78,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (ModelState.IsValid)
             {
                 if (file != null)
@@ -105,6 +109,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Wijzigen van producten";
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
@@ -118,6 +123,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Product is gewzijgid";
             if (ModelState.IsValid)
             {
@@ -136,6 +142,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Categorie Toevoegen";
             return View();
         }
@@ -146,6 +153,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (ModelState.IsValid)
             {
                 ViewBag.H1 = "Categorie Toegevoegd.";
@@ -168,6 +176,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
             //List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
             //cat
@@ -188,6 +197,7 @@ namespace Webshop2.Controllers
                 ProductDBController prodDBControl = new ProductDBController();
                 ViewBag.merkFilters = prodDBControl.getMerken();
                 ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             return View(producten);
         }
 
@@ -199,6 +209,7 @@ namespace Webshop2.Controllers
             ViewBag.categorieen = catControl.haalCatNamenOp();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Gevonden producten";
             return View(producten);
         }

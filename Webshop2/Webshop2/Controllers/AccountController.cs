@@ -22,6 +22,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             return View();
         }
         public ActionResult Admin()
@@ -31,6 +32,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Beheer login";
             return View();
         }
@@ -41,6 +43,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Ingelogd als medewerker";
             AdminModel admin = RegDB.AdminLoginCheck(username);
             
@@ -88,6 +91,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht(); 
             ViewBag.H1 = "Account creëren";
             return View();
         }
@@ -98,6 +102,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Account geregistreerd.";
 
             if (ModelState.IsValid && RegDB.isNewEmail(account.Email))
@@ -128,6 +133,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Ingelogd";
             AccountModel account = RegDB.LoginCheck(username);
             bool mailklopt = true;
@@ -176,6 +182,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             ViewBag.H1 = "Uitgelogd.";
             Session["LoggedIn"] = null;
             Session["AdminLoggedIn"] = null;
@@ -189,6 +196,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];
@@ -209,6 +217,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (Session["LoggedIn"] != null)
             {
                 String email = (String)Session["LoggedIn"];
@@ -230,6 +239,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             List<Product> producten = besteldbcontrol.getBetaaldeProducten();
             return View(producten);
         }
@@ -240,6 +250,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];
@@ -277,6 +288,7 @@ namespace Webshop2.Controllers
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             if (Session["AdminLoggedIn"] != null)
             {
                 String naam = (String)Session["AdminLoggedIn"];

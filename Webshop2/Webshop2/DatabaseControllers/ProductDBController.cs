@@ -356,6 +356,32 @@ namespace Webshop2.DatabaseControllers
             }
             return maten;
         }
+
+        public List<string> getGeslacht()
+        {
+            string selectQuery = "select distinct geslacht from Product P join Uitvoering U on P.productID = U.productID";
+            List<string> geslachten = new List<string>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    string maat = dataReader.GetString("geslacht");
+                    geslachten.Add(maat);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return geslachten;
+        }
     
     }
 }

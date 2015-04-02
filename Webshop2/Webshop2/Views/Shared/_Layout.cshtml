@@ -126,6 +126,12 @@
                             <li><a class="subCat" href="/store/filterProducten?filterSoort=maat&filter=@maat ">@maat.ToString()</a></li>
                             
                         }
+                        <br />
+                        <h4>Geslacht:</h4>
+                        @foreach (string gesl in @ViewBag.geslachtFilters)
+                        {
+                            <li><a class="subCat" href="/store/filterProducten?filterSoort=geslacht&filter=@gesl ">@gesl.ToString()</a></li>
+                        }
                         @*
                          <li><a class="topCat" href="/store/Kleding">Kleding</a></li>
                         <li><a class="subCat" href="/store/Shirts">Shirts</a></li>

@@ -28,6 +28,7 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
 
             DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
             string reactietabel = reactieDBControll.getReactieTable();

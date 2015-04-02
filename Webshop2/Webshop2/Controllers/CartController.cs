@@ -23,6 +23,7 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             @ViewBag.goldcustomer = false;
             {
             Session["SessionExists"] = 1;
@@ -88,6 +89,7 @@ namespace Webshop2.Controllers
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
