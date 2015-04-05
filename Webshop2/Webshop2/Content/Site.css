@@ -298,10 +298,15 @@ footer ul li:hover a {
     text-align: center;
 }
 .naastElkaar {
+    padding:2%;
     display: inline-block;
     width: 250px;
     text-align: left;
+    border-color: #e1e1e1;
+    vertical-align: bottom;
 }
+
+
 
 #contact{
     width:400px;

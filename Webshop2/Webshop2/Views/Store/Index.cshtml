@@ -10,15 +10,17 @@
 @{foreach (Product prod in Model)
   {
       string afbeelding = prod.productID + ".png" ;
-    <p class="naastElkaar">
-        <tr>
-            <a href="/Store/ProductDetail?productID=@prod.productID"><img src="~/ProductImages/@prod.productAfbeelding" alt="AFBEELDING" height="00" width="500" /></a><br />
+    <div class="naastElkaar">
+        
+            <a href="/Store/ProductDetail?productID=@prod.productID"><img src="~/ProductImages/@prod.productAfbeelding" alt="Product Afbeelding" height="00" width="500" /></a><br />
+            <div id="textnaastelkaar">
             <B>Naam: </B>@prod.productNaam
             <br />
             <b>Merk: </b>@prod.productMerk
             <br />
-        </tr>
-    </p>
+            </div>
+        
+    </div>
 }}
 
 
