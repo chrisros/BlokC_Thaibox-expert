@@ -219,5 +219,37 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Gevonden producten";
             return View(producten);
         }
+        public ActionResult ReactieBeheer()
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+
+
+            DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+            string reactietabel = reactieDBControll.getReactieAdminTable();
+            ViewBag.reacties = reactietabel;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ReactieVerwijderen(FormCollection formCollection)
+        {
+            int reactieID = 0;
+            reactieID = Int16.Parse(formCollection["submitButton"]);
+            if(reactieID>1)
+            { 
+                DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+                reactieDBControll.deleteComment(reactieID);
+                return RedirectToAction("ReactieBeheer");
+            }
+            else
+            {
+                return RedirectToAction("ReactieBeheer");
+            }
+        }
     }
 }

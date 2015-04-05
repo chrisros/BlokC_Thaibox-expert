@@ -9,6 +9,74 @@ namespace Webshop2.DatabaseControllers
 {
     public class ReactieDBController : DatabaseController
     {
+        public void deleteComment(int id)
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"DELETE FROM Reactie WHERE reactieID = @ID LIMIT 1";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter sqlid = new MySqlParameter("@ID", MySqlDbType.Int16);
+
+                sqlid.Value = id;
+                regcmd.Parameters.Add(sqlid);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+        }
+
+        public string getReactieAdminTable()
+        {
+            string table = "<hr>";
+            try
+            {
+                conn.Open();
+                string selectQuery = "select G.gebruikersnaam, R.schermNaam, R.reactie, R.rating, R.reactieID from Reactie R join Gebruiker G on R.gebruikerID = G.gebruikerID ORDER BY R.adddate DESC LIMIT 100";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                cmd.Prepare();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    string naam1 = dataReader.GetString("gebruikersnaam");
+                    string naam2 = dataReader.GetString("schermNaam");
+                    string reactie = dataReader.GetString("reactie");
+                    int rating = dataReader.GetInt16("rating");
+                    int id = dataReader.GetInt16("reactieID");
+                    string finalnaam ="";
+                    if (naam1.Length > 1) { finalnaam = naam1; } else if (naam2.Length > 1) { finalnaam = naam2; } else { finalnaam = "N.V.T"; }
+                    table = table + "<tr><td>" + id + "</td><td>" + finalnaam + "</td><td>" + reactie + "</td><td>" + rating + "</td><td><button type=\"submit\" name=\"submitButton\" value=\""+id+"\"/><i class=\"fa fa-trash\"></i></button></a></td></tr>";
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return table;
+        }
+
         public string getReactieTable()
         {
             string table = "<hr>";
@@ -25,9 +93,9 @@ namespace Webshop2.DatabaseControllers
                     string naam2 = dataReader.GetString("schermNaam");
                     string reactie = dataReader.GetString("reactie");
                     int rating = dataReader.GetInt16("rating");
-                    string finalnaam ="";
+                    string finalnaam = "";
                     if (naam1.Length > 1) { finalnaam = naam1; } else if (naam2.Length > 1) { finalnaam = naam2; } else { finalnaam = "N.V.T"; }
-                    table = table + "<tr><td width=\"100px\">Gebruiker: </td><td width=\"100px\">" + finalnaam + "</td><td width=\"100px\">Rating: </td><td width=\"10px\">" + rating + "</td></tr><tr><td width=\"50px\"> Reactie: </td><td width=\"350px\">" + reactie + "</td></tr><tr><td><hr></td></tr>";
+                    table = table + "<tr><td>" + finalnaam + "</td><td>" + reactie + "</td><td>" + rating + "</td></tr>";
                 }
 
             }

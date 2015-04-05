@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "ReactieBeheer";
+}
+
+<h2>ReactieBeheer</h2>
+<p>Klik op het prullenbak icoon om een (ongewenste) reactie te verwijderen. <br><b>Let op!</b> Eenmaal verwijderd kunnen de reacties niet teruggehaald worden. </p>
+<form action="/Store/ReactieVerwijderen" method="post">
+    <table id="adminview">
+        <tr>
+            <td style="width: 40px"><b>ID</b></td>
+            <td style="width: 100px"><b>Gebruiker</b></td>
+            <td style="width: 500px"><b>Beoordeling</b></td>
+            <td style="width: 20px"><b>Rating</b></td>
+            <td style="width: 40px"></td>
+        </tr>
+        @Html.Raw(ViewBag.reacties)
+    </table>
+</form>

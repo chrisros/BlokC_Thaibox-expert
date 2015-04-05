@@ -8,33 +8,39 @@
 <h3>Op de website van Thaibox-expert, hier kun u terecht voor al uw kickbox benodigdheden.</h3>
 
 <form action="/Store/zoekProducten" method="get">
-<input type="text" name="zoekTerm" placeholder="Typ hier uw zoekopdracht" /> 
-<input type="submit" value="Zoek">
+<input type="text" name="zoekTerm" placeholder="Typ hier uw zoekopdracht" id="zoekbalk" /> 
+<input type="submit" value="Zoek" id="bigbutton">
 </form>
 
 <table>
     <tr>
-        <td><a href="/Store/cat?catNaam=Kleding"><img src="~/images/kleding.jpg"></a></td>
-        <td><a href="/Store/cat?catNaam=Bescherming"><img src="~/images/bescherming.jpg"></a></td>
-        <td><a href="/Store/cat?catNaam=Overig"><img src="~/images/accessoires.jpg"></a></td>
+        <td style="width: 192px;"><a href="/Store/cat?catNaam=Kleding"><img src="~/images/kleding.jpg"></a></td>
+        <td style="width: 192px;"><a href="/Store/cat?catNaam=Bescherming"><img src="~/images/bescherming.jpg"></a></td>
+        <td style="width: 193px;"><a href="/Store/cat?catNaam=Overig"><img src="~/images/accessoires.jpg"></a></td>
         
     </tr>
     <tr>
         <td>Hier vindt u kleding.</td>
         <td>Hier vindt u bescherming.</td>
-        <td>Hier vindt u accessoires zoals bokszakken en stootkussens.</td>
+        <td>Hier vindt u accessoires
+         zoals bokszakken en stootkussens.</td>
     </tr>
    
 
 </table>
 <h3>Beoordeel ons!</h3>
-<form name="contactform" method="post" action="/Home/PlaatsReactie">
+<form name="delete" method="post" action="/Home/PlaatsReactie">
     <textarea name="message" rows="5" placeholder="Typ hier uw bericht."></textarea>
-    <label><input type="text" name="name" placeholder="Uw naam"> Geef ons een cijfer: <input type="number" name="rating" min="0" max="10" step="1" value="10"></label>
-    <input type="submit" value="Verstuur" style="float:right; margin-right:10%;"> <br>
+    <label><input type="text" name="name" placeholder="Uw naam" style="margin-right:80px; padding-right:40px;"> Uw cijfer: <input type="number" name="rating" min="1" max="10" step="1" value="10"></label>
+    <input type="submit" value="Verstuur" id="bigbutton"> <br>
     <p>@ViewBag.feedback</p>
 </form>
 <h3>Gebruikers reacties</h3>
 <table>
+    <tr>
+        <td style="width: 150px"><b>Gebruiker</b></td>
+        <td style="width: 500px"><b>Beoordeling</b></td>
+        <td style="width: 20px"><b>Rating</b></td>
+    </tr>
      @Html.Raw(ViewBag.reacties)
 </table>

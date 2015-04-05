@@ -28,11 +28,11 @@
     </td>
     <td>
         <form name="contactform" method="post" action="/Contact/Mailsend">
-            <label><input type="text" name="subject" placeholder="Onderwerp"></label><br />
-            <label><input type="text" name="name" placeholder="Uw naam"></label><br />
-            <label><input type="email" name="email" placeholder="Uw Email"></label>
+            <label><input type="text" name="subject" placeholder="Onderwerp" id="contform"></label><br />
+            <label><input type="text" name="name" placeholder="Uw naam" id="contform"></label><br />
+            <label><input type="email" name="email" placeholder="Uw Email" id="contform"></label>
             <textarea name="message" rows="5" placeholder="Typ hier uw bericht."></textarea>
-            <input type="submit" value="Verstuur"> <br>
+            <input type="submit" value="Verstuur" id="bigbutton"> <br>
             <p>@ViewBag.feedback</p>
         </form>
     </td>

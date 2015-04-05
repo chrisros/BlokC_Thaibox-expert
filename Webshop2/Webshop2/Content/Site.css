@@ -172,7 +172,7 @@ nav ul li:hover a {
 
 #vertCont{
     background-color: #ffffff;
-    min-height: 900px;
+    min-height: 1000px;
     padding-left: 5%;
 }
 
@@ -335,4 +335,20 @@ input[type=submit]{
 
 #profiledata td{
     width: 20%;
+}
+
+#adminview{
+    font-size: 14px;
+}
+#zoekbalk{
+    width: 600px;
+}
+#bigbutton{
+    height:38px;
+    padding-bottom:5px;
+    float:right; 
+    margin-right:10%;
+}
+#contform{
+    width:345px;
 }
