@@ -446,6 +446,39 @@ namespace Webshop2.DatabaseControllers
             }
             return geslachten;
         }
-    
+
+        public List<Product> uitgelichteProducten() 
+        {
+            List<Product> uitgelicht = new List<Product>();
+
+            try
+            {
+                conn.Open();
+
+                string selectuit = @"select * from Product ORDER BY RAND() LIMIT 3";
+                MySqlCommand uitcmd = new MySqlCommand(selectuit, conn);
+                MySqlDataReader reader = uitcmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Product p = new Product();
+                    p.productNaam = reader.GetString("naam");
+                    p.productPrijs = reader.GetDouble("prijs");
+                    p.productAfbeelding = reader.GetString("afbeeldingPath");
+                    uitgelicht.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally 
+            {
+                conn.Close();
+            }
+
+            return uitgelicht;
+        }
     }
 }

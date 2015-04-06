@@ -62,4 +62,17 @@
              
         </form>
 
-    <br /><b>Klik <a href="/account" id="pLink">hier</a> om in te loggen of een account te creeëren.</b>
+    <br />
+
+@{ if (Session["LoggedIn"] != null)
+   {
+       <b>U bent ingelogd en kunt uw bestelling afronden.</b>
+   }
+   else
+   {
+       <b>U bent niet ingelogd. <a href="/account" id="pLink">Log in</a> om uw bestelling af te ronden.</b>
+   }
+
+}
+
+

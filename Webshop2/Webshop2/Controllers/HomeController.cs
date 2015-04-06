@@ -30,10 +30,12 @@ namespace Webshop2.Controllers
             ViewBag.maatFilters = prodDBControl.getMaten();
             ViewBag.geslachtFilters = prodDBControl.getGeslacht();
 
+            List<Product> uitgelicht = prodDBControl.uitgelichteProducten();
+
             DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
             string reactietabel = reactieDBControll.getReactieTable();
             ViewBag.reacties = reactietabel;
-            return View();
+            return View(uitgelicht);
         }
 
         [HttpPost]

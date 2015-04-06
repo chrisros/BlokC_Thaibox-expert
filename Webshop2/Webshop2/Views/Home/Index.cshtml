@@ -1,4 +1,5 @@
-﻿
+﻿@using Webshop2.Models
+@model List<Product>
 @{
     ViewBag.Title = "Default";
 }
@@ -8,24 +9,47 @@
 <h3>Op de website van Thaibox-expert, hier kun u terecht voor al uw kickbox benodigdheden.</h3>
 
 <form action="/Store/zoekProducten" method="get">
-<input type="text" name="zoekTerm" placeholder="Typ hier uw zoekopdracht" id="zoekbalk" /> 
-<input type="submit" value="Zoek" id="bigbutton">
+    <input type="text" name="zoekTerm" placeholder="Typ hier uw zoekopdracht" id="zoekbalk" />
+    <input type="submit" value="Zoek" id="bigbutton">
 </form>
+
+<h3>Een voorbeeld uit ons assortiment:</h3>
+
+@{foreach (Product prod in Model)
+{
+    string afbeelding = prod.productID + ".png";
+    <div class="naastElkaar">
+
+        <a href="/Store/ProductDetail?productID=@prod.productID"><img src="~/ProductImages/@prod.productAfbeelding" alt="afbeelding" height="00" width="100" /></a><br />
+        <div id="textnaastelkaar">
+            <b>Naam: </b>@prod.productNaam
+            <br />
+            <b>Prijs: </b>€ @prod.productPrijs
+            <br />
+        </div>
+
+    </div>
+}
+}
+<br />
+
+<h3>Onze producten:</h3>
 
 <table>
     <tr>
         <td style="width: 192px;"><a href="/Store/cat?catNaam=Kleding"><img src="~/images/kleding.jpg"></a></td>
         <td style="width: 192px;"><a href="/Store/cat?catNaam=Bescherming"><img src="~/images/bescherming.jpg"></a></td>
         <td style="width: 193px;"><a href="/Store/cat?catNaam=Overig"><img src="~/images/accessoires.jpg"></a></td>
-        
     </tr>
     <tr>
         <td>Hier vindt u kleding.</td>
         <td>Hier vindt u bescherming.</td>
-        <td>Hier vindt u accessoires
-         zoals bokszakken en stootkussens.</td>
+        <td>
+            Hier vindt u accessoires
+            zoals bokszakken en stootkussens.
+        </td>
     </tr>
-   
+
 
 </table>
 <h3>Beoordeel ons!</h3>
@@ -42,5 +66,5 @@
         <td style="width: 500px"><b>Beoordeling</b></td>
         <td style="width: 20px"><b>Rating</b></td>
     </tr>
-     @Html.Raw(ViewBag.reacties)
+    @Html.Raw(ViewBag.reacties)
 </table>
