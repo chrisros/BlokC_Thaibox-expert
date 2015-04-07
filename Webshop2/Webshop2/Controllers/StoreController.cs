@@ -139,6 +139,7 @@ namespace Webshop2.Controllers
                 return View("ProductWijzigen", product);
             }
         }
+
         public ActionResult CategorieToevoegen()
         {
             
@@ -171,7 +172,69 @@ namespace Webshop2.Controllers
                 return View("CategorieToevoegen", categorie);
             }
         }
+        public ActionResult CategorieWijzigen()
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Categorie Wijzigen";
+            return View();
+        }
+        public ActionResult CategorieGewijzigd(Categorie categorie, int categorieID)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            if (ModelState.IsValid)
+            {
+                ViewBag.H1 = "Categorie is Gewijzigd.";
+                categorie.categorieID = categorieID;
+                CatDataBase.WijzigenCategorie(categorie);
+                return View();
+            }
+            else
+            {
+                return View("CategorieWijzigen", categorie);
+            }
+        }
 
+        public ActionResult CategorieVerwijderen()
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Categorie Verwijderen";
+            return View();
+        }
+        public ActionResult CategorieVerwijderd(Categorie categorie, int categorieID)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            //if (ModelState.IsValid)
+            //{
+                ViewBag.H1 = "Categorie is Verwijderd.";
+                categorie.categorieID = categorieID;
+                CatDataBase.VerwijderenCategorie(categorie);
+                return View();
+            //}
+            //else
+            //{
+            //    return View("CategorieVerwijderen", categorie);
+            //}
+        }
 
 
 

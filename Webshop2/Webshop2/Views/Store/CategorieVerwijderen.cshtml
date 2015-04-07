@@ -1,0 +1,39 @@
+﻿@using Webshop2.Models
+@model Categorie
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<form name="CategorieVerwijderen" method="post" action="/Store/CategorieVerwijderd">
+
+    <table>
+        <tr>
+            <td>
+                <label>Categorie:</label>
+            </td>
+            <td>
+
+                <select name="categorieID">
+                    @foreach (Categorie cat in @ViewBag.categorieen)
+                    {
+                        <option value="@cat.categorieID">@cat.categorieNaam </option>
+
+                    }
+                </select>
+
+
+            </td>
+
+        </tr>
+        <tr>
+        <td></td>
+        <td>
+            <input type="submit" value="Verwijderen">
+        </td>
+        </tr>
+    </table>
+
+</form>
