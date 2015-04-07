@@ -19,7 +19,7 @@
         
     <tr>    
         <td><a href="~/Store/ProductDetail?productID=@prod.productID">@prod.productNaam</a></td>
-        <td>Gratis</td>
+        <td>Standaard</td>
         <td>@prod.productPrijs</td>
         <td>
             <form action="~/Cart/updateProductAantal" method="get">
@@ -46,6 +46,7 @@
 
 </table>
 <h4>Subtotaal: € @ViewBag.prijs</h4>
+<h4>Verzendkosten: € @ViewBag.Verzendkosten</h4>
 @{
     if(@ViewBag.goldcustomer == true)
     {

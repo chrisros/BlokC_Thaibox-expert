@@ -14,7 +14,9 @@ namespace Webshop2.Controllers
         List<Models.Product> productenInDB = new List<Models.Product>();
         List<double> prijzen = new List<double>();
         List<Models.Product> productenInSessie = (List<Product>)System.Web.HttpContext.Current.Session["sessietest"];
-        int aantal = 1;            
+        int aantal = 1;
+        double prijs = 0;
+        Boolean goldcustomer = false;
         
         public ActionResult Index()
         {
@@ -36,14 +38,34 @@ namespace Webshop2.Controllers
             if (Session["LoggedIn"] != null)
             {
                 ingelogd = (bool)Session["Ingelogd"];
-                ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
+                prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
                 ViewBag.bestelID = besteldbcontrol.getBestelID();
-                if(ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true)
+                if (ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true)
                 {
                     @ViewBag.goldcustomer = true;
+                    goldcustomer = true;
+                }
+                
+
+                if (goldcustomer == true)
+                {
+                    ViewBag.prijs = prijs * 0.96;
+                }
+                else
+                {
+                    ViewBag.prijs = prijs;
+                }
+                if (prijs < 50)
+                {
+                    ViewBag.Verzendkosten = "4.95";
+                }
+                else
+                {
+                    ViewBag.Verzendkosten = "0,-";
                 }
                 return View(productenInDB);
+
             }
             ViewBag.loggedin = ingelogd;
             if (ingelogd == false)
@@ -53,8 +75,6 @@ namespace Webshop2.Controllers
                 {
                     prijzen.Add(p.productPrijs);
                 }
-                                
-                ViewBag.Prijs = sessieTotaalPrijs();
                 return View(productenInSessie);
             }
 
