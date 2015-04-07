@@ -14,6 +14,7 @@
             <th>Naam</th>
             <th>Merk</th>
             <th>Detail</th>
+            <th>Verwijder</th>
             </thead>
 
             @{
@@ -25,6 +26,12 @@
                         <td><input type="text" name="firstname" size="10" value="@prod.productNaam"></td>
                         <td><input type="text" name="firstname" size="5" value="@prod.productMerk"></td>
                         <td><input type="text" name="firstname" size="12" value="@prod.productDetail"></td>
+                        <td>
+                            <select name="verwijder">
+                                <option value="Nee">Nee</option>
+                                <option value="Ja">Ja</option>
+                                </select>
+</td>
                     </tr>
 
 
