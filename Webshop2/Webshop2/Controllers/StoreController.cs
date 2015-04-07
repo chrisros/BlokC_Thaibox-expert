@@ -60,8 +60,7 @@ namespace Webshop2.Controllers
 
         public ActionResult ProductToevoegen()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 ViewBag.H1 = "Toevoegen producten";
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -71,7 +70,8 @@ namespace Webshop2.Controllers
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
-
+            if (Session["AdminLoggedIn"] != null)
+            {
                 return View();
             }
             else
@@ -115,8 +115,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductWijzigen()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 ViewBag.H1 = "Toevoegen producten";
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -126,7 +125,8 @@ namespace Webshop2.Controllers
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
-
+            if (Session["AdminLoggedIn"] != null)
+            {
                 return View();
             }
             else
@@ -138,8 +138,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult wijzigenProduct()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 ViewBag.H1 = "Toevoegen producten";
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -149,7 +148,8 @@ namespace Webshop2.Controllers
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
-
+            if (Session["AdminLoggedIn"] != null)
+            {
                 return View();
             }
             else
@@ -180,8 +180,7 @@ namespace Webshop2.Controllers
 
         public ActionResult CategorieToevoegen()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
                 ProductDBController prodDBControl = new ProductDBController();
@@ -189,6 +188,8 @@ namespace Webshop2.Controllers
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.H1 = "Categorie Toevoegen";
+            if (Session["AdminLoggedIn"] != null)
+            {
                 return View();
             }
             else
@@ -218,14 +219,15 @@ namespace Webshop2.Controllers
         }
         public ActionResult CategorieWijzigen()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
                 ProductDBController prodDBControl = new ProductDBController();
                 ViewBag.merkFilters = prodDBControl.getMerken();
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            if (Session["AdminLoggedIn"] != null)
+            {
                 ViewBag.H1 = "Categorie Wijzigen";
                 return View();
             }
@@ -258,14 +260,15 @@ namespace Webshop2.Controllers
 
         public ActionResult CategorieVerwijderen()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
                 ProductDBController prodDBControl = new ProductDBController();
                 ViewBag.merkFilters = prodDBControl.getMerken();
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            if (Session["AdminLoggedIn"] != null)
+            {
                 ViewBag.H1 = "Categorie Verwijderen";
                 return View();
             }
@@ -345,8 +348,7 @@ namespace Webshop2.Controllers
         }
         public ActionResult ReactieBeheer()
         {
-            if (Session["AdminLoggedIn"] != null)
-            {
+            
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
 
@@ -355,7 +357,8 @@ namespace Webshop2.Controllers
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
 
-
+            if (Session["AdminLoggedIn"] != null)
+            {
                 DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
                 string reactietabel = reactieDBControll.getReactieAdminTable();
                 ViewBag.reacties = reactietabel;
