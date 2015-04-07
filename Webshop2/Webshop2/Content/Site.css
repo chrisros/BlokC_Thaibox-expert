@@ -300,13 +300,22 @@ footer ul li:hover a {
 .naastElkaar {
     padding:2%;
     display: inline-block;
+    height:350px;
     width: 250px;
     text-align: left;
+    border: solid;
+    border-width:1px;
+    border-radius:3px;
+    padding-bottom: 15%;
     border-color: #e1e1e1;
     vertical-align: bottom;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 2px #aaaaaa;
 }
 
-
+    .naastElkaar:hover {
+    box-shadow: 0px 0px 10px #aaaaaa;
+    }
 
 #contact{
     width:400px;
@@ -325,6 +334,13 @@ textarea{
     background-color: #ffffff;
     width: 200px;
 }
+    #button:hover {
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
+        #button:active {
+        background-color: #f1f1f1;
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
 
 input[type=submit]{
     font-family: "Open Sans",sans-serif;
@@ -336,6 +352,13 @@ input[type=submit]{
     border-width: 1px;
     border-color: #CCC;
 }
+    input[type=submit]:hover {
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
+        input[type=submit]:active {
+        background-color: #f1f1f1;
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
 
 
 #profiledata td{
@@ -354,6 +377,18 @@ input[type=submit]{
     float:right; 
     margin-right:10%;
 }
+    #bigbutton:hover {
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
+        #bigbutton:active {
+        background-color: #f1f1f1;
+        box-shadow: 0px 0px 5px #aaaaaa;
+    }
 #contform{
     width:345px;
+}
+#buttoncart2 {
+    font-size: 22px;
+    height: 38px;
+    margin-top:5px;
 }

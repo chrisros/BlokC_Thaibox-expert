@@ -8,13 +8,13 @@
 
     <form name="productToevoegen" method="post" action="/Store/ProductGewijzigd">
         <table>
-            <thead class="h4">
-            <th>ID</th>
-            <th>Prijs</th>
-            <th>Naam</th>
-            <th>Merk</th>
-            <th>Detail</th>
-            </thead>
+            <tr class="h4">
+                <td>ID</td>
+                <td>Prijs</td>
+                <td>Naam</td>
+                <td>Merk</td>
+                <td>Detail</td>
+            </tr>
 
             @{
                 foreach (Product prod in Model)
@@ -31,6 +31,10 @@
                 }
                 
                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td><input type="submit" value="Wijzigen"></td>
                 </tr>
 
