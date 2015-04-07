@@ -7,6 +7,7 @@ using Webshop2.Models;
 using Webshop2.DatabaseControllers;
 using MySql.Data.MySqlClient;
 
+
 namespace Webshop2.Controllers
 {
     public class StoreController : Controller
@@ -106,19 +107,33 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductWijzigen()
         {
-            
-                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-                ViewBag.categorieen = catControl.haalCatNamenOp();
-                ProductDBController prodDBControl = new ProductDBController();
-                ViewBag.merkFilters = prodDBControl.getMerken();
-                ViewBag.maatFilters = prodDBControl.getMaten();
-                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-                ViewBag.H1 = "Wijzigen van producten";
-                DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
-                //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
-                List<Models.Product> producten = prodControl.haalProductGegevensOp();
-                return View(producten);
 
+            ViewBag.H1 = "Toevoegen producten";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+
+            return View();
+
+        }
+        public ActionResult wijzigenProduct()
+        {
+            ViewBag.H1 = "Toevoegen producten";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+
+            return View();
         }
         public ActionResult ProductGeWijzigd(Product product)
         {
@@ -139,6 +154,7 @@ namespace Webshop2.Controllers
                 return View("ProductWijzigen", product);
             }
         }
+
         public ActionResult CategorieToevoegen()
         {
             
@@ -171,7 +187,70 @@ namespace Webshop2.Controllers
                 return View("CategorieToevoegen", categorie);
             }
         }
+        public ActionResult CategorieWijzigen()
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Categorie Wijzigen";
+            return View();
+        }
+        public ActionResult CategorieGewijzigd(Categorie categorie, int categorieID)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            if (ModelState.IsValid)
+            {
+                ViewBag.H1 = "Categorie is Gewijzigd.";
+                categorie.categorieID = categorieID;
+                CatDataBase.WijzigenCategorie(categorie);
+                return View();
+            }
+            else
+            {
+                return View("CategorieWijzigen", categorie);
+            }
+        }
 
+        public ActionResult CategorieVerwijderen()
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Categorie Verwijderen";
+            return View();
+        }
+        public ActionResult CategorieVerwijderd(Categorie categorie, int categorieID)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            //if (ModelState.IsValid)
+            //{
+                ViewBag.H1 = "Categorie is Verwijderd.";
+                categorie.categorieID = categorieID;
+                CatDataBase.VerwijderenCategorie(categorie);
+
+                return View();
+            //}
+            //else
+            //{
+            //    return View("CategorieVerwijderen", categorie);
+            //}
+        }
 
 
 

@@ -120,5 +120,75 @@ namespace Webshop2.DatabaseControllers
             }
             return producten;
         }
+
+        public void WijzigenCategorie(Categorie categorie)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"Update Categorie set categorieNaam = @catNaam WHERE categorieID = @CatID";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter Naam = new MySqlParameter("@catNaam", MySqlDbType.VarChar);
+                MySqlParameter CatID = new MySqlParameter("@CatID", MySqlDbType.Double);
+
+                Naam.Value = categorie.categorieNaam;
+                CatID.Value = categorie.categorieID;
+
+                regcmd.Parameters.Add(Naam);
+                regcmd.Parameters.Add(CatID);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public void VerwijderenCategorie(Categorie categorie)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"DELETE FROM Categorie WHERE categorieID = @CatID";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter CatID = new MySqlParameter("@CatID", MySqlDbType.Double);
+
+                CatID.Value = categorie.categorieID;
+
+                regcmd.Parameters.Add(CatID);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

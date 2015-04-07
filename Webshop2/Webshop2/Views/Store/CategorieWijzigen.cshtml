@@ -7,9 +7,27 @@
 
 <h1>@ViewBag.H1</h1>
 
-<form name="productToevoegen" method="post" action="/Store/CategorieToegvoegd">
+<form name="CategorieWijzigen" method="post" action="/Store/CategorieGewijzigd">
 
     <table>
+        <tr>
+            <td>
+                <label>Categorie:</label>
+            </td>
+            <td>
+
+                <select name="categorieID">
+                    @foreach (Categorie cat in @ViewBag.categorieen)
+                    {
+                        <option value="@cat.categorieID">@cat.categorieNaam </option>
+
+                    }
+                </select>
+
+
+            </td>
+
+        </tr>
         <tr>
             <td>
                 <label>Categorie Naam :</label>
@@ -25,7 +43,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Toevoegen">
+                <input type="submit" value="Wijzigen">
             </td>
         </tr>
     </table>

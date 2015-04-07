@@ -240,6 +240,11 @@
     <Content Include="Views\Store\Cat.cshtml" />
     <Content Include="Views\Store\filterProducten.cshtml" />
     <Content Include="Views\Store\ReactieBeheer.cshtml" />
+    <Content Include="Views\Store\CategorieWijzigen.cshtml" />
+    <Content Include="Views\Store\CategorieGewijzigd.cshtml" />
+    <Content Include="Views\Store\CategorieVerwijderen.cshtml" />
+    <Content Include="Views\Store\CategorieVerwijderd.cshtml" />
+    <Content Include="Views\Store\wijzigenProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
