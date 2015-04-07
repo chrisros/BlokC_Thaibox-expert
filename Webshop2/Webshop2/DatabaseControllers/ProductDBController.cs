@@ -432,7 +432,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    string maat = dataReader.GetString("geslacht");
+                    string maat = dataReader.GetString("geslacht"); 
                     geslachten.Add(maat);
                 }
             }

@@ -228,7 +228,7 @@
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Account\BeheerPagina.cshtml" />
     <Content Include="Views\Account\ProfielPagina.cshtml" />
-    <Content Include="Views\Account\LoginFout.cshtml" />
+    <Content Include="Views\Shared\LoginFout.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Succes.cshtml" />
     <Content Include="Views\Account\betaaldeProducten.cshtml" />

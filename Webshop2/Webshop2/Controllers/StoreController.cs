@@ -60,6 +60,8 @@ namespace Webshop2.Controllers
 
         public ActionResult ProductToevoegen()
         {
+            if (Session["AdminLoggedIn"] != null)
+            {
                 ViewBag.H1 = "Toevoegen producten";
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -71,6 +73,12 @@ namespace Webshop2.Controllers
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
 
                 return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult ProductToegevoegd(Product product, HttpPostedFileBase file, int categorieID, string productGeslacht)
         {
@@ -107,33 +115,48 @@ namespace Webshop2.Controllers
         }
         public ActionResult ProductWijzigen()
         {
+            if (Session["AdminLoggedIn"] != null)
+            {
+                ViewBag.H1 = "Toevoegen producten";
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
 
-            ViewBag.H1 = "Toevoegen producten";
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
 
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
-
-            return View();
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
 
         }
         public ActionResult wijzigenProduct()
         {
-            ViewBag.H1 = "Toevoegen producten";
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
+            if (Session["AdminLoggedIn"] != null)
+            {
+                ViewBag.H1 = "Toevoegen producten";
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
 
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
 
-            return View();
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult ProductGeWijzigd(Product product)
         {
@@ -157,7 +180,8 @@ namespace Webshop2.Controllers
 
         public ActionResult CategorieToevoegen()
         {
-            
+            if (Session["AdminLoggedIn"] != null)
+            {
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
                 ProductDBController prodDBControl = new ProductDBController();
@@ -166,7 +190,12 @@ namespace Webshop2.Controllers
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.H1 = "Categorie Toevoegen";
                 return View();
-            
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult CategorieToegvoegd(Categorie categorie)
         {
@@ -189,14 +218,22 @@ namespace Webshop2.Controllers
         }
         public ActionResult CategorieWijzigen()
         {
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.H1 = "Categorie Wijzigen";
-            return View();
+            if (Session["AdminLoggedIn"] != null)
+            {
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.H1 = "Categorie Wijzigen";
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult CategorieGewijzigd(Categorie categorie, int categorieID)
         {
@@ -221,14 +258,22 @@ namespace Webshop2.Controllers
 
         public ActionResult CategorieVerwijderen()
         {
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.H1 = "Categorie Verwijderen";
-            return View();
+            if (Session["AdminLoggedIn"] != null)
+            {
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ViewBag.H1 = "Categorie Verwijderen";
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         public ActionResult CategorieVerwijderd(Categorie categorie, int categorieID)
         {
@@ -300,34 +345,50 @@ namespace Webshop2.Controllers
         }
         public ActionResult ReactieBeheer()
         {
-            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
-            ViewBag.categorieen = catControl.haalCatNamenOp();
+            if (Session["AdminLoggedIn"] != null)
+            {
+                DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+                ViewBag.categorieen = catControl.haalCatNamenOp();
 
-            ProductDBController prodDBControl = new ProductDBController();
-            ViewBag.merkFilters = prodDBControl.getMerken();
-            ViewBag.maatFilters = prodDBControl.getMaten();
-            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+                ProductDBController prodDBControl = new ProductDBController();
+                ViewBag.merkFilters = prodDBControl.getMerken();
+                ViewBag.maatFilters = prodDBControl.getMaten();
+                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
 
 
-            DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
-            string reactietabel = reactieDBControll.getReactieAdminTable();
-            ViewBag.reacties = reactietabel;
-            return View();
+                DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+                string reactietabel = reactieDBControll.getReactieAdminTable();
+                ViewBag.reacties = reactietabel;
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
         }
         [HttpPost]
         public ActionResult ReactieVerwijderen(FormCollection formCollection)
         {
-            int reactieID = 0;
-            reactieID = Int16.Parse(formCollection["submitButton"]);
-            if(reactieID>1)
-            { 
-                DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
-                reactieDBControll.deleteComment(reactieID);
-                return RedirectToAction("ReactieBeheer");
+            if (Session["AdminLoggedIn"] != null)
+            {
+                int reactieID = 0;
+                reactieID = Int16.Parse(formCollection["submitButton"]);
+                if (reactieID > 1)
+                {
+                    DatabaseControllers.ReactieDBController reactieDBControll = new DatabaseControllers.ReactieDBController();
+                    reactieDBControll.deleteComment(reactieID);
+                    return RedirectToAction("ReactieBeheer");
+                }
+                else
+                {
+                    return RedirectToAction("ReactieBeheer");
+                }
             }
             else
             {
-                return RedirectToAction("ReactieBeheer");
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
             }
         }
     }
