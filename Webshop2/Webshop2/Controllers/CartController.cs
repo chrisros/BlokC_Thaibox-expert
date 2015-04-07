@@ -38,7 +38,6 @@ namespace Webshop2.Controllers
             if (Session["LoggedIn"] != null)
             {
                 ingelogd = (bool)Session["Ingelogd"];
-                prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 productenInDB = besteldbcontrol.haalProductGegevensOpVoorGebruiker();
                 ViewBag.bestelID = besteldbcontrol.getBestelID();
                 if (ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true || ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true)
@@ -47,18 +46,14 @@ namespace Webshop2.Controllers
                     goldcustomer = true;
                 }
                 
-
-                if (goldcustomer == true)
-                {
-                    ViewBag.prijs = prijs * 0.96;
-                }
-                else
-                {
-                    ViewBag.prijs = prijs;
-                }
+                prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
+                ViewBag.prijs = prijs;
+                
                 if (prijs < 50)
                 {
                     ViewBag.Verzendkosten = "4.95";
+                    besteldbcontrol.updateTotaalPRijsUser(prijs + 4.95);
+                    ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser(); 
                 }
                 else
                 {

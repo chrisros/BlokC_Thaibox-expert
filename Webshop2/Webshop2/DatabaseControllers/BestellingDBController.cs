@@ -14,6 +14,7 @@ namespace Webshop2.DatabaseControllers
         int id = 0;
              public double HaalBestellingTotaalPrijsOpUser()
         {
+            //berekenTotaalPRijsUser();
             double prijs=0;
             int aantal = 0;
             try
@@ -74,7 +75,7 @@ namespace Webshop2.DatabaseControllers
                         string productNaam = dataReader.GetString("naam");
                         string kleur = dataReader.GetString("kleur");
                         string maat = dataReader.GetString("maat");
-                        int productPrijs = dataReader.GetInt32("prijs");
+                        double productPrijs = dataReader.GetDouble("prijs");
                         int productaantal = dataReader.GetInt32("aantal");
 
                         Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam + " - " + kleur + " - " + maat, productPrijs = productPrijs, productAantal = productaantal, productMaat = maat, productKleur = kleur };
@@ -105,7 +106,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
                 MySqlCommand cmd = new MySqlCommand("update Bestelling Set totaalprijs = @prijs where bestellingID = @ID and betaald = 0", conn);
-                MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Int32);
+                MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Double);
                 MySqlParameter IDPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 prijsPara.Value = totPrijs;
                 IDPara.Value = ID;
@@ -156,7 +157,7 @@ namespace Webshop2.DatabaseControllers
                 conn2.Close();
             }
             DatabaseControllers.ordermailDBController ordercont = new DatabaseControllers.ordermailDBController();
-            if (ordercont.isGoldCustomer(ID) == true)
+            if ((ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true))
             {
                 double totprijs = totaalprijs * 0.96;
                 updateTotaalPRijsUser(totprijs);
@@ -182,7 +183,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while(dataReader.Read())
                 {
-                    int prijs = dataReader.GetInt32("prijs");
+                    double prijs = dataReader.GetDouble("prijs");
                     string naam = dataReader.GetString("naam");
                     string maat = dataReader.GetString("maat");
                     string kleur = dataReader.GetString("kleur");
@@ -211,7 +212,7 @@ namespace Webshop2.DatabaseControllers
                 conn2.Open();
                 trans = conn2.BeginTransaction();
                 MySqlCommand cmd = new MySqlCommand(insertQuery, conn2);
-                MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Int32);
+                MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Double);
                 MySqlParameter bestStatPara = new MySqlParameter("@bestellingStatus", MySqlDbType.VarChar);
                 MySqlParameter bezorgDatumPara = new MySqlParameter("@bezorgDatum", MySqlDbType.Date);
                 MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int32);
@@ -436,7 +437,7 @@ namespace Webshop2.DatabaseControllers
                     string productKleur = dataReader.GetString("kleur");
                     string productMaat = dataReader.GetString("maat");
                     int productAantal = dataReader.GetInt16("aantal");
-                    int productPrijs = dataReader.GetInt16("prijs");
+                    double productPrijs = dataReader.GetDouble("prijs");
                     Product p = new Product { productNaam = productNaam + " - " + productKleur + " - " + productMaat, productPrijs = productPrijs, productAantal = productAantal };
                     producten.Add(p);
                 }
