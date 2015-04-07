@@ -1,0 +1,21 @@
+﻿@using Webshop2.Models;
+@model Product
+@{
+    ViewBag.Title = "ProductWijzigen";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<table>
+    <tr>
+        <td>
+            <label>Product Naam :</label>
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.productNaam)
+        </td>
+        <td id="validationerror">
+            @Html.ValidationMessageFor(model => model.productNaam)
+        </td>
+    </tr>
+</table>
