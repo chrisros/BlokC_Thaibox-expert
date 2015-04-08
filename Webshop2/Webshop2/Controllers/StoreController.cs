@@ -299,8 +299,41 @@ namespace Webshop2.Controllers
             //    return View("CategorieVerwijderen", categorie);
             //}
         }
+        public ActionResult ProductVerwijderen()
+        {
 
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            List<Product> producten = prodDBControl.haalProductGegevensOp();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            if (Session["AdminLoggedIn"] != null)
+            {
+                ViewBag.H1 = "Product Verwijderen";
+                return View(producten);
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
+        }
+        public ActionResult ProductVerwijderd(Product product, int productID)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Product is Verwijderd.";
+            product.productID = productID;
+            ProdDataBase.VerwijderenProduct(product);
 
+            return View();
+        }
 
 
         public ActionResult Cat(string catNaam)

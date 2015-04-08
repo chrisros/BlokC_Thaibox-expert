@@ -480,5 +480,38 @@ namespace Webshop2.DatabaseControllers
 
             return uitgelicht;
         }
+        public void VerwijderenProduct(Product product)
+        {
+            MySqlTransaction trans = null;
+
+            try
+            {
+                conn.Open();
+                trans = conn.BeginTransaction();
+
+                string InsertString = @"DELETE FROM Categorie WHERE productID = @prodID";
+                MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
+
+                MySqlParameter prodID = new MySqlParameter("@prodID", MySqlDbType.Double);
+
+                prodID.Value = product.productID;
+
+                regcmd.Parameters.Add(prodID);
+
+                regcmd.Prepare();
+
+                regcmd.ExecuteNonQuery();
+
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

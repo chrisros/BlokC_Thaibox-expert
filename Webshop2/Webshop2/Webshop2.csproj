@@ -246,6 +246,8 @@
     <Content Include="Views\Store\CategorieVerwijderen.cshtml" />
     <Content Include="Views\Store\CategorieVerwijderd.cshtml" />
     <Content Include="Views\Store\wijzigenProduct.cshtml" />
+    <Content Include="Views\Store\ProductVerwijderen.cshtml" />
+    <Content Include="Views\Store\ProductVerwijderd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

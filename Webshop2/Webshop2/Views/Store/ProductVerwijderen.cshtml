@@ -1,0 +1,39 @@
+﻿@using Webshop2.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<form name="ProdutVerwijderen" method="post" action="/Store/ProductVerwijderd">
+
+    <table>
+        <tr>
+            <td>
+                <label>Product:</label>
+            </td>
+            <td>
+
+                <select name="categorieID">
+                    @{foreach (Product prod in Model)
+                    {
+                        <option value="@prod.productID">@prod.productNaam </option>
+                    }
+                    }
+                </select>
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Verwijderen">
+            </td>
+        </tr>
+    </table>
+
+</form>
