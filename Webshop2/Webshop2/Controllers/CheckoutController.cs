@@ -20,6 +20,8 @@ namespace Webshop2.Controllers
             ViewBag.maatFilters = prodDBControl.getMaten();
             ViewBag.geslachtFilters = prodDBControl.getGeslacht();
             string orderid = Request.QueryString["orderid"];
+            string bedrag = Request.QueryString["orderprice"]; 
+            ViewBag.bedrag = bedrag ;
             ViewBag.orderid = orderid;
             ViewBag.H1 = "Afrekenen";
             return View();

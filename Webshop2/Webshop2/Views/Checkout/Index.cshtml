@@ -6,11 +6,31 @@
 <h2>@ViewBag.H1</h2>
 
 
-    <input>
+   <form action="/Checkout/succes/ method="get">
     <table>
         <tr>
-            <td>Uw saldo is: €1023,92 </td>
-            <td><a href="/Checkout/succes/?orderid=@ViewBag.orderid" id="button">Klik hier om te betalen.</a></td>
+            <td style="width:600px;">
+                <img src="~/images/icon_ideal2.jpg">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select>
+                    <option value="ING">ING</option>
+                    <option value="ABN amro">ABN amro</option>
+                    <option value="Van landschot">Van landschot</option>
+                    <option value="SNS">SNS</option>
+                    <option value="RBS">RBS</option>
+                    <option value="Fortis">Fortis</option>
+                    <option value="ASN">ASN</option>
+                    <option value="Rabo">Rabo</option>
+                </select>
+                €@ViewBag.bedrag
+            </td>
             <td></td>
+
+            <td><button type="submit" name="orderid" value="@ViewBag.orderid">Klik hier om te betalen.</button></td>
+
         </tr>
     </table>
+</form>
