@@ -108,6 +108,7 @@ namespace Webshop2.Controllers
             if (ModelState.IsValid && RegDB.isNewEmail(account.Email))
             { 
             RegDB.RegisterAccount(account);
+            
             ViewBag.H1 = "Account geregistreerd.";
             ViewBag.H2 = "";
             return View();
@@ -129,6 +130,7 @@ namespace Webshop2.Controllers
         public ActionResult Login(string username, string password)
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            DatabaseControllers.BestellingDBController besteldbControl = new DatabaseControllers.BestellingDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
             ProductDBController prodDBControl = new ProductDBController();
             ViewBag.merkFilters = prodDBControl.getMerken();
@@ -171,6 +173,10 @@ namespace Webshop2.Controllers
                 Session["LoggedIn"] = account.Email;
                 Session["Ingelogd"] = true;
                 Session["gebruikerID"] = account.GebruikerID;
+                if(besteldbControl.getBestelID() <1 )
+                {
+                    besteldbControl.NieuweBestellingGebruiker();
+                }
                 return View(account);
             }
         }

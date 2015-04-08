@@ -98,6 +98,9 @@ namespace Webshop2.Controllers
 
             ViewBag.H1 = "Bestelling compleet!";
             ViewBag.H2 = "order met id: " + orderid+" is verstuurd en wordt z.s.m afgehandeld";
+            DatabaseControllers.BestellingDBController bestelDBControl = new DatabaseControllers.BestellingDBController();
+            bestelDBControl.setBetaald();
+            bestelDBControl.NieuweBestellingGebruiker();
             return View();
         }
     }

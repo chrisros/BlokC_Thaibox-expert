@@ -12,10 +12,10 @@ namespace Webshop2.DatabaseControllers
     {
         static int bestelID = 0;
         int id = 0;
-             public double HaalBestellingTotaalPrijsOpUser()
+        public double HaalBestellingTotaalPrijsOpUser()
         {
             //berekenTotaalPRijsUser();
-            double prijs=0;
+            double prijs = 0;
             int aantal = 0;
             try
             {
@@ -36,7 +36,7 @@ namespace Webshop2.DatabaseControllers
             }
             catch (Exception e)
             {
-                
+
             }
             finally
             {
@@ -54,8 +54,8 @@ namespace Webshop2.DatabaseControllers
                 int userID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
 
                 conn.Open();
-                string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.*, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID" 
-                +" left outer join Uitvoering U on B.uitvoeringID = U.uitvoeringID"
+                string selectQuery = "select A.*, B.uitvoeringID, B.aantal, U.*, P.*  from Bestelling A left outer join BestellingProduct B on A.bestellingID = B.bestellingID"
+                + " left outer join Uitvoering U on B.uitvoeringID = U.uitvoeringID"
                 + " left outer join Product P on U.productID = P.productID where A.bestellingID = @bestelID and A.betaald = 0; ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter bestelidPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
@@ -63,7 +63,7 @@ namespace Webshop2.DatabaseControllers
                 cmd.Parameters.Add(bestelidPara);
                 cmd.Prepare();
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                while(dataReader.Read())
+                while (dataReader.Read())
                 {
                     string firstItem = Convert.ToString(dataReader["productID"]);
                     if (!string.IsNullOrEmpty(firstItem))
@@ -83,7 +83,7 @@ namespace Webshop2.DatabaseControllers
                     }
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 throw;
             }
@@ -96,8 +96,8 @@ namespace Webshop2.DatabaseControllers
 
         public void updateTotaalPRijsUser(double totPrijs)
         {
-            
-            
+
+
             int ID = getBestelID();
 
             MySqlTransaction trans = null;
@@ -115,12 +115,14 @@ namespace Webshop2.DatabaseControllers
                 cmd.ExecuteNonQuery();
                 trans.Commit();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
-            finally { 
-            conn.Close();}
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void berekenTotaalPRijsUser()
@@ -130,9 +132,9 @@ namespace Webshop2.DatabaseControllers
 
             try
             {
-            conn2.Open();
-            List<int> prijzen = new List<int>();
-            List<int> aantallen = new List<int>();
+                conn2.Open();
+                List<int> prijzen = new List<int>();
+                List<int> aantallen = new List<int>();
                 string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID and Be.betaald = 0";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
@@ -140,14 +142,14 @@ namespace Webshop2.DatabaseControllers
                 cmd.Parameters.Add(idPara);
                 cmd.Prepare();
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                while(dataReader.Read())
+                while (dataReader.Read())
                 {
                     int prijs = dataReader.GetInt32("prijs");
                     int aantal = dataReader.GetInt32("aantal");
                     prijzen.Add(prijs);
                     aantallen.Add(aantal);
                 }
-                for (int i = 0; i < aantallen.Count; i++) 
+                for (int i = 0; i < aantallen.Count; i++)
                 {
                     totaalprijs = totaalprijs + prijzen[i] * aantallen[i];
                 }
@@ -174,14 +176,14 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-            string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID where P.productID = @prodID;";
+                string selectQuery = "select P.*, U.* from Product P join Uitvoering U on P.productID = U.productID where P.productID = @prodID;";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
                 prodIDPara.Value = prodID;
                 cmd.Parameters.Add(prodIDPara);
                 cmd.Prepare();
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                while(dataReader.Read())
+                while (dataReader.Read())
                 {
                     double prijs = dataReader.GetDouble("prijs");
                     string naam = dataReader.GetString("naam");
@@ -189,10 +191,10 @@ namespace Webshop2.DatabaseControllers
                     string kleur = dataReader.GetString("kleur");
                     p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal, productKleur = kleur, productMaat = maat };
                 }
-           }
-            catch(Exception)
+            }
+            catch (Exception)
             {
-                
+
             }
             finally
             {
@@ -265,12 +267,12 @@ namespace Webshop2.DatabaseControllers
                 cmd.Parameters.Add(bestIDPara);
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
-                    trans.Commit();
+                trans.Commit();
 
 
 
             }
-            catch(Exception)
+            catch (Exception)
             {
                 trans.Rollback();
             }
@@ -284,7 +286,7 @@ namespace Webshop2.DatabaseControllers
 
         public Int32 haalUitvoeringsIDOp(int productID, string maat, string kleur)
         {
-            int uitvoerID =3 ;
+            int uitvoerID = 3;
             MySqlTransaction trans = null;
             try
             {
@@ -296,10 +298,10 @@ namespace Webshop2.DatabaseControllers
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
                 MySqlParameter maatPara = new MySqlParameter("@maat", MySqlDbType.VarChar);
-                MySqlParameter kleurPara = new MySqlParameter("@kleur", MySqlDbType.VarChar); 
+                MySqlParameter kleurPara = new MySqlParameter("@kleur", MySqlDbType.VarChar);
                 prodIDPara.Value = productID;
                 maatPara.Value = maat;
-                kleurPara.Value = kleur; 
+                kleurPara.Value = kleur;
                 cmd.Parameters.Add(prodIDPara);
                 cmd.Parameters.Add(maatPara);
                 cmd.Parameters.Add(kleurPara);
@@ -307,10 +309,10 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    uitvoerID = dataReader.GetInt32("uitvoeringID"); 
+                    uitvoerID = dataReader.GetInt32("uitvoeringID");
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 trans.Rollback();
             }
@@ -321,27 +323,27 @@ namespace Webshop2.DatabaseControllers
             return uitvoerID;
         }
 
-        public void editAantalWinkelmandGebruiker( int aantal, int uitvoeringID)
+        public void editAantalWinkelmandGebruiker(int aantal, int uitvoeringID)
         {
             MySqlTransaction trans = null;
             try
             {
-            
-            conn.Open();
-            trans = conn.BeginTransaction();
-            MySqlCommand cmd = new MySqlCommand("update BestellingProduct Set aantal = @aant where uitvoeringID = @ID and bestellingID = @bestelID", conn);
-            MySqlParameter aantPara = new MySqlParameter("@aant", MySqlDbType.Int32);
-            MySqlParameter uitvoeringPara = new MySqlParameter("@ID", MySqlDbType.Int32);
-            MySqlParameter bestelPara = new MySqlParameter("@bestelID", MySqlDbType.Int32); 
-            aantPara.Value = aantal;
-            uitvoeringPara.Value = uitvoeringID;
-            bestelPara.Value = getBestelID();
-            cmd.Parameters.Add(aantPara);
-            cmd.Parameters.Add(uitvoeringPara);
-            cmd.Parameters.Add(bestelPara);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-            trans.Commit();
+
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand("update BestellingProduct Set aantal = @aant where uitvoeringID = @ID and bestellingID = @bestelID", conn);
+                MySqlParameter aantPara = new MySqlParameter("@aant", MySqlDbType.Int32);
+                MySqlParameter uitvoeringPara = new MySqlParameter("@ID", MySqlDbType.Int32);
+                MySqlParameter bestelPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
+                aantPara.Value = aantal;
+                uitvoeringPara.Value = uitvoeringID;
+                bestelPara.Value = getBestelID();
+                cmd.Parameters.Add(aantPara);
+                cmd.Parameters.Add(uitvoeringPara);
+                cmd.Parameters.Add(bestelPara);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                trans.Commit();
             }
             finally
             {
@@ -352,26 +354,26 @@ namespace Webshop2.DatabaseControllers
 
         public Int32 getBestelID()
         {
-            conn2.Open(); 
-           int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
-           string selectQuery = "select * from Bestelling where gebruiker = @gebruiker and betaald = 0 order by bestellingID desc limit 1";
-           MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
-           MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int16);
-           gebruikerPara.Value = gebruikerID;
-           cmd.Parameters.Add(gebruikerPara);
-           cmd.Prepare();
-           MySqlDataReader dataReader = cmd.ExecuteReader();
-            while(dataReader.Read())
+            conn2.Open();
+            int gebruikerID = (int)System.Web.HttpContext.Current.Session["gebruikerID"];
+            string selectQuery = "select * from Bestelling where gebruiker = @gebruiker and betaald = 0 order by bestellingID desc limit 1";
+            MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
+            MySqlParameter gebruikerPara = new MySqlParameter("@gebruiker", MySqlDbType.Int16);
+            gebruikerPara.Value = gebruikerID;
+            cmd.Parameters.Add(gebruikerPara);
+            cmd.Prepare();
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
             {
-                    string firstItem = Convert.ToString(dataReader["bestellingID"]);
-                    if (!string.IsNullOrEmpty(firstItem))
-                    {
-                        bestelID = dataReader.GetInt32("bestellingID");
-                    }
-                    else
-                    {
-                        NieuweBestellingGebruiker();
-                    }
+                string firstItem = Convert.ToString(dataReader["bestellingID"]);
+                if (!string.IsNullOrEmpty(firstItem))
+                {
+                    bestelID = dataReader.GetInt32("bestellingID");
+                }
+                else
+                {
+                    NieuweBestellingGebruiker();
+                }
             }
             dataReader.Close();
             conn2.Close();
@@ -402,7 +404,7 @@ namespace Webshop2.DatabaseControllers
 
 
             }
-            catch(Exception)
+            catch (Exception)
             {
                 trans.Rollback();
             }
@@ -442,9 +444,9 @@ namespace Webshop2.DatabaseControllers
                     producten.Add(p);
                 }
                 dataReader.Close();
-               
+
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -453,6 +455,33 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
             return producten;
+        }
+
+        public void setBetaald()
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand("update Bestelling Set betaald = 1 where bestellingID = @bestelID", conn);
+                MySqlParameter bestelPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
+                bestelPara.Value = getBestelID();
+                cmd.Parameters.Add(bestelPara);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
