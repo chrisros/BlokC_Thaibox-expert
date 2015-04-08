@@ -37,5 +37,6 @@ namespace Webshop2.Models
         public string productKleur { get; set; }
         public int productUitvoeringID { get; set; }
         public string uitvoeringMaat { get; set; }
+        public int uitvoeringID { get; set; }
     }
 }

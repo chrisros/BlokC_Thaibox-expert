@@ -99,6 +99,12 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Bestelling compleet!";
             ViewBag.H2 = "order met id: " + orderid+" is verstuurd en wordt z.s.m afgehandeld";
             DatabaseControllers.BestellingDBController bestelDBControl = new DatabaseControllers.BestellingDBController();
+            List<Models.Product> producten = bestelDBControl.haalProductGegevensOpVoorGebruiker();
+            foreach(Models.Product prod in producten)
+            {
+                int nieuwevoorraad = prod.uitvoeringVoorraad - prod.productAantal;
+                bestelDBControl.updateVoorraad(prod.uitvoeringID, nieuwevoorraad);
+            }
             bestelDBControl.setBetaald();
             bestelDBControl.NieuweBestellingGebruiker();
             return View();

@@ -17,7 +17,7 @@ namespace Webshop2.Controllers
         int aantal = 1;
         double prijs = 0;
         Boolean goldcustomer = false;
-        
+       
         public ActionResult Index()
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
@@ -48,12 +48,11 @@ namespace Webshop2.Controllers
                 
                 prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 ViewBag.prijs = prijs;
-                
                 if (prijs < 50)
                 {
-                    ViewBag.Verzendkosten = "4.95";
-                    besteldbcontrol.updateTotaalPRijsUser(prijs + 4.95);
-                    ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser(); 
+                        ViewBag.Verzendkosten = "4.95";
+                        besteldbcontrol.updateTotaalPRijsUser(prijs + 4.95);
+                        ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOpUser();
                 }
                 else
                 {

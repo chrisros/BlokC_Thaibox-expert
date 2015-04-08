@@ -77,8 +77,10 @@ namespace Webshop2.DatabaseControllers
                         string maat = dataReader.GetString("maat");
                         double productPrijs = dataReader.GetDouble("prijs");
                         int productaantal = dataReader.GetInt32("aantal");
+                        int uitvoeringID = dataReader.GetInt32("uitvoeringID");
+                        int uitvoeringvoorraad = dataReader.GetInt32("Voorraad");
 
-                        Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam + " - " + kleur + " - " + maat, productPrijs = productPrijs, productAantal = productaantal, productMaat = maat, productKleur = kleur };
+                        Product p = new Product { productID = ID, productDetail = "hoi", productNaam = productNaam + " - " + kleur + " - " + maat, productPrijs = productPrijs, productAantal = productaantal, productMaat = maat, productKleur = kleur, uitvoeringID = uitvoeringID, uitvoeringVoorraad = uitvoeringvoorraad };
                         producten.Add(p);
                     }
                 }
@@ -469,6 +471,35 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter bestelPara = new MySqlParameter("@bestelID", MySqlDbType.Int32);
                 bestelPara.Value = getBestelID();
                 cmd.Parameters.Add(bestelPara);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                trans.Commit();
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public void updateVoorraad(int uitvoeringID, int voorraad)
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand("update Uitvoering Set voorraad = @voorraad where uitvoeringID = @uitvoerID", conn);
+                MySqlParameter voorraadPara = new MySqlParameter("@voorraad", MySqlDbType.Int32);
+                MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoerID", MySqlDbType.Int32);
+                voorraadPara.Value = voorraad;
+                uitvoerIDPara.Value = uitvoeringID;
+                cmd.Parameters.Add(voorraadPara);
+                cmd.Parameters.Add(uitvoerIDPara);
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
                 trans.Commit();
