@@ -8,17 +8,16 @@
 
 @{foreach (Product prod in Model)
 {
-    <p class="naastElkaar">
-        <tr>
+    string afbeelding = prod.productID + ".png";
+    <div class="naastElkaar">
 
-            <a href="/Store/ProductDetail?productID=@prod.productID"><img src="~/ProductImages/@prod.productAfbeelding" alt="AFBEELDING" height="00" width="500" /></a>
-            <br />
-            <br />
+        <a href="/Store/ProductDetail?productID=@prod.productID" id="linknaastelkaar"><img src="~/ProductImages/@prod.productAfbeelding" alt="afbeelding" height="00" width="200" /></a>
+        <div id="textnaastelkaar">
             <b>Naam: </b>@prod.productNaam
             <br />
-            <b>Merk: </b>@prod.productMerk
+            <b>Prijs: </b>€ @prod.productPrijs
             <br />
+        </div>
 
-        </tr>
-    </p>
+    </div>
 }}
