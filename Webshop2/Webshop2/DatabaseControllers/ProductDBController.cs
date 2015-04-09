@@ -489,7 +489,7 @@ namespace Webshop2.DatabaseControllers
         }
         public List<string> getMaten()
         {
-            string selectQuery = "select distinct maat from Product P join Uitvoering U on P.productID = U.productID";
+            string selectQuery = "select distinct maat from Product P join Uitvoering U on P.productID = U.productID order by maat";
             List<string> maten = new List<string>();
             try
             {
