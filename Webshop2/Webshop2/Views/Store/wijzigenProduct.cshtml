@@ -8,50 +8,65 @@
 
 <form name="productWijzigen" method="post" action="/Store/ProductGeWijzigd">
     <table>
-    <tr>
+        <tr>
+            <td>
+                Product id :
+            </td>
+            <td>
+                <input type="text" name="ID" value="@ViewBag.productID" class="field left" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product Naam : <br /><b>@ViewBag.productNaam</b> </label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.productNaam)
+            </td>
+            <td id="validationerror">
+                @Html.ValidationMessageFor(model => model.productNaam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product merk : <br /> <b>@ViewBag.productMerk</b> </label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.productMerk)
+                @Html.ValidationMessageFor(model => model.productMerk)
+            </td>
+        </tr>
         <td>
-            Product id :
+            <label>Product Prijs : <br /> <b>€@ViewBag.productPrijs</b> </label>
         </td>
         <td>
-            <input type="text" name="ID" value="@ViewBag.productID" class="field left" readonly>
+            @Html.TextBoxFor(model => model.productPrijs)
         </td>
-    </tr>
+        <td id="validationerror">
+            @Html.ValidationMessageFor(model => model.productPrijs)
+        </td>
+        </tr>
         <tr>
+
             <td>
-                <label>Product Naam :</label>
+                <label>
+                    Product Details : <br /><b>
+                        @ViewBag.productDetail
+                    </b>
+                </label>
             </td>
             <td>
-                <input type="text" name="Naam" size="30" value="@ViewBag.productNaam">
+                @Html.TextBoxFor(model => model.productDetail)
+            </td>
+            <td id="validationerror">
+                @Html.ValidationMessageFor(model => model.productDetail)
             </td>
         </tr>
         <tr>
-            <td>
-                <label>Product Merk :</label>
-            </td>
-            <td>
-                <input type="text" name="Merk" size="30" value="@ViewBag.productMerk">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Product Prijs :</label>
-            </td>
-            <td>
-                <input type="number" name="Prijs" size="30" value="@ViewBag.productPrijs">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Product Detail :</label>
-            </td>
-            <td>
-                <input type="text" name="Detail" size="30" value="@ViewBag.productDetail">
-            </td>
-        </tr>
-        <tr>
-        <td></td>
+            <td></td>
             <td>
                 <input type="submit" value="Wijzigen">
             </td>
-        </tr></table>
+        </tr>
+    </table>
 </form>

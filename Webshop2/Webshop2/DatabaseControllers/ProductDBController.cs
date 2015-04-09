@@ -117,7 +117,7 @@ namespace Webshop2.DatabaseControllers
 
 
 
-        public void WijzigenProduct(Product product, string naam, string merk, string detail, int prijs, int id)
+        public void WijzigenProduct(Product product, int id)
         {
             MySqlTransaction trans = null;
 
@@ -129,26 +129,25 @@ namespace Webshop2.DatabaseControllers
                 string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, productOmschrijving = @detail WHERE productID = @prodID";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
-                MySqlParameter Naam = new MySqlParameter("@anaam", MySqlDbType.VarChar);
-                MySqlParameter Prijs = new MySqlParameter("@prijs", MySqlDbType.Double);
-                MySqlParameter Merk = new MySqlParameter("@merk", MySqlDbType.VarChar);
+                MySqlParameter naamPara = new MySqlParameter("@anaam", MySqlDbType.VarChar);
+                MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Double);
+                MySqlParameter merkPara = new MySqlParameter("@merk", MySqlDbType.VarChar);
          //       MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
-                MySqlParameter Detail = new MySqlParameter("@detail", MySqlDbType.VarChar);
+                MySqlParameter detailPara = new MySqlParameter("@detail", MySqlDbType.VarChar);
                 MySqlParameter ID = new MySqlParameter("@prodID", MySqlDbType.VarChar);
 
 
-                Naam.Value = naam;
-                Prijs.Value = prijs;
-                Merk.Value = merk;
-           //     Soort.Value = product.productSoort;
-                Detail.Value = detail;
+                prijsPara.Value = product.productPrijs;
+                naamPara.Value = product.productNaam;
+                merkPara.Value = product.productMerk;
+                detailPara.Value = product.productDetail;
                 ID.Value = id;
 
-                regcmd.Parameters.Add(Naam);
-                regcmd.Parameters.Add(Prijs);
+                regcmd.Parameters.Add(naamPara);
+                regcmd.Parameters.Add(prijsPara);
            //     regcmd.Parameters.Add(Soort);
-                regcmd.Parameters.Add(Detail);
-                regcmd.Parameters.Add(Merk);
+                regcmd.Parameters.Add(detailPara);
+                regcmd.Parameters.Add(merkPara);
                 regcmd.Parameters.Add(ID);
 
 
