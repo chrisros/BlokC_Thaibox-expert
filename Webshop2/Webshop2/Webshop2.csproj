@@ -248,6 +248,7 @@
     <Content Include="Views\Store\wijzigenProduct.cshtml" />
     <Content Include="Views\Store\ProductVerwijderen.cshtml" />
     <Content Include="Views\Store\ProductVerwijderd.cshtml" />
+    <Content Include="Views\Store\ProductGeWijzigd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

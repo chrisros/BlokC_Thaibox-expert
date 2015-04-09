@@ -6,37 +6,44 @@
 
 <h1>@ViewBag.H1</h1>
 
-<table>
-    <tr>
-        <td>
-            <label>Product Naam :</label>
-        </td>
-        <td>
-            <input type="text" name="firstname" size="30" value="@ViewBag.productNaam">
-        </td>
+<form name="productWijzigen" method="post" action="/Store/ProductGeWijzigd">
+    <table>
+        <tr>
+            <td>
+                <label>Product Naam :</label>
+            </td>
+            <td>
+                <input type="text" name="Naam" size="30" value="@ViewBag.productNaam">
+            </td>
         </tr>
-    <tr>
-        <td>
-            <label>Product Merk :</label>
-        </td>
-        <td>
-            <input type="text" name="firstname" size="30" value="@ViewBag.productMerk">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Product Prijs :</label>
-        </td>
-        <td>
-            <input type="text" name="firstname" size="30" value="@ViewBag.productPrijs">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Product Detail :</label>
-        </td>
-        <td>
-            <input type="text" name="firstname" size="30" value="@ViewBag.productDetail">
-        </td>
-    </tr>
-</table>
+        <tr>
+            <td>
+                <label>Product Merk :</label>
+            </td>
+            <td>
+                <input type="text" name="Merk" size="30" value="@ViewBag.productMerk">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product Prijs :</label>
+            </td>
+            <td>
+                <input type="text" name="Prijs" size="30" value="@ViewBag.productPrijs">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Product Detail :</label>
+            </td>
+            <td>
+                <input type="text" name="Detail" size="30" value="@ViewBag.productDetail">
+            </td>
+        </tr>
+        <tr>
+        <td></td>
+            <td>
+                <input type="submit" value="Wijzigen">
+            </td>
+        </tr></table>
+</form>
