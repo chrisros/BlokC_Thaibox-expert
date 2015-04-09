@@ -27,7 +27,7 @@
             { 
             <form action="~/Cart/"><input type="submit" style="width:200px;" value="Ga naar winkelwagen"/></form>
             }
-              if(@ViewBag.opvoorraad != true)
+            if (@ViewBag.opvoorraad == false)
               {
                   <h4>Dit product is helaas uitverkocht</h4>
               }

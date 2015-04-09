@@ -98,7 +98,7 @@ namespace Webshop2.DatabaseControllers
         public void updateTotaalPRijsUser(double totPrijs)//update de prijs bij de desbetreffende bestelling in de DB
         {
 
-
+            
             int ID = getBestelID();
 
             MySqlTransaction trans = null;
@@ -133,10 +133,11 @@ namespace Webshop2.DatabaseControllers
 
             try
             {
+                conn.Open();
                 List<int> prijzen = new List<int>();
                 List<int> aantallen = new List<int>();
                 string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID and Be.betaald = 0";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = ID;
                 cmd.Parameters.Add(idPara);
@@ -158,6 +159,10 @@ namespace Webshop2.DatabaseControllers
             catch(Exception)
             {
                 throw;
+            }
+            finally
+            {
+                conn.Close();
             }
             DatabaseControllers.ordermailDBController ordercont = new DatabaseControllers.ordermailDBController();
             if ((ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true))//checkt of huidige gebruiker goldmember is
@@ -213,9 +218,9 @@ namespace Webshop2.DatabaseControllers
                                     values(@totprijs, @bestellingstatus, 0, @bezorgDatum, @gebruiker, @bestelDatum)";
             try
             {
-                conn2.Open();
-                trans = conn2.BeginTransaction();
-                MySqlCommand cmd = new MySqlCommand(insertQuery, conn2);
+                conn.Open();
+                trans = conn.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
                 MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Double);
                 MySqlParameter bestStatPara = new MySqlParameter("@bestellingStatus", MySqlDbType.VarChar);
                 MySqlParameter bezorgDatumPara = new MySqlParameter("@bezorgDatum", MySqlDbType.Date);
@@ -243,7 +248,7 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                conn2.Close();
+                conn.Close();
             }
         }
 
@@ -281,8 +286,9 @@ namespace Webshop2.DatabaseControllers
 
             finally
             {
-                berekenTotaalPRijsUser();
+                
                 conn.Close();
+                berekenTotaalPRijsUser();
             }
         }
 
@@ -349,8 +355,9 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                berekenTotaalPRijsUser();
+                
                 conn.Close();
+                berekenTotaalPRijsUser();
             }
         }
 
@@ -412,8 +419,8 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                berekenTotaalPRijsUser();
                 conn.Close();
+                berekenTotaalPRijsUser();
             }
         }
 
@@ -517,11 +524,11 @@ namespace Webshop2.DatabaseControllers
 
         public Boolean checkVoorraad(int uitvoeringID, int aantal)
         {
-            conn2.Open();
+            conn.Open();
             Boolean opVoorraad = true;
             int dbVoorraad = 0;
             string selectQuery = "select voorraad from Uitvoering where uitvoeringID = @uitvoerID";
-            MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
+            MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
             MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoerID", MySqlDbType.Int16);
             uitvoerIDPara.Value = uitvoeringID;
             cmd.Parameters.Add(uitvoerIDPara);
@@ -537,7 +544,7 @@ namespace Webshop2.DatabaseControllers
                 opVoorraad = false;
             }
             dataReader.Close();
-            conn2.Close();
+            conn.Close();
             return opVoorraad;
         }
     }
