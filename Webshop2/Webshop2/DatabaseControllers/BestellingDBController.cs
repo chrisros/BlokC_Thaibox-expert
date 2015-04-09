@@ -218,9 +218,9 @@ namespace Webshop2.DatabaseControllers
                                     values(@totprijs, @bestellingstatus, 0, @bezorgDatum, @gebruiker, @bestelDatum)";
             try
             {
-                conn.Open();
-                trans = conn.BeginTransaction();
-                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                conn2.Open();
+                trans = conn2.BeginTransaction();
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn2);
                 MySqlParameter totPrijsPara = new MySqlParameter("@totprijs", MySqlDbType.Double);
                 MySqlParameter bestStatPara = new MySqlParameter("@bestellingStatus", MySqlDbType.VarChar);
                 MySqlParameter bezorgDatumPara = new MySqlParameter("@bezorgDatum", MySqlDbType.Date);
@@ -248,7 +248,7 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                conn.Close();
+                conn2.Close();
             }
         }
 

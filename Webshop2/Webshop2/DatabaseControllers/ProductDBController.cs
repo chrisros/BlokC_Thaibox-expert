@@ -613,5 +613,38 @@ namespace Webshop2.DatabaseControllers
                 conn.Close();
             }
         }
+
+        public void UitvoeringWijzigen(Product product, int uitvoeringID)
+        {
+            MySqlTransaction trans = null;
+            string updateQuery = "update Uitvoering set kleur = @kleur, maat = @maat, voorraad = @voorraad where uitvoeringID = @uitvoerID";
+            try
+            {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(updateQuery, conn);
+            MySqlParameter kleurPara = new MySqlParameter("@kleur", MySqlDbType.VarChar);
+            MySqlParameter maatPara = new MySqlParameter("@maat", MySqlDbType.VarChar);
+            MySqlParameter voorraadPara = new MySqlParameter("@voorraad", MySqlDbType.Int32);
+            MySqlParameter uitvoerIDPara = new MySqlParameter("uitvoerID", MySqlDbType.Int32);
+            kleurPara.Value = product.uitvoeringKleur;
+            maatPara.Value = product.uitvoeringMaat;
+            voorraadPara.Value = product.uitvoeringVoorraad;
+            uitvoerIDPara.Value = uitvoeringID;
+
+            cmd.Parameters.Add(kleurPara);
+            cmd.Parameters.Add(maatPara);
+            cmd.Parameters.Add(voorraadPara);
+            cmd.Prepare();
+            }
+            catch(Exception)
+            {
+                trans.Rollback();
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

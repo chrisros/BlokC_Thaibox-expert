@@ -137,7 +137,7 @@ namespace Webshop2.Controllers
             }
 
         }
-        public ActionResult wijzigenProduct(int prodID)
+        public ActionResult wijzigenProduct(Product product, int prodID)
         {
             
                 ViewBag.H1 = "Toevoegen producten";
@@ -159,6 +159,7 @@ namespace Webshop2.Controllers
                 }
             if (Session["AdminLoggedIn"] != null)
             {
+                prodDBControl.UitvoeringWijzigen(product, prodID);
                 return View();
             }
             else
@@ -239,7 +240,7 @@ namespace Webshop2.Controllers
                 return View("LoginFout");
             }
         }
-        public ActionResult UitvoeringGeWijzigd(Product product, int id)
+        public ActionResult UitvoeringGeWijzigd(Product product, int uitvoeringID)
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -247,10 +248,11 @@ namespace Webshop2.Controllers
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
             ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            
             ViewBag.H1 = "Uitvoering is gewijzigd";
             if (ModelState.IsValid)
             {
-                prodDBControl.WijzigenProduct(product, id);
+                prodDBControl.UitvoeringWijzigen(product, uitvoeringID);
                 return View();
             }
             else

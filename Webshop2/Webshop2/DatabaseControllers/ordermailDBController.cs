@@ -17,11 +17,11 @@ namespace Webshop2.DatabaseControllers
             string bestellijst = "";
             try
             {
-                conn.Open();
+                conn2.Open();
                 List<int> prijzen = new List<int>();
                 List<int> aantallen = new List<int>();
                 string selectQuery = "select uitvoeringID, aantal from BestellingProduct where bestellingID = @ID";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
                 MySqlParameter idPara = new MySqlParameter("@ID", MySqlDbType.Int32);
                 idPara.Value = orderidint;
                 cmd.Parameters.Add(idPara);
@@ -41,7 +41,7 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                conn.Close();
+                conn2.Close();
             }
             return bestellijst;
         }
