@@ -9,11 +9,15 @@
 
 <div>
     <p>
-        Inkomsten per bestelling:
-        @foreach (Bestelling b in Model)
-        {
-            <label> Bestelling geplaatst op:</label> @b.bestelDatum <label> met een totale prijs van: </label>  @b.totaalPrijs <br />
-        }
+        Inkomsten per bestelling: </br>
+        <ul>
+            @foreach (Bestelling b in Model)
+            {
+                <li><label> Bestelling geplaatst op:</label> @b.bestelDatum
+                <label> met een totale prijs van: </label>  @b.totaalPrijs</li>
+                
+            }
+        </ul>
         Totaal inkomsten voor deze maand: @ViewData["inkomst"]
     </p>
 </div>
