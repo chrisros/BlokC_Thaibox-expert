@@ -178,7 +178,7 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Product is gewzijgid";
             if (ModelState.IsValid)
             {
-                ProdDataBase.WijzigenProduct(product, naam, merk, detail, prijs, id);
+                product = ProdDataBase.WijzigenProduct(product, naam, merk, detail, prijs, id);
                 return View();
             }
             else
