@@ -12,12 +12,15 @@ namespace Webshop2.DatabaseControllers
         public List<Product> haalProductGegevensOp()
         {
             List<Product> producten = new List<Product>();
+
             try
             {
                 conn.Open();
                 string selectQuery = "select *  from Product";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
@@ -26,7 +29,15 @@ namespace Webshop2.DatabaseControllers
                     double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
            //         string productSoort = dataReader.GetString("soort");
-                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    
+                    if (!dataReader.IsDBNull(x))
+                    {
+                        productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    }
+                    else 
+                    {
+                        productAfbeelding = "imagefail.jpg";
+                    }
                     Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
                     producten.Add(p);
                 }
@@ -55,6 +66,8 @@ namespace Webshop2.DatabaseControllers
                 prodIDPara.Value = productID;
                 cmd.Parameters.Add(prodIDPara);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
@@ -67,7 +80,14 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    if (dataReader.IsDBNull(x))
+                    {
+                        productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    }
+                    else
+                    {
+                        productAfbeelding = "imagefail.jpg";
+                    }
                     Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs, productDetail = productDetail, productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
                     producten.Add(p);
                 }
@@ -301,6 +321,8 @@ namespace Webshop2.DatabaseControllers
                 //cmd.Parameters.Add(termPara);
                 //cmd.Prepare();
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
@@ -309,7 +331,14 @@ namespace Webshop2.DatabaseControllers
                     double productPrijs = dataReader.GetDouble("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
            //         string productSoort = dataReader.GetString("soort");
-                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    if (!dataReader.IsDBNull(x))
+                    {
+                        productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    }
+                    else
+                    {
+                        productAfbeelding = "imagefail.jpg";
+                    }
                     Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
                     producten.Add(p);
                 }
@@ -347,6 +376,8 @@ namespace Webshop2.DatabaseControllers
                 ////cmd.Parameters.Add(filterPara);
                 //cmd.Prepare();
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
                 while (dataReader.Read())
                 {
                     {
@@ -356,7 +387,14 @@ namespace Webshop2.DatabaseControllers
                         double productPrijs = dataReader.GetDouble("prijs");
                         string productDetail = dataReader.GetString("productOmschrijving");
                         //         string productSoort = dataReader.GetString("soort");
-                        string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                        if (!dataReader.IsDBNull(x))
+                        {
+                            productAfbeelding = dataReader.GetString("afbeeldingPath");
+                        }
+                        else 
+                        {
+                            productAfbeelding = "imagefail.jpg";
+                        }
                         Product p = new Product { productAfbeelding = productAfbeelding, productID = ID, productDetail = productDetail, productNaam = productNaam, productMerk = productMerk, productPrijs = productPrijs };
                         producten.Add(p);
                     }
