@@ -191,7 +191,8 @@ namespace Webshop2.DatabaseControllers
                     string naam = dataReader.GetString("naam");
                     string maat = dataReader.GetString("maat");
                     string kleur = dataReader.GetString("kleur");
-                    p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal, productKleur = kleur, productMaat = maat };
+                    int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
+                    p = new Product { productID = prodID, productNaam = naam, productPrijs = prijs, productAantal = aantal, productKleur = kleur, productMaat = maat, uitvoeringVoorraad = uitvoeringVoorraad };
                 }
             }
             catch (Exception)
@@ -513,6 +514,32 @@ namespace Webshop2.DatabaseControllers
             {
                 conn.Close();
             }
+        }
+
+        public Boolean checkVoorraad(int uitvoeringID, int aantal)
+        {
+            conn2.Open();
+            Boolean opVoorraad = true;
+            int dbVoorraad = 0;
+            string selectQuery = "select voorraad from Uitvoering where uitvoeringID = @uitvoerID";
+            MySqlCommand cmd = new MySqlCommand(selectQuery, conn2);
+            MySqlParameter uitvoerIDPara = new MySqlParameter("@uitvoerID", MySqlDbType.Int16);
+            uitvoerIDPara.Value = uitvoeringID;
+            cmd.Parameters.Add(uitvoerIDPara);
+            cmd.Prepare();
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                    dbVoorraad = dataReader.GetInt32("voorraad");
+            }
+
+            if(dbVoorraad < aantal)
+            {
+                opVoorraad = false;
+            }
+            dataReader.Close();
+            conn2.Close();
+            return opVoorraad;
         }
     }
 }

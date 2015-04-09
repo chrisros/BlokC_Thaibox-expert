@@ -4,7 +4,15 @@
 @{
     ViewBag.Title = "Toegevoegd";
 }
-<h2>Het product is toegevoegd aan uw winkelwagen.</h2><br><br>
+@{if(@ViewBag.opvoorraad == true)
+    { 
+    <h2>Het product is toegevoegd aan uw winkelwagen.</h2><br><br>
+    }
+  if(@ViewBag.opvoorraad == false)
+  {
+      <h2>Het product is <b>niet</b> toegevoegd aan uw winkelwagen.</h2>
+  }
+}
     <div> 
         @{foreach (Product p in Model)
         {
@@ -14,9 +22,16 @@
             <p><b>Aantal: </b>@p.productAantal</p>
             <br />
             <img src="~/ProductImages/@ViewBag.productAfbeelding" alt="AFBEELDING" height="00" width="500" /><br /><br />
+            if(@ViewBag.opvoorraad != false)
+            { 
             <form action="~/Cart/"><input type="submit" style="width:200px;" value="Ga naar winkelwagen"/></form>
-            
-        }}
+            }
+              if(@ViewBag.opvoorraad != true)
+              {
+                  <h4>Dit product is helaas uitverkocht</h4>
+              }
+        }
+    }
       
     </div>
     

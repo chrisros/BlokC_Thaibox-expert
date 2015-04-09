@@ -91,13 +91,13 @@ namespace Webshop2.Controllers
             string[] maatkleurArray = maatkleur.Split(',');
             DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
             List<Product> producten = prodControl.haalProductDetailGegevensOp(productID);
-            foreach(Product produ in producten)
+            foreach (Product produ in producten)
             {
                 ViewBag.productAfbeelding = produ.productAfbeelding;
             }
             string kleur = maatkleurArray[0];
             string maat = maatkleurArray[1].Replace(" ", string.Empty);
-            
+
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
             DatabaseControllers.ProductDBController prodDBControl = new DatabaseControllers.ProductDBController();
@@ -107,25 +107,39 @@ namespace Webshop2.Controllers
             DatabaseControllers.BestellingDBController besteldbcontrol = new DatabaseControllers.BestellingDBController();
             List<Product> toegevoegdProd = new List<Product>();
             Product p = besteldbcontrol.haalProductGegevensOp(productID, aantal);
+            ViewBag.productNaam = p.productNaam;
             Boolean ingelogd = (bool)Session["Ingelogd"];
-            if (ingelogd != true)
-            {
-                ingelogd = false;
-                int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
-                toegevoegdProd.Add(p);
-                productenInSessie.Add(p);
+                if (ingelogd != true)
+                {
+                    ingelogd = false;
+                    int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
+                    Boolean opvoorraad = besteldbcontrol.checkVoorraad(uitvoerID, aantal);
+                    if (opvoorraad)
+                    {
+                        productenInSessie.Add(p);
+                        ViewBag.opvoorraad = true;
+                    }
+                    else { ViewBag.opvoorraad = false; }
+                    toegevoegdProd.Add(p);
 
-                return View(toegevoegdProd);
-            }
-            if (ingelogd == true)
-            {
-                ingelogd = true;
-                int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
-                besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, uitvoerID) ;
-                toegevoegdProd.Add(p);
-                return View(toegevoegdProd);
-            }
-            else { return View(productenInSessie); }
+
+                    return View(toegevoegdProd);
+                }
+                if (ingelogd == true)
+                {
+                    ingelogd = true;
+                    int uitvoerID = besteldbcontrol.haalUitvoeringsIDOp(productID, maat, kleur);
+                    Boolean opvoorraad = besteldbcontrol.checkVoorraad(uitvoerID, aantal);
+                    if (opvoorraad)
+                    {
+                        besteldbcontrol.productToevoegenWinkelWagenGebruiker(aantal, uitvoerID);
+                        
+                    }
+                    else { ViewBag.opvoorraad = false; }
+                    toegevoegdProd.Add(p);
+                    return View(toegevoegdProd); 
+                }
+                else { return View(productenInSessie); }           
         }
 
         public ActionResult updateProductAantal(int productID, int aantal, string kleur, string maat)
