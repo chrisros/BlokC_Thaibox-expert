@@ -371,7 +371,7 @@ namespace Webshop2.DatabaseControllers
       
         public List<string> getMerken()
         {
-            string selectQuery = "select distinct merk from Product";
+            string selectQuery = "select distinct merk from Product ORDER BY merk ASC";
             List<string> merken = new List<string>();
             try
             {
