@@ -116,15 +116,16 @@ namespace Webshop2.Controllers
         public ActionResult ProductWijzigen()
         {
             
-                ViewBag.H1 = "Toevoegen producten";
+                ViewBag.H1 = "Wijzigen producten";
+                DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+                //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+                List<Models.Product> producten = prodControl.haalProductGegevensOp();
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
-
-                ProductDBController prodDBControl = new ProductDBController();
-                ViewBag.merkFilters = prodDBControl.getMerken();
-                ViewBag.maatFilters = prodDBControl.getMaten();
-                ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-                ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+                ViewBag.merkFilters = prodControl.getMerken();
+                ViewBag.maatFilters = prodControl.getMaten();
+                ViewBag.geslachtFilters = prodControl.getGeslacht();
+                ViewBag.productLijstje = prodControl.haalProductGegevensOp();
             if (Session["AdminLoggedIn"] != null)
             {
                 return View();
@@ -136,7 +137,7 @@ namespace Webshop2.Controllers
             }
 
         }
-        public ActionResult wijzigenProduct()
+        public ActionResult wijzigenProduct(int prodID)
         {
             
                 ViewBag.H1 = "Toevoegen producten";
