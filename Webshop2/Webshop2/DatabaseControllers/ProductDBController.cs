@@ -489,7 +489,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"DELETE FROM Categorie WHERE productID = @prodID";
+                string InsertString = @"DELETE FROM Product WHERE productID = @prodID";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
                 MySqlParameter prodID = new MySqlParameter("@prodID", MySqlDbType.Double);
