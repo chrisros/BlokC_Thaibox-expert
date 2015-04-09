@@ -12,10 +12,31 @@
             <label>Product Naam :</label>
         </td>
         <td>
-            @Html.TextBoxFor(model => model.productNaam)
+            <input type="text" name="firstname" size="30" value="@ViewBag.productNaam">
         </td>
-        <td id="validationerror">
-            @Html.ValidationMessageFor(model => model.productNaam)
+        </tr>
+    <tr>
+        <td>
+            <label>Product Merk :</label>
+        </td>
+        <td>
+            <input type="text" name="firstname" size="30" value="@ViewBag.productMerk">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Product Prijs :</label>
+        </td>
+        <td>
+            <input type="text" name="firstname" size="30" value="@ViewBag.productPrijs">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Product Detail :</label>
+        </td>
+        <td>
+            <input type="text" name="firstname" size="30" value="@ViewBag.productDetail">
         </td>
     </tr>
 </table>

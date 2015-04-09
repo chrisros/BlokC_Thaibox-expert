@@ -143,12 +143,19 @@ namespace Webshop2.Controllers
                 ViewBag.H1 = "Toevoegen producten";
                 DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
                 ViewBag.categorieen = catControl.haalCatNamenOp();
-
                 ProductDBController prodDBControl = new ProductDBController();
+                List<Product> producten = prodDBControl.haalProductDetailGegevensOp(prodID);
                 ViewBag.merkFilters = prodDBControl.getMerken();
                 ViewBag.maatFilters = prodDBControl.getMaten();
                 ViewBag.geslachtFilters = prodDBControl.getGeslacht();
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
+                foreach (Product produ in producten)
+                {
+                    ViewBag.productNaam = produ.productNaam;
+                    ViewBag.productPrijs = produ.productPrijs;
+                    ViewBag.productMerk = produ.productMerk;
+                    ViewBag.productDetail = produ.productDetail;
+                }
             if (Session["AdminLoggedIn"] != null)
             {
                 return View();
