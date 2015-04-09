@@ -151,6 +151,7 @@ namespace Webshop2.Controllers
                 ViewBag.productLijstje = prodDBControl.haalProductGegevensOp();
                 foreach (Product produ in producten)
                 {
+                    ViewBag.productID = produ.productID;
                     ViewBag.productNaam = produ.productNaam;
                     ViewBag.productPrijs = produ.productPrijs;
                     ViewBag.productMerk = produ.productMerk;
@@ -166,7 +167,7 @@ namespace Webshop2.Controllers
                 return View("LoginFout");
             }
         }
-        public ActionResult ProductGeWijzigd(Product product)
+        public ActionResult ProductGeWijzigd(Product product, string naam, string merk, string detail, int prijs, int id)
         {
             DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
             ViewBag.categorieen = catControl.haalCatNamenOp();
@@ -177,7 +178,7 @@ namespace Webshop2.Controllers
             ViewBag.H1 = "Product is gewzijgid";
             if (ModelState.IsValid)
             {
-                ProdDataBase.WijzigenProduct(product);
+                ProdDataBase.WijzigenProduct(product, naam, merk, detail, prijs, id);
                 return View();
             }
             else

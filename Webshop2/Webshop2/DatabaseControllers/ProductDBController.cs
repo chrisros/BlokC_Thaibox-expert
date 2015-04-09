@@ -117,7 +117,7 @@ namespace Webshop2.DatabaseControllers
 
 
 
-        public void WijzigenProduct(Product product)
+        public void WijzigenProduct(Product product, string naam, string merk, string detail, int prijs, int id)
         {
             MySqlTransaction trans = null;
 
@@ -126,7 +126,7 @@ namespace Webshop2.DatabaseControllers
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, productOmschrijving = @detail WHERE productID BETWEEN 13 AND 15";
+                string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, productOmschrijving = @detail WHERE productID = @prodID";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
                 MySqlParameter Naam = new MySqlParameter("@anaam", MySqlDbType.VarChar);
@@ -134,18 +134,23 @@ namespace Webshop2.DatabaseControllers
                 MySqlParameter Merk = new MySqlParameter("@merk", MySqlDbType.VarChar);
          //       MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
                 MySqlParameter Detail = new MySqlParameter("@detail", MySqlDbType.VarChar);
+                MySqlParameter ID = new MySqlParameter("@prodID", MySqlDbType.VarChar);
 
-                Naam.Value = product.productNaam;
-                Prijs.Value = product.productPrijs;
-                Merk.Value = product.productMerk;
+
+                Naam.Value = naam;
+                Prijs.Value = prijs;
+                Merk.Value = merk;
            //     Soort.Value = product.productSoort;
-                Detail.Value = product.productDetail;
+                Detail.Value = detail;
+                ID.Value = id;
 
                 regcmd.Parameters.Add(Naam);
                 regcmd.Parameters.Add(Prijs);
            //     regcmd.Parameters.Add(Soort);
                 regcmd.Parameters.Add(Detail);
                 regcmd.Parameters.Add(Merk);
+                regcmd.Parameters.Add(ID);
+
 
                 regcmd.Prepare();
 
