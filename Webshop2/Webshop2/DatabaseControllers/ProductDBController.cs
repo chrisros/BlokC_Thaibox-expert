@@ -80,7 +80,7 @@ namespace Webshop2.DatabaseControllers
                     string uitvoeringKleur = dataReader.GetString("kleur");
                     int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
                     int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
-                    if (dataReader.IsDBNull(x))
+                    if (!dataReader.IsDBNull(x))
                     {
                         productAfbeelding = dataReader.GetString("afbeeldingPath");
                     }
