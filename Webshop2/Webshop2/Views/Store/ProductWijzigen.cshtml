@@ -7,12 +7,30 @@
 
 <h1>@ViewBag.H1</h1>
 
-@{foreach (Product prod in ViewBag.productLijstje)
-{
-    <div>
-        <b>Naam: </b> @prod.productNaam <br />
-        <b>Merk: </b> @prod.productMerk <br />
-        <b>Prijs: </b> @prod.productPrijs <br />
-        <a href="/Store/wijzigenProduct?prodID=@prod.productID">Wijzigen</a> <br /><br />
-    </div>
-}}
+
+    <table>
+        <tr class="h4">
+            <td>Naam</td>
+            <td>Merk</td>
+            <td>Prijs</td>
+            <td></td>
+        </tr>
+
+        @{
+    foreach (Product prod in ViewBag.productLijstje)
+    {
+        <tr>
+            <td>@prod.productNaam</td>
+            <td>@prod.productMerk</td>
+            <td>@prod.productPrijs</td>
+            <td><a href="/Store/wijzigenProduct?prodID=@prod.productID">Wijzigen</a></td>
+        </tr>
+
+
+    }
+
+
+        }
+
+    </table>
+
