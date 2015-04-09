@@ -53,7 +53,7 @@ namespace Webshop2.DatabaseControllers
             try
             {
                 conn.Open();
-                string selectQuery = "SELECT * FROM Categorie ORDER BY categorieNaam DESC ";
+                string selectQuery = "SELECT * FROM Categorie ORDER BY categorieNaam ASC ";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
