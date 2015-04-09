@@ -186,6 +186,78 @@ namespace Webshop2.Controllers
                 return View("ProductWijzigen", product);
             }
         }
+        public ActionResult UitvoeringWijzigen(int prodID)
+        {
+
+            ViewBag.H1 = "Wijzigen uitvoeringen";
+            DatabaseControllers.ProductDBController prodControl = new DatabaseControllers.ProductDBController();
+            //ViewBag.prijs = besteldbcontrol.HaalBestellingTotaalPrijsOp();
+            List<Models.Product> producten = prodControl.haalProductDetailGegevensOp(prodID);
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ViewBag.merkFilters = prodControl.getMerken();
+            ViewBag.maatFilters = prodControl.getMaten();
+            ViewBag.geslachtFilters = prodControl.getGeslacht();
+            ViewBag.productLijstje = prodControl.haalProductDetailGegevensOp(prodID);
+            if (Session["AdminLoggedIn"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
+
+        }
+        public ActionResult WijzigenUitvoering(int uitID)
+        {
+
+            ViewBag.H1 = "Uitvoering wijzigen";
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            List<Product> producten = prodDBControl.haalUitvoeringDetailGegevensOp(uitID);
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.productLijstje = prodDBControl.haalUitvoeringDetailGegevensOp(uitID);
+            foreach (Product produ in producten)
+            {
+                ViewBag.productUitvoeringID = produ.productUitvoeringID;
+                ViewBag.productKleur = produ.productKleur;
+                ViewBag.productMaat = produ.productMaat;
+                ViewBag.uitvoeringVoorraad = produ.uitvoeringVoorraad;
+            }
+            if (Session["AdminLoggedIn"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.H1 = "Niet ingelogd";
+                return View("LoginFout");
+            }
+        }
+        public ActionResult UitvoeringGeWijzigd(Product product, int id)
+        {
+            DatabaseControllers.CategorieDBController catControl = new DatabaseControllers.CategorieDBController();
+            ViewBag.categorieen = catControl.haalCatNamenOp();
+            ProductDBController prodDBControl = new ProductDBController();
+            ViewBag.merkFilters = prodDBControl.getMerken();
+            ViewBag.maatFilters = prodDBControl.getMaten();
+            ViewBag.geslachtFilters = prodDBControl.getGeslacht();
+            ViewBag.H1 = "Uitvoering is gewijzigd";
+            if (ModelState.IsValid)
+            {
+                prodDBControl.WijzigenProduct(product, id);
+                return View();
+            }
+            else
+            {
+                return View("ProductWijzigen", product);
+            }
+        }
 
         public ActionResult CategorieToevoegen()
         {

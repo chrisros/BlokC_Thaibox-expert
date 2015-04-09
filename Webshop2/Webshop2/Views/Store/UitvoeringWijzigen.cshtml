@@ -1,0 +1,31 @@
+﻿@using Webshop2.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "ProductWijzigen";
+}
+
+<h1>@ViewBag.H1</h1>
+
+
+<table>
+    <tr class="h4">
+        <td>Maat</td>
+        <td>Kleur</td>
+        <td>Voorraad</td>
+        <td></td>
+    </tr>
+
+    @{
+        foreach (Product prod in ViewBag.productLijstje)
+        {
+            <tr>
+                <td>@prod.productMaat</td>
+                <td>@prod.productKleur</td>
+                <td>@prod.uitvoeringVoorraad</td>
+                <td><a href="/Store/WijzigenUitvoering?uitID=@prod.productUitvoeringID">Wijzigen</a></td>
+            </tr>
+        }
+    }
+
+</table>

@@ -1,0 +1,56 @@
+﻿@using Webshop2.Models;
+@model Product
+@{
+    ViewBag.Title = "UitvoeringWijzigen";
+}
+
+<h1>@ViewBag.H1</h1>
+
+<form name="UitvoeringWijzigen" method="post" action="/Store/UitvoeringGeWijzigd">
+    <table>
+        <tr>
+            <td>
+                Uitvoering id :
+            </td>
+            <td>
+                <input type="text" name="ID" value="@ViewBag.productUitvoeringID" class="field left" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Kleur : <br /><b>@ViewBag.productKleur</b> </label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.productKleur)
+            </td>
+            <td id="validationerror">
+                @Html.ValidationMessageFor(model => model.productKleur)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Maat : <br /> <b>@ViewBag.productMaat</b> </label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.productMaat)
+                @Html.ValidationMessageFor(model => model.productMaat)
+            </td>
+        </tr>
+        <td>
+            <label>Voorraad : <br /> <b>@ViewBag.uitvoeringVoorraad</b> </label>
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.uitvoeringVoorraad)
+        </td>
+        <td id="validationerror">
+            @Html.ValidationMessageFor(model => model.uitvoeringVoorraad)
+        </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Wijzigen">
+            </td>
+        </tr>
+    </table>
+</form>

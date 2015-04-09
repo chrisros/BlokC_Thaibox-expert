@@ -92,6 +92,7 @@ namespace Webshop2.DatabaseControllers
                     producten.Add(p);
                 }
             }
+
             catch (Exception)
             {
 
@@ -102,7 +103,56 @@ namespace Webshop2.DatabaseControllers
             }
             return producten;
         }
+        public List<Product> haalUitvoeringDetailGegevensOp(int uitvoeringID)
+        {
+            int prodID = uitvoeringID;
+            List<Product> producten = new List<Product>();
+            try
+            {
+                conn.Open();
+                string selectQuery = "select * from Uitvoering where (uitvoeringID = @prodID)";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlParameter prodIDPara = new MySqlParameter("@prodID", MySqlDbType.Int32);
+                prodIDPara.Value = uitvoeringID;
+                cmd.Parameters.Add(prodIDPara);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
+                while (dataReader.Read())
+                {
+                    int ID = dataReader.GetInt32("productID");
+                    string productNaam = dataReader.GetString("naam");
+                    string productMerk = dataReader.GetString("merk");
+                    double productPrijs = dataReader.GetDouble("prijs");
+                    string productDetail = dataReader.GetString("productOmschrijving");
+                    //   string productSoort = dataReader.GetString("soort");
+                    string uitvoeringMaat = dataReader.GetString("maat");
+                    string uitvoeringKleur = dataReader.GetString("kleur");
+                    int uitvoeringVoorraad = dataReader.GetInt16("voorraad");
+                    int productUitvoeringID = dataReader.GetInt32("uitvoeringID");
+                    if (dataReader.IsDBNull(x))
+                    {
+                        productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    }
+                    else
+                    {
+                        productAfbeelding = "imagefail.jpg";
+                    }
+                    Product p = new Product { productMaat = uitvoeringMaat, productKleur = uitvoeringKleur, uitvoeringVoorraad = uitvoeringVoorraad, productUitvoeringID = productUitvoeringID };
+                    producten.Add(p);
+                }
+            }
 
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return producten;
+        }
         public List<string> getUitvoeringenKleur(int productID)
         {
             int prodID = productID;
