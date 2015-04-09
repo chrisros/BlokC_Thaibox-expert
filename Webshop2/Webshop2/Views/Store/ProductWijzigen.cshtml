@@ -9,5 +9,10 @@
 
 @{foreach (Product prod in ViewBag.productLijstje)
 {
-    @prod.productID
+    <div>
+        <b>Naam: </b> @prod.productNaam <br />
+        <b>Merk: </b> @prod.productMerk <br />
+        <b>Prijs: </b> @prod.productPrijs <br />
+        <a href="/Store/wijzigenProduct?prodID=@prod.productID">Wijzigen</a> <br /><br />
+    </div>
 }}
