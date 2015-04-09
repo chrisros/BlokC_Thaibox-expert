@@ -133,7 +133,6 @@ namespace Webshop2.DatabaseControllers
 
             try
             {
-                conn2.Open();
                 List<int> prijzen = new List<int>();
                 List<int> aantallen = new List<int>();
                 string selectQuery = "select B.aantal, Be.totaalprijs, P.Prijs, P.naam from Bestelling Be join BestellingProduct B on Be.bestellingID = B.bestellingID join Uitvoering U on B.uitvoeringID = U.uitvoeringID join Product P on U.productID = P.productID where B.bestellingID = @ID and Be.betaald = 0";
@@ -154,13 +153,14 @@ namespace Webshop2.DatabaseControllers
                 {
                     totaalprijs = totaalprijs + prijzen[i] * aantallen[i];
                 }
+                dataReader.Close();
             }
-            finally
+            catch(Exception)
             {
-                conn2.Close();
+                throw;
             }
             DatabaseControllers.ordermailDBController ordercont = new DatabaseControllers.ordermailDBController();
-            if ((ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true))
+            if ((ordercont.isGoldCustomer((int)System.Web.HttpContext.Current.Session["gebruikerID"]) == true))//checkt of huidige gebruiker goldmember is
             {
                 double totprijs = totaalprijs * 0.96;
                 updateTotaalPRijsUser(totprijs);
@@ -281,8 +281,8 @@ namespace Webshop2.DatabaseControllers
 
             finally
             {
-                conn.Close();
                 berekenTotaalPRijsUser();
+                conn.Close();
             }
         }
 
@@ -349,8 +349,8 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                conn.Close();
                 berekenTotaalPRijsUser();
+                conn.Close();
             }
         }
 
@@ -412,8 +412,8 @@ namespace Webshop2.DatabaseControllers
             }
             finally
             {
-                conn.Close();
                 berekenTotaalPRijsUser();
+                conn.Close();
             }
         }
 
