@@ -463,13 +463,20 @@ namespace Webshop2.DatabaseControllers
                 string selectuit = @"select * from Product ORDER BY RAND() LIMIT 3";
                 MySqlCommand uitcmd = new MySqlCommand(selectuit, conn);
                 MySqlDataReader reader = uitcmd.ExecuteReader();
-
+                int x = reader.GetOrdinal("afbeeldingPath");
                 while (reader.Read())
                 {
                     Product p = new Product();
                     p.productNaam = reader.GetString("naam");
                     p.productPrijs = reader.GetDouble("prijs");
-                    p.productAfbeelding = reader.GetString("afbeeldingPath");
+                    if (!reader.IsDBNull(x))
+                    {
+                        p.productAfbeelding = reader.GetString("afbeeldingPath");
+                    }
+                    else 
+                    {
+                        p.productAfbeelding = "imagefail.jpg";
+                    }
                     uitgelicht.Add(p);
                 }
             }
