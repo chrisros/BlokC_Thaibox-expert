@@ -129,7 +129,7 @@ namespace Webshop2.DatabaseControllers
                 string InsertString = @"Update Product set prijs = @prijs, naam = @naam, merk = @merk, productOmschrijving = @detail WHERE productID = @prodID";
                 MySqlCommand regcmd = new MySqlCommand(InsertString, conn);
 
-                MySqlParameter naamPara = new MySqlParameter("@anaam", MySqlDbType.VarChar);
+                MySqlParameter naamPara = new MySqlParameter("@naam", MySqlDbType.VarChar);
                 MySqlParameter prijsPara = new MySqlParameter("@prijs", MySqlDbType.Double);
                 MySqlParameter merkPara = new MySqlParameter("@merk", MySqlDbType.VarChar);
          //       MySqlParameter Soort = new MySqlParameter("@soort", MySqlDbType.VarChar);
