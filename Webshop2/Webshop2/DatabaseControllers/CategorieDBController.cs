@@ -86,6 +86,8 @@ namespace Webshop2.DatabaseControllers
                 string selectQuery = "select * from Product P Join Categorie C On  C.categorieID = P.categorieID where (C.categorieNaam like '%" + @catNaam + "%')";
                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
+                int x = dataReader.GetOrdinal("afbeeldingPath");
+                string productAfbeelding;
                 while (dataReader.Read())
                 {
                     int ID = dataReader.GetInt32("productID");
@@ -93,7 +95,14 @@ namespace Webshop2.DatabaseControllers
                     string productMerk = dataReader.GetString("merk");
                     int productPrijs = dataReader.GetInt32("prijs");
                     string productDetail = dataReader.GetString("productOmschrijving");
-                    string productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    if (!dataReader.IsDBNull(x))
+                    {
+                        productAfbeelding = dataReader.GetString("afbeeldingPath");
+                    }
+                    else
+                    {
+                        productAfbeelding = "imagefail.jpg";
+                    }
                     int categorieID = dataReader.GetInt32("categorieID");
                     string categorie = dataReader.GetString("categorieNaam");
                     Product p = new Product
