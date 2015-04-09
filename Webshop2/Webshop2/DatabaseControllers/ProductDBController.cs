@@ -504,6 +504,7 @@ namespace Webshop2.DatabaseControllers
                 while (reader.Read())
                 {
                     Product p = new Product();
+                    p.productID = reader.GetInt32("productID");
                     p.productNaam = reader.GetString("naam");
                     p.productPrijs = reader.GetDouble("prijs");
                     if (!reader.IsDBNull(x))
