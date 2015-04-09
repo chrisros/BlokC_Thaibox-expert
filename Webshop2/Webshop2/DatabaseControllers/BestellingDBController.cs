@@ -10,11 +10,10 @@ namespace Webshop2.DatabaseControllers
 {
     public class BestellingDBController : DatabaseController
     {
-        static int bestelID = 0;
+        int bestelID = 0;
         int id = 0;
-        public double HaalBestellingTotaalPrijsOpUser()
+        public double HaalBestellingTotaalPrijsOpUser()//hier wordt de totaalprijs van de laatste bestelling mee uit de DB gehaald
         {
-            //berekenTotaalPRijsUser();
             double prijs = 0;
             int aantal = 0;
             try
@@ -46,7 +45,7 @@ namespace Webshop2.DatabaseControllers
             return prijs;
         }
 
-        public List<Product> haalProductGegevensOpVoorGebruiker()
+        public List<Product> haalProductGegevensOpVoorGebruiker()//hier worden de producten die in de bestelling zitten(dus in winkelmandje) ophehaald uit de DB
         {
             List<Product> producten = new List<Product>();
             try
@@ -65,7 +64,7 @@ namespace Webshop2.DatabaseControllers
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    string firstItem = Convert.ToString(dataReader["productID"]);
+                    string firstItem = Convert.ToString(dataReader["productID"]);//checken of er überhaupt producten in de bestelling zitten
                     if (!string.IsNullOrEmpty(firstItem))
                     {
 
@@ -96,7 +95,7 @@ namespace Webshop2.DatabaseControllers
             return producten;
         }
 
-        public void updateTotaalPRijsUser(double totPrijs)
+        public void updateTotaalPRijsUser(double totPrijs)//update de prijs bij de desbetreffende bestelling in de DB
         {
 
 
@@ -127,7 +126,7 @@ namespace Webshop2.DatabaseControllers
             }
         }
 
-        public void berekenTotaalPRijsUser()
+        public void berekenTotaalPRijsUser()//bereken de nieuwe prijs die in de DB geupdate gaat worden
         {
             double totaalprijs = 0.0;
             int ID = getBestelID();
