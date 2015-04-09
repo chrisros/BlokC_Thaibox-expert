@@ -175,10 +175,10 @@ namespace Webshop2.Controllers
             ViewBag.merkFilters = prodDBControl.getMerken();
             ViewBag.maatFilters = prodDBControl.getMaten();
             ViewBag.geslachtFilters = prodDBControl.getGeslacht();
-            ViewBag.H1 = "Product is gewzijgid";
+            ViewBag.H1 = "Product is gewijzigd";
             if (ModelState.IsValid)
             {
-                
+                prodDBControl.WijzigenProduct(product, id);
                 return View();
             }
             else
